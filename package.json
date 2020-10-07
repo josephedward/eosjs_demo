@@ -1,0 +1,30 @@
+{
+  "name": "eosjs_demo",
+  "version": "1.0.0",
+  "description": "list of the most recent blocks from the eosio blockchain",
+  "main": "index.js",
+
+  "scripts": {
+    "test": "cypress run --browser chrome"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josephedward/eosjs_demo.git"
+  },
+  "keywords": [
+    "EOSIO",
+    "blockchain",
+    "crypto"
+  ],
+  "author": "Joseph Edward",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josephedward/eosjs_demo/issues"
+  },
+  "homepage": "https://github.com/josephedward/eosjs_demo#readme",
+  "dependencies": {
+    "cypress": "^5.3.0",
+    "eosjs": "^21.0.3",
+    "eosjs-api": "^7.0.4"
+  }
+}

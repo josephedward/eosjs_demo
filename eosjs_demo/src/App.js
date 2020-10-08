@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Counter from "./Counter"
 import logo from './logo.svg';
 import './App.css';
+import { ThemeProvider, createTheme, Arwes } from 'arwes';
 
 // const api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() });
 
@@ -32,7 +33,13 @@ function App(){
 
     return(
 <div>
+<ThemeProvider theme={createTheme()}>
+<Arwes>
+<h6>
 <Counter/>
+</h6>
+</Arwes>
+</ThemeProvider>
 </div>
     )
 }

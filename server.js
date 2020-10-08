@@ -65,8 +65,14 @@ const rpc = new JsonRpc('http://127.0.0.1:8888', { fetch });
 const api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() });
 
 
-(async () => { 
-    test = await rpc.get_info()
+// (
+  async function logRpcGetInfo(){ 
+    currentInfo = await rpc.get_info()
     // .get_block(1) //get the first block
-    console.log(test)
-      })();
+    console.log(currentInfo.head_block_num)
+    currentBlock = await rpc.get_block(currentInfo.head_block_num)
+    console.log(currentBlock)
+      }
+      // )();
+
+    setInterval(logRpcGetInfo, 500)

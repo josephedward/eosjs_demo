@@ -8,15 +8,16 @@
     "@testing-library/user-event": "^7.1.2",
     "arwes": "^1.0.0-alpha.5",
     "eosjs": "^21.0.3",
+    "node-fetch": "^2.6.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "./scripts/local_nodeos_init.sh && react-scripts start",
+    "build": "./scripts/local_nodeos_init.sh && react-scripts build",
+    "test": "./scripts/local_nodeos_init.sh && react-scripts test",
+    "eject": "./scripts/local_nodeos_init.sh && react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"

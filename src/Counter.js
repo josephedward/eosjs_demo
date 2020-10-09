@@ -14,8 +14,9 @@ const rpc = new JsonRpc('http://127.0.0.1:8888', { fetch });
 
 let currentInfo
 //  = useState({});
-let currentBlock
+let currentBlock={}
 //  = useState({});
+let currTimeStamp
 let currId
 // =useState('')
 
@@ -36,19 +37,55 @@ function Counter() {
   const [count, setCount] = useState(0);
 
   useInterval(async () => {
-
   currentInfo = await rpc.get_info()
   console.log(currentInfo.head_block_num)
   currentBlock = await rpc.get_block(currentInfo.head_block_num)
   console.log(currentBlock)
+  currTimeStamp= currentBlock.timestamp
   currId= currentBlock.id
+
 
     // Your custom logic here
     setCount(count + 1);
   }, 1000);
 
-  return <h1>{currId}</h1>;
+  return <ul>
+  <li>{currentBlock.timestamp}</li>
+  <li>{currentBlock.producer}</li>
+  <li>{currentBlock.confirmed}</li>
+  <li>{currentBlock.previous}</li>
+  <li>{currentBlock.transaction_mroot}</li>
+  <li>{currentBlock.action_mroot}</li>
+  <li>{currentBlock.schedule_version}</li>
+  <li>{currentBlock.new_producers}</li>
+  <li>{currentBlock.header_extensions}</li>
+  <li>{currentBlock.producer_signature}</li>
+  <li>{currentBlock.transactions}</li>
+  <li>{currentBlock.block_extensions}</li>
+  <li>{currentBlock.id}</li>
+  <li>{currentBlock.block_num}</li>
+  <li>{currentBlock.ref_block_prefix}</li>
+  </ul>;
 }
+
+
+/*
+timestamp 
+producer 
+confirmed
+previous
+transaction_mroot
+action_mroot
+schedule_version
+new_producers
+header_extensions
+producer_signature
+transactions
+block_extensions
+id
+block_num
+ref_block_prefix
+*/
 
 function useInterval(callback, delay) {
   const savedCallback = useRef();

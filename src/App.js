@@ -3,6 +3,7 @@ import Counter from "./Counter"
 import logo from './logo.svg';
 import './App.css';
 import { ThemeProvider, createTheme, Arwes } from 'arwes';
+import Content from 'arwes/lib/Content';
 
 // const api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() });
 
@@ -35,9 +36,9 @@ function App(){
 <div>
 <ThemeProvider theme={createTheme()}>
 <Arwes>
-<h6>
+<Content>
 <Counter/>
-</h6>
+</Content>
 </Arwes>
 </ThemeProvider>
 </div>

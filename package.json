@@ -1,38 +1,36 @@
 {
   "name": "eosjs_demo",
-  "version": "1.0.0",
-  "description": "list of the most recent blocks from the eosio blockchain",
-  "main": "index.js",
-
-  "scripts": {
-    "start": "./scripts/preflight.sh && if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-    "start:prod": "node server.js",
-    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
-    "client": "cd client && npm run start",
-    "seed": "node scripts/seedDB.js",
-    "install": "cd client && npm install",
-    "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build",
-    "test": "cypress run --browser chrome"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/josephedward/eosjs_demo.git"
-  },
-  "keywords": [
-    "EOSIO",
-    "blockchain",
-    "crypto"
-  ],
-  "author": "Joseph Edward",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/josephedward/eosjs_demo/issues"
-  },
-  "homepage": "https://github.com/josephedward/eosjs_demo#readme",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "cypress": "^5.3.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "arwes": "^1.0.0-alpha.5",
     "eosjs": "^21.0.3",
-    "eosjs-api": "^7.0.4"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

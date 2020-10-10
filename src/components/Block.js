@@ -81,7 +81,7 @@ const rowStyle = {
     // display: "flex",
     // flexDirection: "row",
     // lineHeight: 0,
-    margin:"10%"
+    margin:"5%"
   
   };
   

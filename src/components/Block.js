@@ -3,10 +3,12 @@ import ReactDOM from "react-dom";
 import { ThemeProvider, createTheme, Arwes, Frame } from "arwes";
 import Content from "arwes/lib/Content";
 import ErrorBoundary from "./ErrorBoundary";
+import Transaction from "./Transaction";
 
 export default function Block(props) {
   return (
     <ErrorBoundary>
+    
       <Frame
         style={{ ...blockStyle }}
         show={true}
@@ -15,6 +17,7 @@ export default function Block(props) {
         corners={4}
         layer="primary"
       >
+
         <Content style={{ margin: "5%" }}>
           <div style={{ ...rowStyle }}>
             <h5>timestamp : </h5>
@@ -40,25 +43,33 @@ export default function Block(props) {
             <h5>schedule_version : </h5>{" "}
             <h6> {props.currentBlock.schedule_version}</h6>
           </div>
-          <div style={{ ...rowStyle }}>
+          {/* <div style={{ ...rowStyle }}>
             <h5>new_producers : </h5>{" "}
             <h6> {props.currentBlock.new_producers}</h6>
           </div>
           <div style={{ ...rowStyle }}>
             <h5>header_extensions : </h5>{" "}
             <h6> {props.currentBlock.header_extensions}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
+          </div> */}
+
+          <div style={{ ...prodSigStyle }}>
             <h5>producer_signature : </h5>{" "}
             <h6> {props.currentBlock.producer_signature}</h6>
           </div>
-          <div style={{ ...rowStyle }}>
-            <h5>transactions : </h5>
-          </div>
-          <div style={{ ...rowStyle }}>
+          
+
+        {/* {props.currentBlock.transactions.length!==0?(<TransitionablePortalExamplePortal/>):([])}  */}
+        {/* {props.currentBlock.block_extensions !==""?(
+            <div style={{ ...rowStyle }}>
             <h5>block_extensions : </h5>{" "}
             <h6> {props.currentBlock.block_extensions}</h6>
           </div>
+          ):("")
+               */
+          /* <div style={{ ...rowStyle }}>
+            <h5>block_extensions : </h5>{" "}
+            <h6> {props.currentBlock.block_extensions}</h6>
+          </div> */}
           <div style={{ ...rowStyle }}>
             <h5>id : </h5> <h6> {props.currentBlock.id}</h6>
           </div>
@@ -69,10 +80,24 @@ export default function Block(props) {
             <h5>ref_block_prefix : </h5>{" "}
             <h6> {props.currentBlock.ref_block_prefix}</h6>
           </div>
+          <div style={{ ...rowStyle }}>
+              <Transaction style={{...buttonStyle}}
+                blockId={props.currentBlock.id}
+                transactionObj={props.currentBlock.transactions}
+              />
+              {/* <h6 style={{...buttonStyle}}>transactions : </h6>
+              </Transaction> */}
+          </div>
+
         </Content>
+    
       </Frame>
     </ErrorBoundary>
   );
+}
+
+const buttonStyle={
+    color:"white"
 }
 
 const rowStyle = {
@@ -81,9 +106,10 @@ const rowStyle = {
   lineHeight: 0,
 };
 
+const prodSigStyle = {
+  lineHeight: 0,
+};
+
 const blockStyle = {
-  // display: "flex",
-  // flexDirection: "row",
-  // lineHeight: 0,
-  margin: "5%",
+   margin: "5%",
 };

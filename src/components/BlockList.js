@@ -22,12 +22,33 @@ const fetch = require("node-fetch"); // node only; not needed in browsers
 const { TextEncoder, TextDecoder } = require("util"); // node only; native TextEncoder/Decoder
 const defaultPrivateKey = "5JtUScZK2XEp3g9gh7F8bwtPTRAkASmNrrftmx4AxDKD5K4zDnr"; // bob
 const signatureProvider = new JsSignatureProvider([defaultPrivateKey]);
-const rpc = new JsonRpc("https://api.testnet.eos.io", { fetch });
+let endPointUrl= "https://api.testnet.eos.io"
+const rpc = new JsonRpc(endPointUrl, { fetch });
 // https://api.eosnewyork.io/v1/chain/get_info
 let currentInfo;
 let currentBlock = {};
 let tenMostRecentBlocks = [];
 let reqTimer;
+
+
+(async()=>{
+  try {
+    currentInfo = await rpc.get_info();
+    console.log("currentInfo.head_block_num : ", currentInfo.head_block_num);
+    currentBlock = await rpc.get_block(currentInfo.head_block_num);
+    console.log("currentBlock : ", currentBlock);
+    tenMostRecentBlocks = [];
+    for (let x = 10; x > 0; x--) {
+      let blockIndex = currentInfo.head_block_num - x;
+      let tempBlock = await rpc.get_block(blockIndex);
+      tenMostRecentBlocks.push(tempBlock);
+    }
+    console.log(tenMostRecentBlocks);
+  } catch (error) {
+    console.log(chalk.red("ERROR FETCHING CHAIN : ") + chalk.bgRed(error));
+  }
+  })();
+
 
 function BlockList() {
   const { time, start, pause, reset, isRunning } = useTimer({
@@ -40,6 +61,10 @@ function BlockList() {
     interval: 500,
   });
 
+
+  
+
+  
   const [count, setCount] = useState(0);
   useInterval(async () => {
     reset();
@@ -68,14 +93,19 @@ function BlockList() {
         {/* style={{...blockStyle}} */}
         <Heading node="h1" style={{ ...headerStyle }} layer="primary">
           EOS CHAIN NAVIGATOR
-
         </Heading>
         {isRunning?(<h4 style={{ ...timerStyle}}>
-            Fetching new results in : {Math.ceil((reqTimer - 1)/2)}
+            new results in : {Math.ceil((reqTimer - 1)/2)}
           </h4>):""}
+        <h4 style={{ ...endPointStyle}}>
+          RPC-API-URL endpoint : {endPointUrl}
+        </h4>
+
+<div style={{...listStyle}}>
         {tenMostRecentBlocks.map((book) => (
           <Block currentBlock={book} />
         ))}
+</div>
       </Arwes>
     </ErrorBoundary>
   );
@@ -103,6 +133,10 @@ function useInterval(callback, delay) {
 
 export default BlockList;
 
+const listStyle={
+  marginTop:"10%"
+}
+
 const blockStyle = {
   margin: "20%",
 };
@@ -124,8 +158,8 @@ const timerStyle = {
   justifyContent: "center",
   background: "black",
   textAlign: "center",
-  top: "0",
-  width: "25%",
+  top: "6%",
+  width: "50%",
   zIndex: "10",
   margin: "2px",
   marginTop:"3px",
@@ -133,6 +167,22 @@ const timerStyle = {
   border: "3px solid purple",
 };
 
+const endPointStyle = {
+  position: "fixed",
+  display:"flex",
+  flexDirection:"row",
+  justifyContent: "center",
+  background: "black",
+  textAlign: "center",
+  top: "6%",
+  right:"0",
+  width: "50%",
+  zIndex: "10",
+  margin: "2px",
+  marginTop:"3px",
+  padding:"2px",
+  border: "3px solid purple",
+};
 
 /*
 timestamp 

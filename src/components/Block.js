@@ -2,14 +2,19 @@ import React, { useState, useEffect, useRef, Fragment } from "react";
 import ReactDOM from "react-dom";
 import { ThemeProvider, createTheme, Arwes, Frame } from "arwes";
 import Content from "arwes/lib/Content";
-import ErrorBoundary from "./ErrorBoundary"
+import ErrorBoundary from "./ErrorBoundary";
 
-
-export default function Block(props){
-return(
+export default function Block(props) {
+  return (
     <ErrorBoundary>
-    {/* <Arwes> */}
-      <Frame style={{...blockStyle}}  show={true} animate={true} level={3} corners={4} layer="primary">
+      <Frame
+        style={{ ...blockStyle }}
+        show={true}
+        animate={true}
+        level={3}
+        corners={4}
+        layer="primary"
+      >
         <Content style={{ margin: "5%" }}>
           <div style={{ ...rowStyle }}>
             <h5>timestamp : </h5>
@@ -36,7 +41,8 @@ return(
             <h6> {props.currentBlock.schedule_version}</h6>
           </div>
           <div style={{ ...rowStyle }}>
-            <h5>new_producers : </h5> <h6> {props.currentBlock.new_producers}</h6>
+            <h5>new_producers : </h5>{" "}
+            <h6> {props.currentBlock.new_producers}</h6>
           </div>
           <div style={{ ...rowStyle }}>
             <h5>header_extensions : </h5>{" "}
@@ -47,7 +53,7 @@ return(
             <h6> {props.currentBlock.producer_signature}</h6>
           </div>
           <div style={{ ...rowStyle }}>
-            <h5>transactions : </h5> 
+            <h5>transactions : </h5>
           </div>
           <div style={{ ...rowStyle }}>
             <h5>block_extensions : </h5>{" "}
@@ -65,23 +71,19 @@ return(
           </div>
         </Content>
       </Frame>
-    {/* </Arwes> */}
     </ErrorBoundary>
-)
+  );
 }
 
 const rowStyle = {
+  display: "flex",
+  flexDirection: "row",
+  lineHeight: 0,
+};
 
-    display: "flex",
-    flexDirection: "row",
-    lineHeight: 0,
-  };
-  
-  const blockStyle = {
-    // display: "flex",
-    // flexDirection: "row",
-    // lineHeight: 0,
-    margin:"5%"
-  
-  };
-  
+const blockStyle = {
+  // display: "flex",
+  // flexDirection: "row",
+  // lineHeight: 0,
+  margin: "5%",
+};

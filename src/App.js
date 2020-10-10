@@ -7,18 +7,19 @@ import { ThemeProvider, createTheme, Arwes, Project, Heading,
     createSounds,
 } from 'arwes';
 import Content from 'arwes/lib/Content';
+import ErrorBoundary from './components/ErrorBoundary';
 
 function App(){
     return(
 <div>
+<ErrorBoundary>
 <ThemeProvider theme={createTheme()}>
 
 <Arwes   background="/images/background.jpg" pattern="/images/glow.png">
-{/* <Project> */}
 <BlockList background="/images/background.jpg" pattern="/images/glow.png"/>
-{/* </Project> */}
 </Arwes>
 </ThemeProvider>
+</ErrorBoundary>
 </div>
     )
 }

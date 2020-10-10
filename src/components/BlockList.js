@@ -104,9 +104,6 @@ function useInterval(callback, delay) {
 export default BlockList;
 
 const blockStyle = {
-  // display: "flex",
-  // flexDirection: "row",
-  // lineHeight: 0,
   margin: "20%",
 };
 
@@ -136,15 +133,6 @@ const timerStyle = {
   border: "3px solid purple",
 };
 
-// const sounds = {
-//   shared: { volume: 1 },
-//   players: {
-//     information: { sound: { src: ["/sounds/information.mp3"] } },
-//     ask: { sound: { src: ["/sounds/ask.mp3"] } },
-//     warning: { sound: { src: ["/sounds/warning.mp3"] } },
-//     error: { sound: { src: ["/sounds/error.mp3"] } },
-//   },
-// };
 
 /*
 timestamp 
@@ -164,62 +152,3 @@ block_num
 ref_block_prefix
 */
 
-{
-  /* <Frame animate={true} level={3} corners={4} layer="primary">
-        <Content style={{ margin: "5%" }}>
-          <div style={{ ...rowStyle }}>
-            <h5>timestamp : </h5>
-            <h6> {currentBlock.timestamp}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>producer : </h5> <h6> {currentBlock.producer}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>confirmed : </h5> <h6> {currentBlock.confirmed}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>previous : </h5> <h6> {currentBlock.previous}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>transaction_mroot : </h5>{" "}
-            <h6> {currentBlock.transaction_mroot}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>action_mroot : </h5> <h6> {currentBlock.action_mroot}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>schedule_version : </h5>{" "}
-            <h6> {currentBlock.schedule_version}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>new_producers : </h5> <h6> {currentBlock.new_producers}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>header_extensions : </h5>{" "}
-            <h6> {currentBlock.header_extensions}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>producer_signature : </h5>{" "}
-            <h6> {currentBlock.producer_signature}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>transactions : </h5> 
-
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>block_extensions : </h5>{" "}
-            <h6> {currentBlock.block_extensions}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>id : </h5> <h6> {currentBlock.id}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>block_num : </h5> <h6> {currentBlock.block_num}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>ref_block_prefix : </h5>{" "}
-            <h6> {currentBlock.ref_block_prefix}</h6>
-          </div>
-        </Content>
-      </Frame> */
-}

@@ -7,11 +7,13 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "arwes": "^1.0.0-alpha.5",
+    "chalk": "^4.1.0",
     "eosjs": "^21.0.3",
     "node-fetch": "^2.6.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "semantic-ui-react": "^2.0.0"
   },
   "scripts": {
     "start": "./scripts/local_nodeos_init.sh && react-scripts start",

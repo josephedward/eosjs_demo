@@ -29,83 +29,38 @@ function Counter() {
     console.log("currentInfo.head_block_num : ",currentInfo.head_block_num);
     currentBlock = await rpc.get_block(currentInfo.head_block_num);
     console.log("currentBlock : ",currentBlock);
-    currentBlock2 = await rpc.get_block(currentInfo.head_block_num-1);
-    console.log("currentBlock2 : ",currentBlock2);
+    tenMostRecentBlocks=[]
+    for(let x=10;x>0;x--)
+    {
+      let blockIndex = currentInfo.head_block_num - x
+      let tempBlock=await rpc.get_block(blockIndex);
+      tenMostRecentBlocks.push(tempBlock)
+    }
+    console.log(tenMostRecentBlocks)
+    // currentBlock2 = await rpc.get_block(currentInfo.head_block_num-1);
+    // console.log("currentBlock2 : ",currentBlock2);
+    
+
 
   }
     catch(error){
       console.log(chalk.red('ERROR FETCHING CHAIN : ')+chalk.bgRed(error))
     }
     setCount(count + 1);
-  }, 1000);
+  }, 5000);
 
   return (
     <ErrorBoundary>
     <Arwes background="/images/blocks.gif" pattern="/images/glow.png">
     {/* style={{...blockStyle}} */}
     <Heading style={{...headerStyle}} layer="primary">EOS CHAIN NAV</Heading>
+    {tenMostRecentBlocks.map((book)=>(
+      <Block currentBlock={book}/>
+    )
+    )}
 
-    <Block currentBlock = {currentBlock}/>
-    
-    <Block currentBlock = {currentBlock2}/>
-
-      {/* <Frame animate={true} level={3} corners={4} layer="primary">
-        <Content style={{ margin: "5%" }}>
-          <div style={{ ...rowStyle }}>
-            <h5>timestamp : </h5>
-            <h6> {currentBlock.timestamp}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>producer : </h5> <h6> {currentBlock.producer}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>confirmed : </h5> <h6> {currentBlock.confirmed}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>previous : </h5> <h6> {currentBlock.previous}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>transaction_mroot : </h5>{" "}
-            <h6> {currentBlock.transaction_mroot}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>action_mroot : </h5> <h6> {currentBlock.action_mroot}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>schedule_version : </h5>{" "}
-            <h6> {currentBlock.schedule_version}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>new_producers : </h5> <h6> {currentBlock.new_producers}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>header_extensions : </h5>{" "}
-            <h6> {currentBlock.header_extensions}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>producer_signature : </h5>{" "}
-            <h6> {currentBlock.producer_signature}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>transactions : </h5> 
-
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>block_extensions : </h5>{" "}
-            <h6> {currentBlock.block_extensions}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>id : </h5> <h6> {currentBlock.id}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>block_num : </h5> <h6> {currentBlock.block_num}</h6>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>ref_block_prefix : </h5>{" "}
-            <h6> {currentBlock.ref_block_prefix}</h6>
-          </div>
-        </Content>
-      </Frame> */}
+    {/* <Block currentBlock = {currentBlock}/> */}
+    {/* <Block currentBlock = {currentBlock2}/> */}
     </Arwes>
     </ErrorBoundary>
   );
@@ -172,3 +127,63 @@ id
 block_num
 ref_block_prefix
 */
+
+
+
+      {/* <Frame animate={true} level={3} corners={4} layer="primary">
+        <Content style={{ margin: "5%" }}>
+          <div style={{ ...rowStyle }}>
+            <h5>timestamp : </h5>
+            <h6> {currentBlock.timestamp}</h6>
+          </div>
+          <div style={{ ...rowStyle }}>
+            <h5>producer : </h5> <h6> {currentBlock.producer}</h6>
+          </div>
+          <div style={{ ...rowStyle }}>
+            <h5>confirmed : </h5> <h6> {currentBlock.confirmed}</h6>
+          </div>
+          <div style={{ ...rowStyle }}>
+            <h5>previous : </h5> <h6> {currentBlock.previous}</h6>
+          </div>
+          <div style={{ ...rowStyle }}>
+            <h5>transaction_mroot : </h5>{" "}
+            <h6> {currentBlock.transaction_mroot}</h6>
+          </div>
+          <div style={{ ...rowStyle }}>
+            <h5>action_mroot : </h5> <h6> {currentBlock.action_mroot}</h6>
+          </div>
+          <div style={{ ...rowStyle }}>
+            <h5>schedule_version : </h5>{" "}
+            <h6> {currentBlock.schedule_version}</h6>
+          </div>
+          <div style={{ ...rowStyle }}>
+            <h5>new_producers : </h5> <h6> {currentBlock.new_producers}</h6>
+          </div>
+          <div style={{ ...rowStyle }}>
+            <h5>header_extensions : </h5>{" "}
+            <h6> {currentBlock.header_extensions}</h6>
+          </div>
+          <div style={{ ...rowStyle }}>
+            <h5>producer_signature : </h5>{" "}
+            <h6> {currentBlock.producer_signature}</h6>
+          </div>
+          <div style={{ ...rowStyle }}>
+            <h5>transactions : </h5> 
+
+          </div>
+          <div style={{ ...rowStyle }}>
+            <h5>block_extensions : </h5>{" "}
+            <h6> {currentBlock.block_extensions}</h6>
+          </div>
+          <div style={{ ...rowStyle }}>
+            <h5>id : </h5> <h6> {currentBlock.id}</h6>
+          </div>
+          <div style={{ ...rowStyle }}>
+            <h5>block_num : </h5> <h6> {currentBlock.block_num}</h6>
+          </div>
+          <div style={{ ...rowStyle }}>
+            <h5>ref_block_prefix : </h5>{" "}
+            <h6> {currentBlock.ref_block_prefix}</h6>
+          </div>
+        </Content>
+      </Frame> */} 

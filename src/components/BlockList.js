@@ -59,8 +59,6 @@ function Counter() {
     )
     )}
 
-    {/* <Block currentBlock = {currentBlock}/> */}
-    {/* <Block currentBlock = {currentBlock2}/> */}
     </Arwes>
     </ErrorBoundary>
   );

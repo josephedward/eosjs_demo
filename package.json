@@ -17,10 +17,10 @@
     "use-timer": "^1.4.0"
   },
   "scripts": {
-    "start": "./scripts/local_nodeos_init.sh && react-scripts start",
-    "build": "./scripts/local_nodeos_init.sh && react-scripts build",
-    "test": "./scripts/local_nodeos_init.sh && react-scripts test",
-    "eject": "./scripts/local_nodeos_init.sh && react-scripts eject"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"

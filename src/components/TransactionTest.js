@@ -36,31 +36,112 @@ export default class AccordionExampleStandard extends Component {
       <div>
         <Project style={{ ...projectStyle }} header={tHeader}>
           <Row style={{ ...rowStyle }}>
-            <Col m={3}>cpu_usage_us : </Col>
+            <Col m={2}>cpu_usage_us : </Col>
             <Col m={9}>{this.state.transaction.cpu_usage_us}</Col>
           </Row>
           <Row style={{ ...rowStyle }}>
-            <Col m={3}>net_usage_words : </Col>
+            <Col m={2}>net_usage_words : </Col>
             <Col m={9}>{this.state.transaction.net_usage_words}</Col>
           </Row>
           <Row style={{ ...rowStyle }}>
-            <Col m={3}>status : </Col>
+            <Col m={2}>status : </Col>
             <Col m={9}>{this.state.transaction.status}</Col>
           </Row>
           <Row style={{ ...rowStyle }}></Row>
           <Row style={{ ...rowStyle }}>
-            <Col m={4}>TRX</Col>
+            <Col m={12}>TRX: </Col>
             {/* <Col m={4}>Second Column</Col> */}
           </Row>
           <Row style={{ ...rowStyle }}>
-            <Col m={3}></Col>
+            <Col m={2}></Col>
             <Col m={3}>compression : </Col>
             <Col m={3}>{this.state.transaction.trx.compression}</Col>
           </Row>
           <Row style={{ ...rowStyle }}>
-            <Col m={3}></Col>
+            <Col m={2}></Col>
             <Col m={3}>context_free_data : </Col>
-            <Col m={3}>{this.state.transaction.trx.context_free_data}</Col>
+            <Col m={3}>
+              {this.state.transaction.trx.context_free_data.forEach((cfd) => (
+                <div style={{ ...rowStyle }}>{cfd}</div>
+              ))}
+            </Col>
+          </Row>
+          <Row style={{ ...rowStyle }}>
+            <Col m={2}></Col>
+            <Col m={3}>packed_context_free_data : </Col>
+            <Col m={3}>
+              {this.state.transaction.trx.packed_context_free_data}
+            </Col>
+          </Row>
+          <Row style={{ ...rowStyle }}>
+            <Col m={2}></Col>
+            <Col m={3}>packed_trx : </Col>
+            <Col m={3}>{this.state.transaction.trx.packed_trx}</Col>
+          </Row>
+          <Row style={{ ...rowStyle }}>
+            <Col m={2}></Col>
+            <Col m={3}>signatures : </Col>
+          </Row>
+          <Row>
+            <Col m={2}></Col>
+            <Col m={10}>
+              <Frame style={{ ...frameStyle }}>
+                {this.state.transaction.trx.signatures.map((sig) => (
+                  <getSigs sig={sig} />
+                ))}
+              </Frame>
+            </Col>
+          </Row>
+          <Row style={{ ...rowStyle }}>
+            <Col m={12}>Transaction Detail : </Col>
+            {/* <Col m={4}>Second Column</Col> */}
+          </Row>
+          <Row style={{ ...rowStyle }}>
+            <Col m={2}></Col>
+            <Col m={3}>context_free_actions : </Col>
+            <Col m={3}>
+              {this.state.transaction.trx.transaction.context_free_actions}
+            </Col>
+          </Row>
+          <Row style={{ ...rowStyle }}>
+            <Col m={2}></Col>
+            <Col m={3}>delay_sec : </Col>
+            <Col m={3}>{this.state.transaction.trx.transaction.delay_sec}</Col>
+          </Row>
+          <Row style={{ ...rowStyle }}>
+            <Col m={2}></Col>
+            <Col m={3}>expiration : </Col>
+            <Col m={3}>{this.state.transaction.trx.transaction.expiration}</Col>
+          </Row>
+          <Row style={{ ...rowStyle }}>
+            <Col m={2}></Col>
+            <Col m={3}>max_cpu_usage_ms : </Col>
+            <Col m={3}>
+              {this.state.transaction.trx.transaction.max_cpu_usage_ms}
+            </Col>
+          </Row>
+          <Row style={{ ...rowStyle }}>
+            <Col m={2}></Col>
+            <Col m={3}>max_net_usage_word : </Col>
+            <Col m={3}>
+              {this.state.transaction.trx.transaction.max_net_usage_word}
+            </Col>
+          </Row>
+          <Row style={{ ...rowStyle }}>
+            <Col m={2}></Col>
+            <Col m={3}>ref_block_num : </Col>
+            <Col m={3}>{this.state.transaction.trx.transaction.ref_block_num}</Col>
+          </Row>
+          <Row style={{ ...rowStyle }}>
+            <Col m={2}></Col>
+            <Col m={3}>ref_block_prefix : </Col>
+            <Col m={3}>
+              {this.state.transaction.trx.transaction.ref_block_prefix}
+            </Col>
+          </Row>
+          <Row style={{ ...rowStyle }}>
+            <Col m={12}>Actions : </Col>
+            {/* <Col m={4}>Second Column</Col> */}
           </Row>
         </Project>
       </div>
@@ -68,12 +149,22 @@ export default class AccordionExampleStandard extends Component {
   }
 }
 
+function getSigs(props) {
+  return <div>{props.sig}</div>;
+}
+
+const frameStyle = {
+  height: "50px",
+  width: "100%",
+};
+
 const rowStyle = {
-  height: "15px",
+  height: "12.5px",
 };
 
 const projectStyle = {
-  margin: "5%",
+//   margin: "2.5%",
+//   overflow: "scroll",
 };
 
 const accordionStyle = {
@@ -91,7 +182,9 @@ const fakeTransaction = {
     packed_context_free_data: "",
     packed_trx:
       "0d6e815f6bab3ca76bb8000000000180b535d2ccb9a78a000000000075e8ad0180b535d2ccb9a78a00000000a8ed323208335c00000000000000",
+
     signatures: [
+      "SIG_K1_K3VNDhTSeXeUv7TMoE86SANSG8S4ktY29ARFyawmtijtsJjSaPiiwf8JWS7aw8QunjtbPzDwpgATQegY1ofc9THm9JNJsj",
       "SIG_K1_K3VNDhTSeXeUv7TMoE86SANSG8S4ktY29ARFyawmtijtsJjSaPiiwf8JWS7aw8QunjtbPzDwpgATQegY1ofc9THm9JNJsj",
     ],
     transaction: {

@@ -8,7 +8,6 @@ import Transaction from "./Transaction";
 export default function Block(props) {
   return (
     <ErrorBoundary>
-    
       <Frame
         style={{ ...blockStyle }}
         show={true}
@@ -17,99 +16,105 @@ export default function Block(props) {
         corners={4}
         layer="primary"
       >
-
-        <Content style={{ margin: "5%" }}>
+        <Content animate layer="success" style={{ margin: "5%" }}>
           <div style={{ ...rowStyle }}>
             <h5>timestamp : </h5>
-            <h6> {props.currentBlock.timestamp}</h6>
+            <h5> {props.currentBlock.timestamp}</h5>
           </div>
           <div style={{ ...rowStyle }}>
-            <h5>producer : </h5> <h6> {props.currentBlock.producer}</h6>
+            <h5>producer : </h5> <h5> {props.currentBlock.producer}</h5>
           </div>
           <div style={{ ...rowStyle }}>
-            <h5>confirmed : </h5> <h6> {props.currentBlock.confirmed}</h6>
+            <h5>confirmed : </h5> <h5> {props.currentBlock.confirmed}</h5>
           </div>
           <div style={{ ...rowStyle }}>
-            <h5>previous : </h5> <h6> {props.currentBlock.previous}</h6>
+            <h5>previous : </h5> <h5> {props.currentBlock.previous}</h5>
           </div>
           <div style={{ ...rowStyle }}>
             <h5>transaction_mroot : </h5>{" "}
-            <h6> {props.currentBlock.transaction_mroot}</h6>
+            <h5> {props.currentBlock.transaction_mroot}</h5>
           </div>
           <div style={{ ...rowStyle }}>
-            <h5>action_mroot : </h5> <h6> {props.currentBlock.action_mroot}</h6>
+            <h5>action_mroot : </h5> <h5> {props.currentBlock.action_mroot}</h5>
           </div>
           <div style={{ ...rowStyle }}>
             <h5>schedule_version : </h5>{" "}
-            <h6> {props.currentBlock.schedule_version}</h6>
-          </div>
-          {/* <div style={{ ...rowStyle }}>
-            <h5>new_producers : </h5>{" "}
-            <h6> {props.currentBlock.new_producers}</h6>
+            <h5> {props.currentBlock.schedule_version}</h5>
           </div>
           <div style={{ ...rowStyle }}>
-            <h5>header_extensions : </h5>{" "}
-            <h6> {props.currentBlock.header_extensions}</h6>
-          </div> */}
-
-          <div style={{ ...prodSigStyle }}>
             <h5>producer_signature : </h5>{" "}
-            <h6> {props.currentBlock.producer_signature}</h6>
           </div>
-          
+          <div style={{ ...rowStyle }}>
+            <h5> {props.currentBlock.producer_signature}</h5>
+          </div>
 
-        {/* {props.currentBlock.transactions.length!==0?(<TransitionablePortalExamplePortal/>):([])}  */}
-        {/* {props.currentBlock.block_extensions !==""?(
-            <div style={{ ...rowStyle }}>
-            <h5>block_extensions : </h5>{" "}
-            <h6> {props.currentBlock.block_extensions}</h6>
-          </div>
-          ):("")
-               */
-          /* <div style={{ ...rowStyle }}>
-            <h5>block_extensions : </h5>{" "}
-            <h6> {props.currentBlock.block_extensions}</h6>
-          </div> */}
           <div style={{ ...rowStyle }}>
-            <h5>id : </h5> <h6> {props.currentBlock.id}</h6>
+            <h5>id : </h5> <h5> {props.currentBlock.id}</h5>
           </div>
           <div style={{ ...rowStyle }}>
-            <h5>block_num : </h5> <h6> {props.currentBlock.block_num}</h6>
+            <h5>block_num : </h5> <h5> {props.currentBlock.block_num}</h5>
           </div>
           <div style={{ ...rowStyle }}>
             <h5>ref_block_prefix : </h5>{" "}
-            <h6> {props.currentBlock.ref_block_prefix}</h6>
+            <h5> {props.currentBlock.ref_block_prefix}</h5>
           </div>
           <div style={{ ...rowStyle }}>
-              <Transaction style={{...buttonStyle}}
+            {props.currentBlock.transactions.length != 0 ? (
+              <Transaction
+                style={{ ...buttonStyle }}
                 blockId={props.currentBlock.id}
                 transactionObj={props.currentBlock.transactions}
               />
-              {/* <h6 style={{...buttonStyle}}>transactions : </h6>
-              </Transaction> */}
+            ) : (
+              <h5>Transactions : Empty</h5>
+            )}
           </div>
-
         </Content>
-    
       </Frame>
     </ErrorBoundary>
   );
 }
 
-const buttonStyle={
-    color:"white"
-}
+const buttonStyle = {
+  color: "white",
+};
 
 const rowStyle = {
   display: "flex",
   flexDirection: "row",
   lineHeight: 0,
+  padding: 0,
+  height: "20px",
 };
 
 const prodSigStyle = {
-  lineHeight: 0,
+  marginBottom: 0,
 };
 
 const blockStyle = {
-   margin: "5%",
+  margin: "5%",
 };
+
+
+
+
+          {/* <div style={{ ...rowStyle }}>
+            <h5>new_producers : </h5>{" "}
+            <h5> {props.currentBlock.new_producers}</h5>
+          </div>
+          <div style={{ ...rowStyle }}>
+            <h5>header_extensions : </h5>{" "}
+            <h5> {props.currentBlock.header_extensions}</h5>
+          </div> */}
+          {/* {props.currentBlock.transactions.length!==0?(<TransitionablePortalExamplePortal/>):([])}  */}
+          {/* {props.currentBlock.block_extensions !==""?(
+            <div style={{ ...rowStyle }}>
+            <h5>block_extensions : </h5>{" "}
+            <h5> {props.currentBlock.block_extensions}</h5>
+          </div>
+          ):("")
+               */
+          /* <div style={{ ...rowStyle }}>
+            <h5>block_extensions : </h5>{" "}
+            <h5> {props.currentBlock.block_extensions}</h5>
+          </div> */}

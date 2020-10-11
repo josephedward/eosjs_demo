@@ -8,17 +8,26 @@ import { ThemeProvider, createTheme, Arwes, Project, Heading,
 } from 'arwes';
 import Content from 'arwes/lib/Content';
 import ErrorBoundary from './components/ErrorBoundary';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Transaction from './components/Transaction'
+import TransactionTest from './components/TransactionTest'
+import 'semantic-ui-css/semantic.min.css'
 
 function App(){
     return(
 <div>
 <ErrorBoundary>
+<Router>
+<Switch>
 <ThemeProvider theme={createTheme()}>
-
 <Arwes   background="/images/background.jpg" pattern="/images/glow.png">
-<BlockList background="/images/background.jpg" pattern="/images/glow.png"/>
+<Route exact path="/" component={BlockList} />
+<Route exact path="/transaction" component={TransactionTest} />
 </Arwes>
 </ThemeProvider>
+</Switch>
+</Router>
+
 </ErrorBoundary>
 </div>
     )

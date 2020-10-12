@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, Fragment } from "react";
+import React, { useState, useEffect, useRef, Fragment, Redirect } from "react";
 import ReactDOM from "react-dom";
 import {
   ThemeProvider,
@@ -9,12 +9,14 @@ import {
   Words,
   SoundsProvider,
   createSounds,
+  Button,
 } from "arwes";
 import Content from "arwes/lib/Content";
 import ErrorBoundary from "./ErrorBoundary";
 import Block from "./Block";
 import { useTimer } from "use-timer";
-import { Menu } from "semantic-ui-react";
+import { Menu, Grid, Image } from "semantic-ui-react";
+import { opacify } from "polished";
 
 const chalk = require("chalk");
 const { Api, JsonRpc, RpcError } = require("eosjs");
@@ -31,23 +33,24 @@ let currentBlock = {};
 let tenMostRecentBlocks = [];
 let reqTimer;
 
-(async () => {
-  try {
-    currentInfo = await rpc.get_info();
-    console.log("currentInfo.head_block_num : ", currentInfo.head_block_num);
-    currentBlock = await rpc.get_block(currentInfo.head_block_num);
-    console.log("currentBlock : ", currentBlock);
-    tenMostRecentBlocks = [];
-    for (let x = 10; x > 0; x--) {
-      let blockIndex = currentInfo.head_block_num - x;
-      let tempBlock = await rpc.get_block(blockIndex);
-      tenMostRecentBlocks.push(tempBlock);
-    }
-    console.log(tenMostRecentBlocks);
-  } catch (error) {
-    console.log(chalk.red("ERROR FETCHING CHAIN : ") + chalk.bgRed(error));
-  }
-})();
+// (async () => {
+//   try {
+//     currentInfo = await rpc.get_info();
+//     console.log("currentInfo.head_block_num : ", currentInfo.head_block_num);
+//     currentBlock = await rpc.get_block(currentInfo.head_block_num);
+//     console.log("currentBlock : ", currentBlock);
+//     tenMostRecentBlocks = [];
+//     for (let x = 10; x > 0; x--) {
+//       let blockIndex = currentInfo.head_block_num - x;
+//       let tempBlock = await rpc.get_block(blockIndex);
+//       tenMostRecentBlocks.push(tempBlock);
+//     }
+//     console.log(tenMostRecentBlocks);
+//   } catch (error) {
+//     console.log(chalk.red("ERROR FETCHING CHAIN : ") + chalk.bgRed(error));
+//   }
+// })();
+let recentBlocks = [];
 
 function BlockList() {
   const { time, start, pause, reset, isRunning } = useTimer({
@@ -61,50 +64,85 @@ function BlockList() {
   });
 
   const [count, setCount] = useState(0);
+
   useInterval(async () => {
-    reset();
-    start();
+    
+    // reset();
+    // start();
+
     try {
       currentInfo = await rpc.get_info();
       console.log("currentInfo.head_block_num : ", currentInfo.head_block_num);
       currentBlock = await rpc.get_block(currentInfo.head_block_num);
       console.log("currentBlock : ", currentBlock);
-      tenMostRecentBlocks = [];
-      for (let x = 10; x > 0; x--) {
-        let blockIndex = currentInfo.head_block_num - x;
-        let tempBlock = await rpc.get_block(blockIndex);
-        tenMostRecentBlocks.push(tempBlock);
-      }
-      console.log(tenMostRecentBlocks);
+
+      // for (let x = 10; x > 0; x--) {
+        // let blockIndex = currentInfo.head_block_num - x;
+        // let tempBlock = await rpc.get_block(blockIndex);
+        recentBlocks.push(currentBlock);
+      // }
+      console.log("blocks in memory: ", recentBlocks.length);
     } catch (error) {
       console.log(chalk.red("ERROR FETCHING CHAIN : ") + chalk.bgRed(error));
     }
     setCount(count + 1);
-  }, 5000);
+  }, 500);
 
   return (
     <ErrorBoundary>
-      <Arwes background="/images/blocks.gif" pattern="/images/glow.png">
-        <Heading node="h1" style={{ ...headerStyle }} layer="primary">
-          EOS CHAIN NAVIGATOR
-        </Heading>
-        {isRunning ? (
-          <h4 style={{ ...timerStyle }}>
-            new results in : {Math.ceil((reqTimer - 1) / 2)}
-          </h4>
-        ) : (
-          ""
-        )}
-        <h4 style={{ ...endPointStyle, ...timerStyle }}>
-          RPC-API-URL endpoint : {endPointUrl}
-        </h4>
-        {/* </div> */}
+      <Arwes background="/images/blocks.gif" pattern="/images/glow.png"
+      >
+        <Frame >
+          <Menu >
+            <Menu.Item>
+              <h1>EOS CHAIN NAVIGATOR</h1>
+            </Menu.Item>
+            <Menu.Item>
+              <Button>Test</Button>
+            </Menu.Item>
+            <Menu.Item
+            position='right'
+            >
+              <h4>RPC-API-URL endpoint : {endPointUrl}</h4>
+            </Menu.Item>
+          </Menu>
+        </Frame>
+        <Grid
+        style={{ ...menuStyle }}
+        >
+          <Grid.Column width={10}>
 
-        <div style={{ ...listStyle }}>
-          {tenMostRecentBlocks.map((book) => (
-            <Block currentBlock={book} />
-          ))}
-        </div>
+            {/* <Image src="https://react.semantic-ui.com/images/wireframe/image.png" /> */}
+          </Grid.Column>
+          {/* <Grid.Column width={9}>
+      <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+    </Grid.Column> */}
+          <Grid.Column width={6}>
+          <Frame
+          style={{height:'150vh',
+          overflowY:'scroll'
+          }}
+          >
+            {isRunning ? (
+              <Frame>
+              <Heading>
+                new results in : {Math.ceil((reqTimer - 1) / 2)}
+              </Heading>
+              </Frame>
+            ) : (
+              ""
+            )}
+            <div style={{ ...listStyle }}>
+              {recentBlocks.slice(0).reverse().map((book) => (
+                <Block currentBlock={book} />
+              ))}
+            </div>
+            </Frame>
+
+            {/* <Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' /> */}
+          </Grid.Column>
+        </Grid>
+        )
       </Arwes>
     </ErrorBoundary>
   );
@@ -131,6 +169,14 @@ function useInterval(callback, delay) {
 }
 export default BlockList;
 
+const menuStyle = {
+  width: "100%",
+  // opacity:"1",
+  // color:"white"
+  // color:"aqua",
+  // background:"black"
+};
+
 const listStyle = {
   marginTop: "10%",
 };
@@ -138,33 +184,25 @@ const listStyle = {
 const headerStyle = {
   position: "fixed",
   justifyContent: "center",
-  background: "darkblue",
+  // background: "darkblue",
   textAlign: "center",
   top: "0",
-  width: "100%",
+  // width: "100%",
   zIndex: "10",
   margin: "0 auto",
-  border: "3px solid aqua",
+  // border: "3px solid aqua",
 };
 
 const timerStyle = {
-  position: "fixed",
   justifyContent: "center",
-  background: "black",
   textAlign: "center",
-  top: "0",
-  width: "25%",
-  zIndex: "10",
-  margin: "1%",
-  // marginTop: ".25%",
-  // padding: "1%",
-  border: "3px solid purple",
+  margin: "0 auto",
 };
 
 const endPointStyle = {
   display: "flex",
   flexDirection: "row",
-  right: "0",
+  // right: "0",
 };
 
 /*

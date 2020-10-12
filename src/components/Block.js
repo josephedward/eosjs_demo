@@ -3,7 +3,11 @@ import ReactDOM from "react-dom";
 import { ThemeProvider, createTheme, Arwes, Frame } from "arwes";
 import Content from "arwes/lib/Content";
 import ErrorBoundary from "./ErrorBoundary";
+// import Transaction from "../../misc/Transaction";
 import Transaction from "./Transaction";
+import TransactionRedirect from "./TransactionRedirect";
+import { Button } from "semantic-ui-react";
+import { Redirect } from "react-router";
 
 export default function Block(props) {
   return (
@@ -60,11 +64,7 @@ export default function Block(props) {
           </div>
           <div style={{ ...rowStyle }}>
             {props.currentBlock.transactions.length != 0 ? (
-              <Transaction
-                style={{ ...buttonStyle }}
-                blockId={props.currentBlock.id}
-                transactionObj={props.currentBlock.transactions}
-              />
+              <h5>Transactions : []</h5>
             ) : (
               <h5>Transactions : Empty</h5>
             )}
@@ -75,8 +75,20 @@ export default function Block(props) {
   );
 }
 
+// const buttonStyle = {
+//   color: "white",
+// };
+
+function reDirectTransaction() {
+  return <Redirect to="/transaction" />;
+}
+
 const buttonStyle = {
-  color: "white",
+  width: "20%",
+  backgroundColor: "black",
+  color: "lightGreen",
+  border: "2px solid aqua",
+  top: "0%",
 };
 
 const rowStyle = {
@@ -94,27 +106,3 @@ const prodSigStyle = {
 const blockStyle = {
   margin: "5%",
 };
-
-
-
-
-          {/* <div style={{ ...rowStyle }}>
-            <h5>new_producers : </h5>{" "}
-            <h5> {props.currentBlock.new_producers}</h5>
-          </div>
-          <div style={{ ...rowStyle }}>
-            <h5>header_extensions : </h5>{" "}
-            <h5> {props.currentBlock.header_extensions}</h5>
-          </div> */}
-          {/* {props.currentBlock.transactions.length!==0?(<TransitionablePortalExamplePortal/>):([])}  */}
-          {/* {props.currentBlock.block_extensions !==""?(
-            <div style={{ ...rowStyle }}>
-            <h5>block_extensions : </h5>{" "}
-            <h5> {props.currentBlock.block_extensions}</h5>
-          </div>
-          ):("")
-               */
-          /* <div style={{ ...rowStyle }}>
-            <h5>block_extensions : </h5>{" "}
-            <h5> {props.currentBlock.block_extensions}</h5>
-          </div> */}

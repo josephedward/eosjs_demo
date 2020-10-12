@@ -10,7 +10,6 @@ import Content from 'arwes/lib/Content';
 import ErrorBoundary from './components/ErrorBoundary';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Transaction from './components/Transaction'
-import TransactionTest from './components/TransactionTest'
 import 'semantic-ui-css/semantic.min.css'
 
 function App(){
@@ -22,7 +21,7 @@ function App(){
 <ThemeProvider theme={createTheme()}>
 <Arwes   background="/images/background.jpg" pattern="/images/glow.png">
 <Route exact path="/" component={BlockList} />
-<Route exact path="/transaction" component={TransactionTest} />
+<Route exact path="/transaction" component={Transaction} />
 </Arwes>
 </ThemeProvider>
 </Switch>

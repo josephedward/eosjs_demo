@@ -51,24 +51,36 @@ let reqTimer;
 //   }
 // })();
 let recentBlocks = [];
+let tenLatestBlocks=[];
+function grabTen(latestBlockNum) {
+  tenLatestBlocks=[]
+  try{
+      for (let x = 10; x > 0; x--) {
+      let blockIndex = latestBlockNum - x;
+      let tempBlock = await rpc.get_block(blockIndex);
+      
+    }
+  catch(err){
+
+  }
+}
 
 function BlockList() {
   const { time, start, pause, reset, isRunning } = useTimer({
-    initialTime: 10,
+    initialTime: 50,
     timerType: "DECREMENTAL",
     onTimeUpdate: (time) => {
       console.log("Time is updated", time);
       reqTimer = time;
     },
-    interval: 500,
+    interval: 1,
   });
 
   const [count, setCount] = useState(0);
 
   useInterval(async () => {
-    
-    // reset();
-    // start();
+    reset();
+    start();
 
     try {
       currentInfo = await rpc.get_info();
@@ -77,11 +89,12 @@ function BlockList() {
       console.log("currentBlock : ", currentBlock);
 
       // for (let x = 10; x > 0; x--) {
-        // let blockIndex = currentInfo.head_block_num - x;
-        // let tempBlock = await rpc.get_block(blockIndex);
-        recentBlocks.push(currentBlock);
+      // let blockIndex = currentInfo.head_block_num - x;
+      // let tempBlock = await rpc.get_block(blockIndex);
+      recentBlocks.push(currentBlock);
       // }
-      console.log("blocks in memory: ", recentBlocks.length);
+      // console.log("blocks in memory: ", recentBlocks.length);
+      // if(recentBlocks.length>=500){window.location.reload()}
     } catch (error) {
       console.log(chalk.red("ERROR FETCHING CHAIN : ") + chalk.bgRed(error));
     }
@@ -90,53 +103,53 @@ function BlockList() {
 
   return (
     <ErrorBoundary>
-      <Arwes background="/images/blocks.gif" pattern="/images/glow.png"
-      >
-        <Frame >
-          <Menu >
+      <Arwes background="/images/blocks.gif" pattern="/images/glow.png">
+        <Frame>
+          <Menu>
             <Menu.Item>
               <h1>EOS CHAIN NAVIGATOR</h1>
             </Menu.Item>
             <Menu.Item>
-              <Button>Test</Button>
+              <Button layer="success">Latest Ten Blocks</Button>
             </Menu.Item>
-            <Menu.Item
-            position='right'
-            >
+            <Menu.Item position="right">
               <h4>RPC-API-URL endpoint : {endPointUrl}</h4>
+            </Menu.Item>
+            <Menu.Item position="right">
+              {isRunning ? (
+                <Frame>
+                  <Heading>
+                    Chain Height : {currentBlock.block_num}
+                    {/* {Math.ceil((reqTimer - 1) / 2) */}
+                    {/* } */}
+                  </Heading>
+                </Frame>
+              ) : (
+                ""
+              )}
             </Menu.Item>
           </Menu>
         </Frame>
-        <Grid
-        style={{ ...menuStyle }}
-        >
+        <Grid style={{ ...menuStyle }}>
           <Grid.Column width={10}>
-
             {/* <Image src="https://react.semantic-ui.com/images/wireframe/image.png" /> */}
           </Grid.Column>
           {/* <Grid.Column width={9}>
       <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
     </Grid.Column> */}
           <Grid.Column width={6}>
-          <Frame
-          style={{height:'150vh',
-          overflowY:'scroll'
-          }}
-          >
-            {isRunning ? (
-              <Frame>
-              <Heading>
-                new results in : {Math.ceil((reqTimer - 1) / 2)}
-              </Heading>
-              </Frame>
-            ) : (
-              ""
-            )}
-            <div style={{ ...listStyle }}>
-              {recentBlocks.slice(0).reverse().map((book) => (
-                <Block currentBlock={book} />
-              ))}
-            </div>
+            <Frame
+              style={{ height: "150vh", overflowY: "scroll", right: 0 }}
+              position="right"
+            >
+              <div style={{ ...listStyle }}>
+                {recentBlocks
+                  .slice(0)
+                  .reverse()
+                  .map((book) => (
+                    <Block currentBlock={book} />
+                  ))}
+              </div>
             </Frame>
 
             {/* <Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' /> */}

@@ -1,15 +1,20 @@
 import React, { useState, useEffect, useRef, Fragment } from "react";
 import ReactDOM from "react-dom";
-import { ThemeProvider, createTheme, Arwes, Frame } from "arwes";
+import { ThemeProvider, createTheme, Arwes, Frame, Heading } from "arwes";
 import Content from "arwes/lib/Content";
 import ErrorBoundary from "./ErrorBoundary";
 // import Transaction from "../../misc/Transaction";
-import Transaction from "./Transaction";
-import TransactionRedirect from "./TransactionRedirect";
+import TransactionList from "./Transaction";
 import { Button } from "semantic-ui-react";
 import { Redirect } from "react-router";
 
+
 export default function Block(props) {
+
+    //   console.log(
+//     "props.currentBlock.transactions.length : ",
+//     props.currentBlock.transactions.length
+//   );
   return (
     <ErrorBoundary>
       <Frame
@@ -21,6 +26,8 @@ export default function Block(props) {
         layer="primary"
       >
         <Content animate layer="success" style={{ margin: "5%" }}>
+          <h2>BLOCK ID: </h2>
+          <h3>{props.currentBlock.id}</h3>
           <div style={{ ...rowStyle }}>
             <h5>timestamp : </h5>
             <h5> {props.currentBlock.timestamp}</h5>
@@ -32,14 +39,25 @@ export default function Block(props) {
             <h5>confirmed : </h5> <h5> {props.currentBlock.confirmed}</h5>
           </div>
           <div style={{ ...rowStyle }}>
-            <h5>previous : </h5> <h5> {props.currentBlock.previous}</h5>
+            <h5>previous : </h5>
+          </div>
+          <div style={{ ...rowStyle }}>
+            <h5> {props.currentBlock.previous}</h5>
           </div>
           <div style={{ ...rowStyle }}>
             <h5>transaction_mroot : </h5>{" "}
+          </div>
+          <div style={{ ...rowStyle }}>
             <h5> {props.currentBlock.transaction_mroot}</h5>
           </div>
           <div style={{ ...rowStyle }}>
-            <h5>action_mroot : </h5> <h5> {props.currentBlock.action_mroot}</h5>
+            <h5>action_mroot : </h5>
+          </div>
+          <div style={{ ...rowStyle }}>
+            <h5 style={{ wordWrap: "break-word" }}>
+              {" "}
+              {props.currentBlock.action_mroot}
+            </h5>
           </div>
           <div style={{ ...rowStyle }}>
             <h5>schedule_version : </h5>{" "}
@@ -49,12 +67,12 @@ export default function Block(props) {
             <h5>producer_signature : </h5>{" "}
           </div>
           <div style={{ ...rowStyle }}>
-            <h5> {props.currentBlock.producer_signature}</h5>
+            <h5 style={{ wordWrap: "break-word" }}>
+              {" "}
+              {props.currentBlock.producer_signature}
+            </h5>
           </div>
 
-          <div style={{ ...rowStyle }}>
-            <h5>id : </h5> <h5> {props.currentBlock.id}</h5>
-          </div>
           <div style={{ ...rowStyle }}>
             <h5>block_num : </h5> <h5> {props.currentBlock.block_num}</h5>
           </div>
@@ -63,8 +81,15 @@ export default function Block(props) {
             <h5> {props.currentBlock.ref_block_prefix}</h5>
           </div>
           <div style={{ ...rowStyle }}>
-            {props.currentBlock.transactions.length != 0 ? (
-              <h5>Transactions : []</h5>
+            {props.currentBlock.transactions.length != 0  && props.currentBlock.staticFlag==true ? (
+                <div style={{ ...rowStyle }}>
+                <h5>Transactions : []</h5>
+                <TransactionList
+                style={{...buttonStyle, position:"absolute"}}
+                  blockId={props.currentBlock.id}
+                  transactionList={props.currentBlock.transactions}
+                />
+              </div>
             ) : (
               <h5>Transactions : Empty</h5>
             )}
@@ -75,34 +100,42 @@ export default function Block(props) {
   );
 }
 
-// const buttonStyle = {
-//   color: "white",
-// };
-
-function reDirectTransaction() {
-  return <Redirect to="/transaction" />;
+const buttonStyle={
+    display:"block",
+    position:"absolute",
+    height:"100px",
+    width:"100px",
+    backgroundColor:"red",
+// zIndex:50
 }
-
-const buttonStyle = {
-  width: "20%",
-  backgroundColor: "black",
-  color: "lightGreen",
-  border: "2px solid aqua",
-  top: "0%",
-};
 
 const rowStyle = {
   display: "flex",
   flexDirection: "row",
-  lineHeight: 0,
-  padding: 0,
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  "white-space": "nowrap",
+
+  //   lineHeight: '20px',
+  //   padding:"5%",
   height: "20px",
 };
 
-const prodSigStyle = {
-  marginBottom: 0,
-};
+
 
 const blockStyle = {
   margin: "5%",
+  height:"100%",
+  //   overflowWrap:"anywhere",
+  // overflow: 'hidden',
+  // textOverflow: 'ellipsis',
+  // 'white-space': 'nowrap',
+  // width:"425px",
+  wordBreak: "break-all",
+  // // textOverflow: "ellipsis",
+  // // "white-space": "pre-line",
+  // whiteSpace: "normal",
+  //   width:"400px",
+  // lineHeight: '20px',
+  // position: 'relative'
 };

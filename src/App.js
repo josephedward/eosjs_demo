@@ -12,6 +12,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Transaction from './components/Transaction'
 import 'semantic-ui-css/semantic.min.css'
 
+
 function App(){
     return(
 <div>
@@ -19,7 +20,9 @@ function App(){
 <Router>
 <Switch>
 <ThemeProvider theme={createTheme()}>
-<Arwes   background="/images/background.jpg" pattern="/images/glow.png">
+<Arwes   background="/images/background.jpg" 
+// pattern="/images/glow.png"
+>
 <Route exact path="/" component={BlockList} />
 <Route exact path="/transaction" component={Transaction} />
 </Arwes>

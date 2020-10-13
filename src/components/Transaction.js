@@ -6,184 +6,198 @@ import {
   // Table
 } from "arwes";
 import { Label, Menu, Table } from "semantic-ui-react";
-import { ThemeProvider, createTheme, Row, Col } from "arwes";
-import { Container } from "semantic-ui-react";
+import { ThemeProvider, createTheme, Row, Col, Arwes} from "arwes";
+import { Container, Modal } from "semantic-ui-react";
 import {
   Button,
   Header,
   Segment,
   TransitionablePortal,
-} from 'semantic-ui-react'
+} from "semantic-ui-react";
 import { Redirect } from "react-router";
+import ToObject from "es-abstract/5/ToObject";
 
+export default function TransactionList(props) {
+  console.log("props.transactionList : ",props.transactionList.length)
+  return (
+    <Modal
+    style={{...transactionStyle}}
+          trigger={<Button
+          style={{...buttonStyle}}
+          >Show Transactions</Button>}
+          // header='Reminder!'
+          // content='Call Benjamin regarding the reports.'
+          // actions={['Snooze', { key: 'done', content: 'Done', positive: true }]}
+        >
+    <Modal.Content
+    // style={{...transactionStyle}}
+    >
+      {/* {props.transactionList.forEach((tObj) => ( */}
+        <Transaction
+        
+          blockId={props.blockId}
+          transaction={props.transactionList[0]}
+        ></Transaction>
+      {/* ))} */}
+    </Modal.Content>
+    </Modal>
+  );
+}
 
-export default class Transaction extends Component {
+const transactionStyle={
+  height: "80%",
+  width:"80%"
+}
+
+const buttonStyle={
+  position:"absolute",
+  zIndex:50
+}
+
+class Transaction extends Component {
   constructor(props) {
+    console.log("props.transaction : ", props.transaction);
     super(props);
     this.state = {
       blockId: props.blockId,
-      transaction: props.transactionObj,
+      transaction: props.transaction,
       open: false,
       // activeIndex: 0,
     };
   }
 
-
-
   render() {
-    const { open } = this.state.open
-    console.log("this.state.blockId : ",this.state.blockId);
-    console.log("this.state.transaction : ",this.state.transaction);
-    try{
-    let tHeader = "Transaction ID: " + this.state.transaction.trx.id;
-    return (
-      
-        <TransitionablePortal
-        closeOnTriggerClick
-        onOpen={this.handleOpen}
-        // onClose={this.handleClose}
-        openOnTriggerClick
-        trigger={
-          <Button
-            content="Open"
-            // {open ? 'Close Portal' : 'Open Portal'}
-            negative={open}
-            positive={!open}
-          />
-        }
-      >
-        <Project style={{ ...projectStyle }} header={tHeader}>
-          <Row style={{ ...rowStyle }}>
-            <Col m={2}>cpu_usage_us : </Col>
-            <Col m={9}>{this.state.transaction.cpu_usage_us}</Col>
-          </Row>
-          <Row style={{ ...rowStyle }}>
-            <Col m={2}>net_usage_words : </Col>
-            <Col m={9}>{this.state.transaction.net_usage_words}</Col>
-          </Row>
-          <Row style={{ ...rowStyle }}>
-            <Col m={2}>status : </Col>
-            <Col m={9}>{this.state.transaction.status}</Col>
-          </Row>
-          <Row style={{ ...rowStyle }}></Row>
-          <Row style={{ ...rowStyle }}>
-            <Col m={12}>TRX: </Col>
-            {/* <Col m={4}>Second Column</Col> */}
-          </Row>
-          <Row style={{ ...rowStyle }}>
-            <Col m={2}></Col>
-            <Col m={3}>compression : </Col>
-            <Col m={3}>{this.state.transaction.trx.compression}</Col>
-          </Row>
-          <Row style={{ ...rowStyle }}>
-            <Col m={2}></Col>
-            <Col m={3}>context_free_data : </Col>
-            <Col m={3}>
-              {this.state.transaction.trx.context_free_data.forEach((cfd) => (
-                <div style={{ ...rowStyle }}>{cfd}</div>
-              ))}
-            </Col>
-          </Row>
-          <Row style={{ ...rowStyle }}>
-            <Col m={2}></Col>
-            <Col m={3}>packed_context_free_data : </Col>
-            <Col m={3}>
-              {this.state.transaction.trx.packed_context_free_data}
-            </Col>
-          </Row>
-          <Row style={{ ...rowStyle }}>
-            <Col m={2}></Col>
-            <Col m={3}>packed_trx : </Col>
-            <Col m={3}>{this.state.transaction.trx.packed_trx}</Col>
-          </Row>
-          <Row style={{ ...rowStyle }}>
-            <Col m={2}></Col>
-            <Col m={3}>signatures : </Col>
-          </Row>
-          <Row>
-            <Col m={2}></Col>
-            <Col m={10}>
-              <Frame style={{ ...frameStyle }}>
-                {this.state.transaction.trx.signatures.map((sig) => (
-                  <getSigs sig={sig} />
+    const { open } = this.state.open;
+    // console.log("this.state.blockId : ", this.state.blockId);
+    // console.log("this.state.transaction : ", this.state.transaction);
+    try {
+      let tHeader = "Transaction ID: " + this.state.transaction.trx.id;
+      return (
+        <div style={{all:"unset"}}>
+        <Arwes 
+        // style={{...transactionStyle}}
+        >
+          <Project style={{ ...projectStyle }} header={tHeader}>
+            <Row style={{ ...rowStyle }}>
+              <Col m={2}>cpu_usage_us : </Col>
+              <Col m={9}>{this.state.transaction.cpu_usage_us}</Col>
+            </Row>
+            <Row style={{ ...rowStyle }}>
+              <Col m={2}>net_usage_words : </Col>
+              <Col m={9}>{this.state.transaction.net_usage_words}</Col>
+            </Row>
+            <Row style={{ ...rowStyle }}>
+              <Col m={2}>status : </Col>
+              <Col m={9}>{this.state.transaction.status}</Col>
+            </Row>
+            <Row style={{ ...rowStyle }}></Row>
+          
+            <Row style={{ ...rowStyle }}>
+              <Col m={12}>TRX: </Col>
+            </Row>
+            <Row style={{ ...rowStyle }}>
+              <Col m={2}></Col>
+              <Col m={3}>compression : </Col>
+              <Col m={3}>{this.state.transaction.trx.compression}</Col>
+            </Row>
+            <Row style={{ ...rowStyle }}>
+              <Col m={2}></Col>
+              <Col m={3}>context_free_data : </Col>
+              <Col m={3}>
+                {this.state.transaction.trx.context_free_data.forEach((cfd) => (
+                  <div style={{ ...rowStyle }}>{cfd}</div>
                 ))}
-              </Frame>
-            </Col>
-          </Row>
-          <Row style={{ ...rowStyle }}>
-            <Col m={12}>Transaction Detail : </Col>
-          </Row>
-          <Row style={{ ...rowStyle }}>
-            <Col m={2}></Col>
-            <Col m={3}>context_free_actions : </Col>
-            <Col m={3}>
-              {this.state.transaction.trx.transaction.context_free_actions}
-            </Col>
-          </Row>
-          <Row style={{ ...rowStyle }}>
-            <Col m={2}></Col>
-            <Col m={3}>delay_sec : </Col>
-            <Col m={3}>{this.state.transaction.trx.transaction.delay_sec}</Col>
-          </Row>
-          <Row style={{ ...rowStyle }}>
-            <Col m={2}></Col>
-            <Col m={3}>expiration : </Col>
-            <Col m={3}>{this.state.transaction.trx.transaction.expiration}</Col>
-          </Row>
-          <Row style={{ ...rowStyle }}>
-            <Col m={2}></Col>
-            <Col m={3}>max_cpu_usage_ms : </Col>
-            <Col m={3}>
-              {this.state.transaction.trx.transaction.max_cpu_usage_ms}
-            </Col>
-          </Row>
-          <Row style={{ ...rowStyle }}>
-            <Col m={2}></Col>
-            <Col m={3}>max_net_usage_word : </Col>
-            <Col m={3}>
-              {this.state.transaction.trx.transaction.max_net_usage_word}
-            </Col>
-          </Row>
-          <Row style={{ ...rowStyle }}>
-            <Col m={2}></Col>
-            <Col m={3}>ref_block_num : </Col>
-            <Col m={3}>{this.state.transaction.trx.transaction.ref_block_num}</Col>
-          </Row>
-          <Row style={{ ...rowStyle }}>
-            <Col m={2}></Col>
-            <Col m={3}>ref_block_prefix : </Col>
-            <Col m={3}>
-              {this.state.transaction.trx.transaction.ref_block_prefix}
-            </Col>
-          </Row>
-          <Row style={{ ...rowStyle }}>
-            <Col m={12}>Actions : </Col>
-          </Row>
-        </Project>
-        </TransitionablePortal>
-    );
-    }
-    catch(err){
-      return(
-        <div>
-          Error rendering.
-        </div>
-      )
+              </Col>
+            </Row>
+            <Row style={{ ...rowStyle }}>
+              <Col m={2}></Col>
+              <Col m={3}>packed_context_free_data : </Col>
+              <Col m={3}>
+                {this.state.transaction.trx.packed_context_free_data}
+              </Col>
+            </Row>
+            <Row style={{ ...rowStyle }}>
+              <Col m={2}></Col>
+              <Col m={3}>packed_trx : </Col>
+              <Col m={3}>{this.state.transaction.trx.packed_trx}</Col>
+            </Row>
+            <Row style={{ ...rowStyle }}>
+              <Col m={2}></Col>
+              <Col m={3}>signatures : </Col>
+            </Row>
+            <Row>
+              <Col m={2}></Col>
+              <Col m={10}>
+                <Frame style={{ ...frameStyle }}>
+                  {this.state.transaction.trx.signatures.map((sig) => (
+                    <getSigs sig={sig} />
+                  ))}
+                </Frame>
+              </Col>
+            </Row>
+            <Row style={{ ...rowStyle }}>
+              <Col m={12}>Transaction Detail : </Col>
+            </Row>
+            <Row style={{ ...rowStyle }}>
+              <Col m={2}></Col>
+              <Col m={3}>context_free_actions : </Col>
+              <Col m={3}>
+                {this.state.transaction.trx.transaction.context_free_actions}
+              </Col>
+            </Row>
+            <Row style={{ ...rowStyle }}>
+              <Col m={2}></Col>
+              <Col m={3}>delay_sec : </Col>
+              <Col m={3}>
+                {this.state.transaction.trx.transaction.delay_sec}
+              </Col>
+            </Row>
+            <Row style={{ ...rowStyle }}>
+              <Col m={2}></Col>
+              <Col m={3}>expiration : </Col>
+              <Col m={3}>
+                {this.state.transaction.trx.transaction.expiration}
+              </Col>
+            </Row>
+            <Row style={{ ...rowStyle }}>
+              <Col m={2}></Col>
+              <Col m={3}>max_cpu_usage_ms : </Col>
+              <Col m={3}>
+                {this.state.transaction.trx.transaction.max_cpu_usage_ms}
+              </Col>
+            </Row>
+            <Row style={{ ...rowStyle }}>
+              <Col m={2}></Col>
+              <Col m={3}>max_net_usage_word : </Col>
+              <Col m={3}>
+                {this.state.transaction.trx.transaction.max_net_usage_word}
+              </Col>
+            </Row>
+            <Row style={{ ...rowStyle }}>
+              <Col m={2}></Col>
+              <Col m={3}>ref_block_num : </Col>
+              <Col m={3}>
+                {this.state.transaction.trx.transaction.ref_block_num}
+              </Col>
+            </Row>
+            <Row style={{ ...rowStyle }}>
+              <Col m={2}></Col>
+              <Col m={3}>ref_block_prefix : </Col>
+              <Col m={3}>
+                {this.state.transaction.trx.transaction.ref_block_prefix}
+              </Col>
+            </Row>
+            <Row style={{ ...rowStyle }}>
+              <Col m={12}>Actions : </Col>
+            </Row>
+          </Project>
+          </Arwes>
+          </div>
+      );
+    } catch (err) {
+      return <div>Error rendering : {err}</div>;
     }
   }
-}
-
-
-function reDirectTransaction(){
-  return(
-    <Redirect to="/transaction"/>
-  )
-}
-
-
-
-function getSigs(props) {
-  return <div>{props.sig}</div>;
 }
 
 const frameStyle = {
@@ -196,8 +210,9 @@ const rowStyle = {
 };
 
 const projectStyle = {
-//   margin: "2.5%",
-//   overflow: "scroll",
+  height:"100%"
+  //   margin: "2.5%",
+  //   overflow: "scroll",
 };
 
 const accordionStyle = {

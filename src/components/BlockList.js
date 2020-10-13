@@ -33,22 +33,19 @@ let currentBlock = {};
 let tenMostRecentBlocks = [];
 let reqTimer;
 
-
 let tenLatestBlocks = [];
 async function grabTen(latestBlockNum) {
-  
   tenLatestBlocks = [];
   try {
     for (let x = 10; x > 0; x--) {
       let blockIndex = latestBlockNum - x;
       let tempBlock = await rpc.get_block(blockIndex);
-      tempBlock.staticFlag = true
+      tempBlock.staticFlag = true;
       tenLatestBlocks.push(tempBlock);
     }
   } catch (err) {
     console.log(err);
   }
-
 }
 
 let recentBlocks = [];
@@ -80,8 +77,7 @@ function BlockList() {
       // }
       // console.log("blocks in memory: ", recentBlocks.length);
       if (recentBlocks.length >= 5) {
-      
-        recentBlocks.shift()
+        recentBlocks.shift();
       }
     } catch (error) {
       console.log(chalk.red("ERROR FETCHING CHAIN : ") + chalk.bgRed(error));
@@ -93,70 +89,90 @@ function BlockList() {
     <ErrorBoundary>
       <Arwes background="/images/blocks.gif">
         {/* pattern="/images/glow.png" */}
-        <Frame
-        
-        >
-          <Menu 
-        
-          stackable>
+        <Frame>
+          <Menu
+            style={{
+              backgroundColor: "black",
+              color: "aqua",
+              "-webkit-text-stroke": "1px white",
+            }}
+            stackable
+          >
             <Menu.Item>
               <h1>EOS CHAIN NAVIGATOR</h1>
             </Menu.Item>
-            <Menu.Item>
-              <Button layer="success"
-              
-              onClick={()=>{grabTen(currentBlock.block_num)}}
-              >Latest Ten Blocks</Button>
+            {/* <Menu.Item></Menu.Item> */}
+            <Menu.Item style={{ ...centerStyle, width:'45%' }}>
+              <h4
+                style={{
+                  color: "aqua",
+                  "-webkit-text-stroke": "none",
+                }}
+              >
+                RPC-API-URL endpoint : {endPointUrl}
+              </h4>
             </Menu.Item>
             <Menu.Item position="right">
-              <h4>RPC-API-URL endpoint : {endPointUrl}</h4>
-            </Menu.Item>
-            <Menu.Item position="right">
-              {/* {isRunning ? ( */}
               <Frame>
-                <Heading>
-                  Chain Height : {currentBlock.block_num}
-                  {/* {Math.ceil((reqTimer - 1) / 2) */}
-                  {/* } */}
-                </Heading>
+                <Heading>Chain Height : {currentBlock.block_num}</Heading>
               </Frame>
-              {/* ) : (
-                ""
-              )} */}
             </Menu.Item>
           </Menu>
         </Frame>
         <Grid style={{ ...menuStyle }}>
-        <Grid.Column width={12} position="left" style={{ left: 0, width: "100%" }}>
-            <Frame
-              style={{
-                width: "100%",
-                height: "150vh",
-                overflowY: "scroll",
-                right: 0,
+          <Grid.Column
+            width={12}
+            position="left"
+            style={{ left: 0, width: "100%" }}
+          >
+            <Button
+              // layer="success"
+              style={{ ...centerStyle, margin:"2.5%",
+               }}
+              onClick={() => {
+                grabTen(currentBlock.block_num);
               }}
-              
             >
-              <div style={{ ...listStyle }}>
-                {tenLatestBlocks
-                  .slice(0)
-                  .reverse()
-                  .map((book) => (
-                    <Block animate currentBlock={book} />
-                  ))}
-              </div>
-            </Frame>
+              Get Latest Ten Blocks
+            </Button>
 
+            {tenLatestBlocks.length > 0 ? (
+              <Frame
+                style={{
+                  width: "100%",
+                  height: "150vh",
+                  overflowY: "scroll",
+                  right: 0,
+                }}
+              >
+                <div style={{ ...listStyle }}>
+                  {tenLatestBlocks
+                    .slice(0)
+                    .reverse()
+                    .map((book) => (
+                      <Block animate currentBlock={book} />
+                    ))}
+                </div>
+              </Frame>
+            ) : (
+              ""
+            )}
           </Grid.Column>
 
-          <Grid.Column width={4} position="right" style={{ right: 0,
-          //  width: "100%", 
-           paddingRight:0 }}>
+          <Grid.Column
+            width={4}
+            position="right"
+            style={{
+              right: 0,
+              //  width: "100%",
+              paddingRight: 0,
+            }}
+          >
             <div
               style={{
                 width: "100%",
                 height: "150vh",
-                overflowY:  "hidden",
+                overflowY: "hidden",
                 // direction: 'rtl',
                 right: 0,
               }}
@@ -172,7 +188,7 @@ function BlockList() {
               </div>
             </div>
           </Grid.Column>
-        </Grid>  
+        </Grid>
       </Arwes>
     </ErrorBoundary>
   );
@@ -223,16 +239,13 @@ const headerStyle = {
   // border: "3px solid aqua",
 };
 
-const timerStyle = {
-  justifyContent: "center",
-  textAlign: "center",
-  margin: "0 auto",
-};
-
-const endPointStyle = {
+const centerStyle = {
+  width: "100%",
+  // height:"100%",
   display: "flex",
   flexDirection: "row",
-  // right: "0",
+  justifyContent: "center",
+  textAlign: "center",
 };
 
 /*

@@ -23,7 +23,14 @@ export default function TransactionList(props) {
     <Modal
     style={{...transactionStyle}}
           trigger={<Button
-          style={{...buttonStyle}}
+          style={{...buttonStyle,
+            "-webkit-text-stroke": "1px white",
+            color:"aqua",
+            backgroundColor:"black",
+            outline:"3px solid white",
+            border:"3px solid blue"
+
+          }}
           >Show Transactions</Button>}
           // header='Reminder!'
           // content='Call Benjamin regarding the reports.'

@@ -25,7 +25,7 @@ const fetch = require("node-fetch"); // node only; not needed in browsers
 const { TextEncoder, TextDecoder } = require("util"); // node only; native TextEncoder/Decoder
 const defaultPrivateKey = "5JtUScZK2XEp3g9gh7F8bwtPTRAkASmNrrftmx4AxDKD5K4zDnr"; // bob
 const signatureProvider = new JsSignatureProvider([defaultPrivateKey]);
-let endPointUrl = "https://api.eosdetroit.io:443"
+let endPointUrl = "https://api.eosdetroit.io:443";
 // "https://api.eosio.cr:80"
 // "https://api.testnet.eos.io";
 const rpc = new JsonRpc(endPointUrl, { fetch });
@@ -52,32 +52,22 @@ async function grabTen(latestBlockNum) {
 
 let recentBlocks = [];
 function BlockList() {
-  const { time, start, pause, reset, isRunning } = useTimer({
-    initialTime: 50,
-    timerType: "DECREMENTAL",
-    onTimeUpdate: (time) => {
-      // console.log("Time is updated", time);
-      reqTimer = time;
-    },
-    interval: 1,
-  });
-  // reset();
-  // start();
+  // const { time, start, pause, reset, isRunning } = useTimer({
+  //   initialTime: 50,
+  //   timerType: "DECREMENTAL",
+  //   onTimeUpdate: (time) => {
+  //     // console.log("Time is updated", time);
+  //     reqTimer = time;
+  //   },
+  //   interval: 1,
+  // });
 
   const [count, setCount] = useState(0);
   useInterval(async () => {
     try {
       currentInfo = await rpc.get_info();
-      // console.log("currentInfo.head_block_num : ", currentInfo.head_block_num);
       currentBlock = await rpc.get_block(currentInfo.head_block_num);
-      // console.log("currentBlock : ", currentBlock);
-
-      // for (let x = 10; x > 0; x--) {
-      // let blockIndex = currentInfo.head_block_num - x;
-      // let tempBlock = await rpc.get_block(blockIndex);
       recentBlocks.push(currentBlock);
-      // }
-      // console.log("blocks in memory: ", recentBlocks.length);
       if (recentBlocks.length >= 5) {
         recentBlocks.shift();
       }
@@ -104,7 +94,7 @@ function BlockList() {
               <h1>EOS CHAIN NAVIGATOR</h1>
             </Menu.Item>
             {/* <Menu.Item></Menu.Item> */}
-            <Menu.Item style={{ ...centerStyle, width:'45%' }}>
+            <Menu.Item style={{ ...centerStyle, width: "45%" }}>
               <h4
                 style={{
                   color: "aqua",
@@ -129,7 +119,7 @@ function BlockList() {
           >
             <Button
               // layer="success"
-              style={{ ...centerStyle, margin:"2.5%", }}
+              style={{ ...centerStyle, margin: "2.5vh" }}
               onClick={() => {
                 grabTen(currentBlock.block_num);
               }}
@@ -172,7 +162,7 @@ function BlockList() {
             <div
               style={{
                 width: "100%",
-                height: "150vh",
+                height: "160vh",
                 overflowY: "hidden",
                 // direction: 'rtl',
                 right: 0,
@@ -197,7 +187,6 @@ function BlockList() {
 
 function useInterval(callback, delay) {
   const savedCallback = useRef();
-
   // Remember the latest function.
   useEffect(() => {
     savedCallback.current = callback;

@@ -11,10 +11,19 @@ import { Redirect } from "react-router";
 
 export default function Block(props) {
 
-    //   console.log(
-//     "props.currentBlock.transactions.length : ",
-//     props.currentBlock.transactions.length
-//   );
+// console.log(props)
+//     if(props.currentBlock.staticFlag == true){
+// //       console.log(
+// //     "props.currentBlock.transactions.length : ",
+// //     props.currentBlock.transactions.length
+// //   );
+// console.log("tenBlocks")
+// }
+//   else
+//   {
+//       console.log("recentBlocks")
+//   }
+
   return (
     <ErrorBoundary>
       <Frame
@@ -81,9 +90,9 @@ export default function Block(props) {
             <h5> {props.currentBlock.ref_block_prefix}</h5>
           </div>
           <div style={{ ...rowStyle }}>
-            {props.currentBlock.transactions.length != 0  && props.currentBlock.staticFlag==true ? (
+            {props.currentBlock.staticFlag==true ? (
                 <div style={{ ...rowStyle }}>
-                <h5>Transactions : []</h5>
+                
                 <TransactionList
                 style={{...buttonStyle, position:"absolute"}}
                   blockId={props.currentBlock.id}
@@ -91,7 +100,8 @@ export default function Block(props) {
                 />
               </div>
             ) : (
-              <h5>Transactions : Empty</h5>
+                <h5>Transactions : []</h5>                
+//              {/* <h5>Transactions : Empty</h5> */}
             )}
           </div>
         </Content>

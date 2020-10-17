@@ -6,7 +6,7 @@ import {
   Menu,
   // Table
 } from "semantic-ui-react";
-import { ThemeProvider, createTheme, Row, Col, Arwes } from "arwes";
+import { ThemeProvider, createTheme, Row, Col, Arwes, Blockquote } from "arwes";
 import { Container, Modal } from "semantic-ui-react";
 import {
   Button,
@@ -83,7 +83,6 @@ function TListObj(props) {
             <strong>signatures: </strong>
             <SignatureObj
               signatures={props.transactionList[x].trx.signatures}
-
             />
             {/* {props.transactionList[x].trx.signatures} */}
           </div>
@@ -139,7 +138,13 @@ function TListObj(props) {
             <strong>max_net_usage_words: </strong>
             {props.transactionList[x].trx.transaction.max_net_usage_words}
           </div>
-          
+          <div>
+            <strong>Actions: </strong>
+            <ActionObj
+              actions={props.transactionList[x].trx.transaction.actions}
+            />
+            {/* {props.transactionList[x].trx.transaction.max_net_usage_words} */}
+          </div>
         </p>
 
         {/* <Table
@@ -177,32 +182,132 @@ function TListObj(props) {
 function SignatureObj(props) {
   let sigList = [];
   for (let x = 0; x < props.signatures.length; x++) {
-    sigList.push(
-      <div>{props.signatures[x]}</div>
+    sigList.push(<div>{props.signatures[x]}</div>);
+  }
+
+  return <div>{sigList}</div>;
+}
+
+function ActionObj(props) {
+  let actList = [];
+  for (let x = 0; x < props.actions.length; x++) {
+    actList.push(
+      <div style={{ ...actionStyle }}>
+        <div>
+          <strong>account : </strong>
+          {props.actions[x].account}
+        </div>
+        <div>
+          <strong>name : </strong>
+          {props.actions[x].name}
+        </div>
+        <div>
+          <strong>hex_data : </strong>
+          {props.actions[x].hex_data}
+        </div>
+
+        <div>
+          <strong>account : </strong>
+          {props.actions[x].account}
+        </div>
+        <div>
+          <strong>name : </strong>
+          {props.actions[x].name}
+        </div>
+        <div>
+          <strong>hex_data : </strong>
+          {props.actions[x].hex_data}
+        </div>
+
+        <div>
+          <strong>authorization: </strong>
+          <AuthorizationObj authorization={props.actions[x].authorization} />
+        </div>
+
+        <div>
+          <strong>data payload: </strong>
+
+          <Blockquote layer="success">
+            <DataObj data={props.actions[x].data} />
+            {/* {props.actions[x].data} */}
+          </Blockquote>
+        </div>
+      </div>
     );
   }
 
-  return(
-    <div>{sigList}</div>
-  )
-
-
+  return <div>{actList}</div>;
 }
+
+function AuthorizationObj(props) {
+  let authList = [];
+  for (let x = 0; x < props.authorization.length; x++) {
+    authList.push(
+      <ul style={{ ...leftStyle }}>
+        <li>
+          <strong>actor : </strong>
+          {props.authorization[x].actor}
+        </li>
+        <li>
+          <strong>permission : </strong>
+          {props.authorization[x].permission}
+        </li>
+      </ul>
+    );
+  }
+
+  return <div>{authList}</div>;
+}
+
+function DataObj(props) {
+  let dataList = [];
+
+  if(!props.data['0']){
+  for (let x in props.data) {
+    dataList.push(
+      <div style={{ ...dataStyle }}>
+        <strong>{x} : </strong>
+        <div>{props.data[x]} : </div>
+      </div>
+    );
+  }}
+  else{
+    dataList.push("no data")
+  }
+  return <div>{dataList}</div>;
+}
+
+const leftStyle = {
+  marginLeft: "2.5%",
+};
+
+const actionStyle = {
+  marginLeft: "2.5%",
+  // textOverflow: "ellipsis",
+  textOverflow: "wrap",
+  whiteSpace: "wrap",
+  // "white-space": "nowrap",
+  marginTop: "1%",
+  marginBottom: "1%",
+  border: "1px solid #26dafd",
+};
+
+const dataStyle = {
+  display: "flex",
+  flexDirection: "row",
+  overflow: "hidden",
+};
 
 const itemStyle = {
   // display: "flex",
   // flexDirection: "row",
   overflowX: "scroll",
+
   // textOverflow: "ellipsis",
   // "white-space": "nowrap",
   //   lineHeight: '20px',
   //   padding:"5%",
   // height: "20px",
-};
-
-const lineStyle = {
-  width: "100%",
-  flexDirection: "column",
 };
 
 const transactionStyle = {
@@ -283,155 +388,3 @@ const accordionStyle = {
 //     },
 //   },
 // };
-
-// class Transaction extends Component {
-//   constructor(props) {
-//     console.log("props.transaction : ", props.transaction);
-//     super(props);
-//     this.state = {
-//       blockId: props.blockId,
-//       transaction: props.transaction,
-//       // open: false,
-//       // activeIndex: 0,
-//     };
-//   }
-
-//   render() {
-//     // const { open } = this.state.open;
-
-//     // console.log("this.state.transaction : ", this.state.transaction);
-//     // if (this.state.transaction.trx.signatures == 1) {
-//     //   console.log();
-//     // }
-
-//     try {
-//       let tHeader = "Transaction ID: " + this.state.transaction.trx.id;
-//       return (
-//         <div
-//         // style={{ all: "unset" }}
-//         >
-//           <Arwes>
-//             <Project style={{ ...projectStyle }} header={tHeader}>
-//               <Row style={{ ...rowStyle }}>
-//                 <Col m={2}>cpu_usage_us : </Col>
-//                 <Col m={9}>{this.state.transaction.cpu_usage_us}</Col>
-//               </Row>
-//               <Row style={{ ...rowStyle }}>
-//                 <Col m={2}>net_usage_words : </Col>
-//                 <Col m={9}>{this.state.transaction.net_usage_words}</Col>
-//               </Row>
-//               <Row style={{ ...rowStyle }}>
-//                 <Col m={2}>status : </Col>
-//                 <Col m={9}>{this.state.transaction.status}</Col>
-//               </Row>
-//               <Row style={{ ...rowStyle }}></Row>
-
-//               <Row style={{ ...rowStyle }}>
-//                 <Col m={12}>TRX: </Col>
-//               </Row>
-//               <Row style={{ ...rowStyle }}>
-//                 <Col m={2}></Col>
-//                 <Col m={3}>compression : </Col>
-//                 <Col m={3}>{this.state.transaction.trx.compression}</Col>
-//               </Row>
-//               <Row style={{ ...rowStyle }}>
-//                 <Col m={2}></Col>
-//                 <Col m={3}>context_free_data : </Col>
-//                 <Col m={3}>
-//                   {this.state.transaction.trx.context_free_data.forEach(
-//                     (cfd) => (
-//                       <div style={{ ...rowStyle }}>{cfd}</div>
-//                     )
-//                   )}
-//                 </Col>
-//               </Row>
-//               <Row style={{ ...rowStyle }}>
-//                 <Col m={2}></Col>
-//                 <Col m={3}>packed_context_free_data : </Col>
-//                 <Col m={3}>
-//                   {this.state.transaction.trx.packed_context_free_data}
-//                 </Col>
-//               </Row>
-//               <Row style={{ ...rowStyle }}>
-//                 <Col m={2}></Col>
-//                 <Col m={3}>packed_trx : </Col>
-//                 <Col m={3}>{this.state.transaction.trx.packed_trx}</Col>
-//               </Row>
-//               <Row style={{ ...rowStyle }}>
-//                 <Col m={2}></Col>
-//                 <Col m={3}>signatures : </Col>
-//               </Row>
-//               <Row>
-//                 <Col m={2}></Col>
-//                 <Col m={10}>
-//                   {/* <Frame style={{ ...frameStyle }}>
-//                     {this.state.transaction.trx.signatures.map((sig) => (
-//                       <getSigs sig={sig} />
-//                     ))}
-//                   </Frame> */}
-//                 </Col>
-//               </Row>
-//               <Row style={{ ...rowStyle }}>
-//                 <Col m={12}>Transaction Detail : </Col>
-//               </Row>
-//               <Row style={{ ...rowStyle }}>
-//                 <Col m={2}></Col>
-//                 <Col m={3}>context_free_actions : </Col>
-//                 <Col m={3}>
-//                   {this.state.transaction.trx.transaction.context_free_actions}
-//                 </Col>
-//               </Row>
-//               <Row style={{ ...rowStyle }}>
-//                 <Col m={2}></Col>
-//                 <Col m={3}>delay_sec : </Col>
-//                 <Col m={3}>
-//                   {this.state.transaction.trx.transaction.delay_sec}
-//                 </Col>
-//               </Row>
-//               <Row style={{ ...rowStyle }}>
-//                 <Col m={2}></Col>
-//                 <Col m={3}>expiration : </Col>
-//                 <Col m={3}>
-//                   {this.state.transaction.trx.transaction.expiration}
-//                 </Col>
-//               </Row>
-//               <Row style={{ ...rowStyle }}>
-//                 <Col m={2}></Col>
-//                 <Col m={3}>max_cpu_usage_ms : </Col>
-//                 <Col m={3}>
-//                   {this.state.transaction.trx.transaction.max_cpu_usage_ms}
-//                 </Col>
-//               </Row>
-//               <Row style={{ ...rowStyle }}>
-//                 <Col m={2}></Col>
-//                 <Col m={3}>max_net_usage_word : </Col>
-//                 <Col m={3}>
-//                   {this.state.transaction.trx.transaction.max_net_usage_word}
-//                 </Col>
-//               </Row>
-//               <Row style={{ ...rowStyle }}>
-//                 <Col m={2}></Col>
-//                 <Col m={3}>ref_block_num : </Col>
-//                 <Col m={3}>
-//                   {this.state.transaction.trx.transaction.ref_block_num}
-//                 </Col>
-//               </Row>
-//               <Row style={{ ...rowStyle }}>
-//                 <Col m={2}></Col>
-//                 <Col m={3}>ref_block_prefix : </Col>
-//                 <Col m={3}>
-//                   {this.state.transaction.trx.transaction.ref_block_prefix}
-//                 </Col>
-//               </Row>
-//               <Row style={{ ...rowStyle }}>
-//                 <Col m={12}>Actions : </Col>
-//               </Row>
-//             </Project>
-//           </Arwes>
-//         </div>
-//       );
-//     } catch (err) {
-//       return <div>Error rendering : {err}</div>;
-//     }
-//   }
-// }

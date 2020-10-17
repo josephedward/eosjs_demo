@@ -68,7 +68,7 @@ function BlockList() {
       currentInfo = await rpc.get_info();
       currentBlock = await rpc.get_block(currentInfo.head_block_num);
       recentBlocks.push(currentBlock);
-      if (recentBlocks.length >= 5) {
+      if (recentBlocks.length >= 6) {
         recentBlocks.shift();
       }
     } catch (error) {
@@ -131,7 +131,7 @@ function BlockList() {
               <Frame
                 style={{
                   width: "100%",
-                  height: "150vh",
+                  height: "100vh",
                   overflowY: "scroll",
                   right: 0,
                 }}
@@ -155,19 +155,17 @@ function BlockList() {
             position="right"
             style={{
               right: 0,
-              //  width: "100%",
               paddingRight: 0,
             }}
           >
             <div
               style={{
                 width: "100%",
-                height: "160vh",
-                overflowY: "hidden",
-                // direction: 'rtl',
+                height: "100vh",
+                overflowY: "scroll",
                 right: 0,
               }}
-              // position="right"
+            
             >
               <div style={{ ...listStyle }}>
                 {recentBlocks

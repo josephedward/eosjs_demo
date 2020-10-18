@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.1.2",
     "arwes": "^1.0.0-alpha.5",
     "chalk": "^4.1.0",
+    "eos-rc-parser": "^1.0.4",
     "eosjs": "^21.0.3",
     "node-fetch": "^2.6.1",
     "react": "^16.13.1",

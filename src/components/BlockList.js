@@ -72,7 +72,8 @@ function BlockList() {
         recentBlocks.shift();
       }
     } catch (error) {
-      console.log(chalk.red("ERROR FETCHING CHAIN : ") + chalk.bgRed(error));
+    //  // console.log(chalk.red("ERROR FETCHING CHAIN : ") + chalk.bgRed(error));
+    console.log("ERROR FETCHING CHAIN : "+ error)
     }
     setCount(count + 1);
   }, 500);

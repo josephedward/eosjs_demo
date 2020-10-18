@@ -8,21 +8,19 @@ import TransactionList from "./Transaction";
 import { Button } from "semantic-ui-react";
 import { Redirect } from "react-router";
 
-
 export default function Block(props) {
-
-// console.log(props)
-//     if(props.currentBlock.staticFlag == true){
-// //       console.log(
-// //     "props.currentBlock.transactions.length : ",
-// //     props.currentBlock.transactions.length
-// //   );
-// console.log("tenBlocks")
-// }
-//   else
-//   {
-//       console.log("recentBlocks")
-//   }
+  // console.log(props)
+  //     if(props.currentBlock.staticFlag == true){
+  // //       console.log(
+  // //     "props.currentBlock.transactions.length : ",
+  // //     props.currentBlock.transactions.length
+  // //   );
+  // console.log("tenBlocks")
+  // }
+  //   else
+  //   {
+  //       console.log("recentBlocks")
+  //   }
 
   return (
     <ErrorBoundary>
@@ -90,18 +88,20 @@ export default function Block(props) {
             <h5> {props.currentBlock.ref_block_prefix}</h5>
           </div>
           <div style={{ ...rowStyle }}>
-            {props.currentBlock.staticFlag==true ? (
+            {props.currentBlock.staticFlag == true ? (
+              props.currentBlock.transactions.length > 0 ? (
                 <div style={{ ...rowStyle }}>
-                
-                <TransactionList
-                style={{...buttonStyle, position:"absolute"}}
-                  blockId={props.currentBlock.id}
-                  transactionList={props.currentBlock.transactions}
-                />
-              </div>
+                  <TransactionList
+                    style={{ ...buttonStyle, position: "absolute" }}
+                    blockId={props.currentBlock.id}
+                    transactionList={props.currentBlock.transactions}
+                  />
+                </div>
+              ) : (
+                <h5>no transactions</h5>
+              )
             ) : (
-                <h5>Transactions : []</h5>                
-//              {/* <h5>Transactions : Empty</h5> */}
+              ""
             )}
           </div>
         </Content>
@@ -110,14 +110,14 @@ export default function Block(props) {
   );
 }
 
-const buttonStyle={
-    display:"block",
-    position:"absolute",
-    height:"100px",
-    width:"100px",
-    // backgroundColor:"red",
-// zIndex:50
-}
+const buttonStyle = {
+  display: "block",
+  position: "absolute",
+  height: "100px",
+  width: "100px",
+  // backgroundColor:"red",
+  // zIndex:50
+};
 
 const rowStyle = {
   display: "flex",
@@ -131,11 +131,9 @@ const rowStyle = {
   height: "20px",
 };
 
-
-
 const blockStyle = {
   margin: "5%",
-  height:"100%",
+  height: "100%",
   //   overflowWrap:"anywhere",
   // overflow: 'hidden',
   // textOverflow: 'ellipsis',

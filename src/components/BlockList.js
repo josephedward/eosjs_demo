@@ -168,7 +168,6 @@ function BlockList() {
                 overflowY: "scroll",
                 right: 0,
               }}
-            
             >
               <div style={{ ...listStyle }}>
                 {recentBlocks

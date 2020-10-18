@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import BlockList from "./components/BlockList"
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import { ThemeProvider, createTheme, Arwes, Project, Heading,
     // SoundsProvider,
@@ -11,7 +11,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Transaction from './components/Transaction'
 import 'semantic-ui-css/semantic.min.css'
-
+import AbiDisplay from "./components/ABI"
 
 function App(){
     return(
@@ -20,11 +20,9 @@ function App(){
 <Router>
 <Switch>
 <ThemeProvider theme={createTheme()}>
-<Arwes   background="/images/background.jpg" 
-// pattern="/images/glow.png"
->
+<Arwes   background="/images/background.jpg" >
 <Route exact path="/" component={BlockList} />
-{/* <Route exact path="/transaction" component={Transaction} /> */}
+<Route exact path="/test" component={AbiDisplay} />
 </Arwes>
 </ThemeProvider>
 </Switch>

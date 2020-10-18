@@ -1,50 +1,42 @@
 import React, { Component } from "react";
 import { Accordion, Icon } from "semantic-ui-react";
 import { Frame, Project, Table, Header } from "arwes";
-import {
-  Label,
-  Menu,
-} from "semantic-ui-react";
+import { Label, Menu } from "semantic-ui-react";
 import { ThemeProvider, createTheme, Row, Col, Arwes, Blockquote } from "arwes";
 import { Container, Modal } from "semantic-ui-react";
-import {
-  Button,
-  Segment,
-  TransitionablePortal,
-} from "semantic-ui-react";
+import { Button, Segment, TransitionablePortal } from "semantic-ui-react";
 import { Redirect } from "react-router";
 import ToObject from "es-abstract/5/ToObject";
 import ErrorBoundary from "./ErrorBoundary";
 import AbiDisplay from "./ABI";
 
-
 export default function TransactionList(props) {
   return (
     <ErrorBoundary>
-    <Modal
-      style={{ ...transactionStyle }}
-      trigger={
-        <Button
-          style={{
-            ...buttonStyle,
-            "-webkit-text-stroke": "1px white",
-            color: "aqua",
-            backgroundColor: "black",
-            outline: "3px solid aqua",
-            border: "3px solid white",
-          }}
-        >
-          Show Transactions [{props.transactionList.length}]
-        </Button>
-      }
-    >
-      <Modal.Content>
-        <TListObj
-          blockId={props.blockId}
-          transactionList={props.transactionList}
-        />
-      </Modal.Content>
-    </Modal>
+      <Modal
+        style={{ ...transactionStyle }}
+        trigger={
+          <Button
+            style={{
+              ...buttonStyle,
+              "-webkit-text-stroke": "1px white",
+              color: "aqua",
+              backgroundColor: "black",
+              outline: "3px solid aqua",
+              border: "3px solid white",
+            }}
+          >
+            Show Transactions [{props.transactionList.length}]
+          </Button>
+        }
+      >
+        <Modal.Content>
+          <TListObj
+            blockId={props.blockId}
+            transactionList={props.transactionList}
+          />
+        </Modal.Content>
+      </Modal>
     </ErrorBoundary>
   );
 }
@@ -54,16 +46,14 @@ function TListObj(props) {
   let tList = [];
   for (let x = 0; x < props.transactionList.length; x++) {
     tList.push(
+      <ErrorBoundary>
       <Frame style={{ ...rowStyle }}>
-        <Header
-        style={{marginTop:"1%", marginBottom:"1%"}}
-        >
+        <Header style={{ marginTop: "1%", marginBottom: "1%" }}>
           <strong>Transaction ID : </strong>
           {props.transactionList[x].trx.id}
         </Header>
 
         <p style={{ ...itemStyle }}>
-
           {props.transactionList[x].trx.signatures ? (
             <div>
               <strong>signatures: </strong>
@@ -132,12 +122,14 @@ function TListObj(props) {
             <div>
               <strong>packed_trx: </strong>
               <div
-              style={{
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                textOverflow: 'ellipsis'
-              }}
-              >{props.transactionList[x].trx.packed_trx}</div>
+                style={{
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {props.transactionList[x].trx.packed_trx}
+              </div>
             </div>
           ) : (
             ""
@@ -187,7 +179,6 @@ function TListObj(props) {
           ) : (
             ""
           )}
-
           {props.transactionList[x].trx.transaction.max_net_usage_words ? (
             <div>
               <strong>max_net_usage_words: </strong>
@@ -196,10 +187,12 @@ function TListObj(props) {
           ) : (
             ""
           )}
-
           {props.transactionList[x].trx.transaction.actions ? (
             <div>
-              <strong>actions[{props.transactionList[x].trx.transaction.actions.length}]: </strong>
+              <strong>
+                actions[
+                {props.transactionList[x].trx.transaction.actions.length}]:{" "}
+              </strong>
               <ActionObj
                 actions={props.transactionList[x].trx.transaction.actions}
               />
@@ -209,13 +202,14 @@ function TListObj(props) {
           )}
         </p>
       </Frame>
+      </ErrorBoundary>
     );
   }
-  try{
-  return <Arwes style={{ ...frameStyle }}>{tList}</Arwes>;}
-  catch(err){
-    console.log(err)
-    window.location.reload()
+  try {
+    return <Arwes style={{ ...frameStyle }}>{tList}</Arwes>;
+  } catch (err) {
+    console.log(err);
+    window.location.reload();
   }
 }
 
@@ -231,16 +225,14 @@ function ActionObj(props) {
   let actList = [];
   for (let x = 0; x < props.actions.length; x++) {
     actList.push(
+      <ErrorBoundary>
       <div style={{ ...actionStyle }}>
+            <AbiDisplay 
+            accountName={props.actions[x].account} />
         <div>
-          <strong>account : </strong>
-          <div
-          // onClick={}
-          >
-          {props.actions[x].account}
-          </div>
+          <strong>account : </strong>            
+            {props.actions[x].account}
 
-          {/* <AbiDisplay/> */}
         </div>
         <div>
           <strong>name : </strong>
@@ -262,6 +254,7 @@ function ActionObj(props) {
           </Blockquote>
         </div>
       </div>
+      </ErrorBoundary>
     );
   }
   return <div>{actList}</div>;
@@ -314,7 +307,6 @@ const actionStyle = {
   marginTop: "1%",
   marginBottom: "1%",
   border: "1px solid #26dafd",
-
 };
 
 const dataStyle = {
@@ -336,8 +328,6 @@ const transactionStyle = {
   wordBreak: "break-all",
   textOverflow: "ellipsis",
   whiteSpace: "wrap",
-
-
 };
 
 const buttonStyle = {

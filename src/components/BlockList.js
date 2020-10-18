@@ -7,8 +7,8 @@ import {
   Frame,
   Heading,
   Words,
-  SoundsProvider,
-  createSounds,
+  // SoundsProvider,
+  // createSounds,
   Button,
 } from "arwes";
 import Content from "arwes/lib/Content";
@@ -47,6 +47,7 @@ async function grabTen(latestBlockNum) {
     }
   } catch (err) {
     console.log(err);
+    window.location.reload()
   }
 }
 
@@ -74,6 +75,7 @@ function BlockList() {
     } catch (error) {
     //  // console.log(chalk.red("ERROR FETCHING CHAIN : ") + chalk.bgRed(error));
     console.log("ERROR FETCHING CHAIN : "+ error)
+    window.location.reload()
     }
     setCount(count + 1);
   }, 500);
@@ -116,7 +118,7 @@ function BlockList() {
           <Grid.Column
             width={12}
             position="left"
-            style={{ left: 0, width: "100%" }}
+            style={{ left: 0,height:"100%", width: "100%" }}
           >
             <Button
               // layer="success"
@@ -206,6 +208,7 @@ export default BlockList;
 
 const menuStyle = {
   width: "100%",
+  height:"100%"
   // opacity:"1",
   // color:"white"
   // color:"aqua",

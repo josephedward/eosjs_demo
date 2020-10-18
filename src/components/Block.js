@@ -9,19 +9,8 @@ import { Button } from "semantic-ui-react";
 import { Redirect } from "react-router";
 
 export default function Block(props) {
-  // console.log(props)
-  //     if(props.currentBlock.staticFlag == true){
-  // //       console.log(
-  // //     "props.currentBlock.transactions.length : ",
-  // //     props.currentBlock.transactions.length
-  // //   );
-  // console.log("tenBlocks")
-  // }
-  //   else
-  //   {
-  //       console.log("recentBlocks")
-  //   }
-
+  
+try{
   return (
     <ErrorBoundary>
       <Frame
@@ -107,7 +96,11 @@ export default function Block(props) {
         </Content>
       </Frame>
     </ErrorBoundary>
-  );
+  );}
+  catch(err){
+    console.log(err)
+    window.location.reload()
+  }
 }
 
 const buttonStyle = {
@@ -123,8 +116,8 @@ const rowStyle = {
   display: "flex",
   flexDirection: "row",
   overflow: "hidden",
-  textOverflow: "ellipsis",
-  "white-space": "nowrap",
+  // textOverflow: "ellipsis",
+  // "white-space": "nowrap",
 
   //   lineHeight: '20px',
   //   padding:"5%",

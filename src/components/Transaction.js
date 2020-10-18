@@ -4,23 +4,23 @@ import { Frame, Project, Table, Header } from "arwes";
 import {
   Label,
   Menu,
-  // Table
 } from "semantic-ui-react";
 import { ThemeProvider, createTheme, Row, Col, Arwes, Blockquote } from "arwes";
 import { Container, Modal } from "semantic-ui-react";
 import {
   Button,
-  // Header,
   Segment,
   TransitionablePortal,
 } from "semantic-ui-react";
 import { Redirect } from "react-router";
 import ToObject from "es-abstract/5/ToObject";
+import ErrorBoundary from "./ErrorBoundary";
+import AbiDisplay from "./ABI";
+
 
 export default function TransactionList(props) {
-  // console.log(typeof props.transactionList);
-
   return (
+    <ErrorBoundary>
     <Modal
       style={{ ...transactionStyle }}
       trigger={
@@ -37,21 +37,15 @@ export default function TransactionList(props) {
           Show Transactions [{props.transactionList.length}]
         </Button>
       }
-      // header='Reminder!'
-      // content='Call Benjamin regarding the reports.'
-      // actions={['Snooze', { key: 'done', content: 'Done', positive: true }]}
     >
       <Modal.Content>
-        {/* <Transaction
-      blockId={props.blockId}
-      transaction={props.transactionList[0]}
-      /> */}
         <TListObj
           blockId={props.blockId}
           transactionList={props.transactionList}
         />
       </Modal.Content>
     </Modal>
+    </ErrorBoundary>
   );
 }
 
@@ -68,19 +62,8 @@ function TListObj(props) {
           {props.transactionList[x].trx.id}
         </Header>
 
-        {/* <Table
-          animate
-          headers={["cpu_usage_us : ", "net_usage_words :", "status :"]}
-          dataset={[
-            [
-              props.transactionList[x].cpu_usage_us,
-              props.transactionList[x].net_usage_words,
-              props.transactionList[x].status,
-            ],
-          ]}
-        /> */}
-
         <p style={{ ...itemStyle }}>
+
           {props.transactionList[x].trx.signatures ? (
             <div>
               <strong>signatures: </strong>
@@ -210,7 +193,7 @@ function TListObj(props) {
 
           {props.transactionList[x].trx.transaction.actions ? (
             <div>
-              <strong>Actions: </strong>
+              <strong>actions[{props.transactionList[x].trx.transaction.actions.length}]: </strong>
               <ActionObj
                 actions={props.transactionList[x].trx.transaction.actions}
               />
@@ -222,7 +205,12 @@ function TListObj(props) {
       </Frame>
     );
   }
-  return <Arwes style={{ ...frameStyle }}>{tList}</Arwes>;
+  try{
+  return <Arwes style={{ ...frameStyle }}>{tList}</Arwes>;}
+  catch(err){
+    console.log(err)
+    window.location.reload()
+  }
 }
 
 function SignatureObj(props) {
@@ -230,7 +218,6 @@ function SignatureObj(props) {
   for (let x = 0; x < props.signatures.length; x++) {
     sigList.push(<div>{props.signatures[x]}</div>);
   }
-
   return <div>{sigList}</div>;
 }
 
@@ -241,7 +228,13 @@ function ActionObj(props) {
       <div style={{ ...actionStyle }}>
         <div>
           <strong>account : </strong>
+          <div
+          // onClick={}
+          >
           {props.actions[x].account}
+          </div>
+
+          {/* <AbiDisplay/> */}
         </div>
         <div>
           <strong>name : </strong>
@@ -251,15 +244,12 @@ function ActionObj(props) {
           <strong>hex_data : </strong>
           {props.actions[x].hex_data}
         </div>
-
         <div>
           <strong>authorization: </strong>
           <AuthorizationObj authorization={props.actions[x].authorization} />
         </div>
-
         <div>
           <strong>data: </strong>
-
           <Blockquote layer="success">
             <DataObj data={props.actions[x].data} />
             {/* {props.actions[x].data} */}
@@ -268,7 +258,6 @@ function ActionObj(props) {
       </div>
     );
   }
-
   return <div>{actList}</div>;
 }
 
@@ -276,16 +265,16 @@ function AuthorizationObj(props) {
   let authList = [];
   for (let x = 0; x < props.authorization.length; x++) {
     authList.push(
-      <ul style={{ ...leftStyle }}>
-        <li>
+      <div style={{ ...leftStyle }}>
+        <div>
           <strong>actor : </strong>
           {props.authorization[x].actor}
-        </li>
-        <li>
+        </div>
+        <div>
           <strong>permission : </strong>
           {props.authorization[x].permission}
-        </li>
-      </ul>
+        </div>
+      </div>
     );
   }
   return <div>{authList}</div>;
@@ -293,7 +282,6 @@ function AuthorizationObj(props) {
 
 function DataObj(props) {
   let dataList = [];
-
   if (!props.data["0"]) {
     for (let x in props.data) {
       dataList.push(
@@ -315,13 +303,12 @@ const leftStyle = {
 
 const actionStyle = {
   marginLeft: "2.5%",
-  // textOverflow: "ellipsis",
   textOverflow: "wrap",
   whiteSpace: "wrap",
-  // "white-space": "nowrap",
   marginTop: "1%",
   marginBottom: "1%",
   border: "1px solid #26dafd",
+
 };
 
 const dataStyle = {
@@ -331,12 +318,20 @@ const dataStyle = {
 };
 
 const itemStyle = {
-  overflowX: "scroll",
+  // overflowX: "scroll",
+  wordBreak: "break-all",
+  textOverflow: "ellipsis",
+  whiteSpace: "wrap",
 };
 
 const transactionStyle = {
   height: "80%",
   width: "80%",
+  wordBreak: "break-all",
+  textOverflow: "ellipsis",
+  whiteSpace: "wrap",
+
+
 };
 
 const buttonStyle = {
@@ -347,6 +342,9 @@ const buttonStyle = {
 const rowStyle = {
   marginTop: "5%",
   marginBottom: "5%",
+  wordBreak: "break-all",
+  textOverflow: "ellipsis",
+  whiteSpace: "wrap",
 };
 
 const frameStyle = {

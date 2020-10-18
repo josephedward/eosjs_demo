@@ -131,7 +131,13 @@ function TListObj(props) {
           {props.transactionList[x].trx.packed_trx ? (
             <div>
               <strong>packed_trx: </strong>
-              {props.transactionList[x].trx.packed_trx}
+              <div
+              style={{
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: 'ellipsis'
+              }}
+              >{props.transactionList[x].trx.packed_trx}</div>
             </div>
           ) : (
             ""

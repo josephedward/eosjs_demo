@@ -108,35 +108,18 @@ const buttonStyle = {
   position: "absolute",
   height: "100px",
   width: "100px",
-  // backgroundColor:"red",
-  // zIndex:50
 };
 
 const rowStyle = {
   display: "flex",
   flexDirection: "row",
   overflow: "hidden",
-  // textOverflow: "ellipsis",
-  // "white-space": "nowrap",
-
-  //   lineHeight: '20px',
-  //   padding:"5%",
   height: "20px",
 };
 
 const blockStyle = {
   margin: "5%",
   height: "100%",
-  //   overflowWrap:"anywhere",
-  // overflow: 'hidden',
-  // textOverflow: 'ellipsis',
-  // 'white-space': 'nowrap',
-  // width:"425px",
   wordBreak: "break-all",
-  // // textOverflow: "ellipsis",
-  // // "white-space": "pre-line",
-  // whiteSpace: "normal",
-  //   width:"400px",
-  // lineHeight: '20px',
-  // position: 'relative'
+
 };

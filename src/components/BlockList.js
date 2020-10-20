@@ -34,6 +34,7 @@ const rpc = new JsonRpc(endPointUrl, { fetch });
 // https://api.eosnewyork.io/v1/chain/get_info
 let currentInfo = {};
 let currentBlock = {};
+
 let tenMostRecentBlocks = [];
 let reqTimer;
 
@@ -59,7 +60,7 @@ function BlockList() {
   useInterval(async () => {
     try {
       currentInfo = await rpc.get_info();
-      console.log(currentInfo);
+      // console.log(currentInfo);
       currentBlock = await rpc.get_block(currentInfo.head_block_num);
       recentBlocks.push(currentBlock);
       if (recentBlocks.length >= 11) {
@@ -85,9 +86,25 @@ function BlockList() {
             stackable
           >
             <Menu.Item>
+              <h1>EOS CHAIN NAVIGATOR</h1>
+            </Menu.Item>
+            <Menu.Item style={{ ...centerStyle, width: "45%" }}>
               <Popup
-                style={{ backgroundColor: "darkblue", border:"3px solid aqua" }}
-                trigger={<h1>EOS CHAIN NAVIGATOR</h1>}
+                position="left"
+                style={{
+                  backgroundColor: "darkblue",
+                  border: "3px solid aqua",
+                }}
+                trigger={
+                  <h4
+                    style={{
+                      color: "aqua",
+                      "-webkit-text-stroke": "none",
+                    }}
+                  >
+                    RPC-API-URL endpoint : {endPointUrl}
+                  </h4>
+                }
               >
                 <Popup.Content>
                   <Frame style={{ backgroundColor: "lightgrey" }}>
@@ -95,16 +112,6 @@ function BlockList() {
                   </Frame>
                 </Popup.Content>
               </Popup>
-            </Menu.Item>
-            <Menu.Item style={{ ...centerStyle, width: "45%" }}>
-              <h4
-                style={{
-                  color: "aqua",
-                  "-webkit-text-stroke": "none",
-                }}
-              >
-                RPC-API-URL endpoint : {endPointUrl}
-              </h4>
             </Menu.Item>
             <Menu.Item position="right">
               <Frame>
@@ -121,7 +128,6 @@ function BlockList() {
             style={{ left: 0, height: "100%", width: "100%" }}
           >
             <Button
-            
               style={{ ...centerStyle, margin: "2.5vh" }}
               onClick={() => {
                 grabTen(currentBlock.block_num);

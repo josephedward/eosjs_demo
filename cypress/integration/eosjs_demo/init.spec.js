@@ -1,7 +1,6 @@
-import React from 'react'
-import { mount } from 'cypress-react-unit-test'
+import React from "react";
+import { mount } from "cypress-react-unit-test";
 // import {Button} from 'arwes'
-
 // import { ErrorBoundary } from '../../../src/components/ErrorBoundary'
 // Cypress.on('uncaught:exception', (err, runnable) => {
 //   return false
@@ -44,36 +43,39 @@ import { mount } from 'cypress-react-unit-test'
 //   })
 // })
 
+describe("Basic L1 Initialization Test", () => {
+  it("visits the heroku url", () => {
+    cy.visit("https://eosjs-chain-nav.herokuapp.com/");
+  });
+
+  // it('tests the timed get_info call to the RPC', () =>{
+  //     let lastBlock={}
+  // setInterval(() => {
+  // }
+  // , 500)
+  // })
 
 
 
-describe('Basic L1 Initialization Test', ()=>{
-it('visits the heroku url', ()=>{
-    cy.visit("https://eosjs-chain-nav.herokuapp.com/")
-})
+  it("checks the getTenLatestBlocks button", () => {
+    cy.contains("Get Latest Ten Blocks").should("exist");
+    cy.wait(500);
+    cy.contains("Get Latest Ten Blocks").click();
+      
 
-// it('tests the timed get_info call to the RPC', () =>{
-//     let lastBlock={}
-// setInterval(() => {
-// }
-// , 500)
-// })
-
-it('checks the getTenLatestBlocks button',()=>{
-   
-
-        // mount(<Button />).click()
-        
-        cy.contains("Get Latest Ten Blocks").should('exist')
-        cy.wait(500)
-        cy.contains("Get Latest Ten Blocks").click()
-        // .should('be.visible')
-        // .wait(500)
-        // .click()
-        // cy.get(<Button />).click()
-        // cy.visit("google.com")
-   
-})
+});
 
 
-})
+
+  it("checks the currentInfo hover event", () => {
+    cy.contains("EOS CHAIN NAVIGATOR").should('exist');
+    cy.wait(500);  
+    cy.contains("EOS CHAIN NAVIGATOR").trigger("mouseover");
+    cy.get('table').contains('server_version').should('exist')
+});
+
+
+
+
+
+});

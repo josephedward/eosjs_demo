@@ -7,6 +7,7 @@ import {
   Frame,
   Heading,
   Words,
+  Table,
   // SoundsProvider,
   // createSounds,
   Button,
@@ -15,8 +16,9 @@ import Content from "arwes/lib/Content";
 import ErrorBoundary from "./ErrorBoundary";
 import Block from "./Block";
 import { useTimer } from "use-timer";
-import { Menu, Grid, Image } from "semantic-ui-react";
+import { Menu, Grid, Image, Popup } from "semantic-ui-react";
 import { opacify } from "polished";
+import { JsonToTable } from "react-json-to-table";
 
 const chalk = require("chalk");
 const { Api, JsonRpc, RpcError } = require("eosjs");
@@ -30,7 +32,7 @@ let endPointUrl = "https://api.eosdetroit.io:443";
 // "https://api.testnet.eos.io";
 const rpc = new JsonRpc(endPointUrl, { fetch });
 // https://api.eosnewyork.io/v1/chain/get_info
-let currentInfo;
+let currentInfo = {};
 let currentBlock = {};
 let tenMostRecentBlocks = [];
 let reqTimer;
@@ -47,35 +49,25 @@ async function grabTen(latestBlockNum) {
     }
   } catch (err) {
     console.log(err);
-    window.location.reload()
+    window.location.reload();
   }
 }
 
 let recentBlocks = [];
 function BlockList() {
-  // const { time, start, pause, reset, isRunning } = useTimer({
-  //   initialTime: 50,
-  //   timerType: "DECREMENTAL",
-  //   onTimeUpdate: (time) => {
-  //     // console.log("Time is updated", time);
-  //     reqTimer = time;
-  //   },
-  //   interval: 1,
-  // });
-
   const [count, setCount] = useState(0);
   useInterval(async () => {
     try {
       currentInfo = await rpc.get_info();
+      console.log(currentInfo);
       currentBlock = await rpc.get_block(currentInfo.head_block_num);
       recentBlocks.push(currentBlock);
-      if (recentBlocks.length >= 6) {
+      if (recentBlocks.length >= 11) {
         recentBlocks.shift();
       }
     } catch (error) {
-    //  // console.log(chalk.red("ERROR FETCHING CHAIN : ") + chalk.bgRed(error));
-    console.log("ERROR FETCHING CHAIN : "+ error)
-    window.location.reload()
+      console.log("ERROR FETCHING CHAIN : " + error);
+      window.location.reload();
     }
     setCount(count + 1);
   }, 500);
@@ -83,7 +75,6 @@ function BlockList() {
   return (
     <ErrorBoundary>
       <Arwes background="/images/blocks.gif">
-        {/* pattern="/images/glow.png" */}
         <Frame>
           <Menu
             style={{
@@ -94,9 +85,17 @@ function BlockList() {
             stackable
           >
             <Menu.Item>
-              <h1>EOS CHAIN NAVIGATOR</h1>
+              <Popup
+                style={{ backgroundColor: "darkblue", border:"3px solid aqua" }}
+                trigger={<h1>EOS CHAIN NAVIGATOR</h1>}
+              >
+                <Popup.Content>
+                  <Frame style={{ backgroundColor: "lightgrey" }}>
+                    <JsonToTable json={currentInfo} />
+                  </Frame>
+                </Popup.Content>
+              </Popup>
             </Menu.Item>
-            {/* <Menu.Item></Menu.Item> */}
             <Menu.Item style={{ ...centerStyle, width: "45%" }}>
               <h4
                 style={{
@@ -114,14 +113,15 @@ function BlockList() {
             </Menu.Item>
           </Menu>
         </Frame>
+
         <Grid style={{ ...menuStyle }}>
           <Grid.Column
             width={12}
             position="left"
-            style={{ left: 0,height:"100%", width: "100%" }}
+            style={{ left: 0, height: "100%", width: "100%" }}
           >
             <Button
-              // layer="success"
+            
               style={{ ...centerStyle, margin: "2.5vh" }}
               onClick={() => {
                 grabTen(currentBlock.block_num);
@@ -174,7 +174,7 @@ function BlockList() {
                   .slice(0)
                   .reverse()
                   .map((book) => (
-                    <Block currentBlock={book} />
+                    <Block class="intervalBlock" currentBlock={book} />
                   ))}
               </div>
             </div>
@@ -207,11 +207,7 @@ export default BlockList;
 
 const menuStyle = {
   width: "100%",
-  height:"100%"
-  // opacity:"1",
-  // color:"white"
-  // color:"aqua",
-  // background:"black"
+  height: "100%",
 };
 
 const listStyle = {
@@ -286,4 +282,50 @@ https://api.eosn.io
 https://eu1.eosdac.io:443
 https://api.main.alohaeos.com:443
 https://rpc.eosys.io
+*/
+{
+  /* <JsonToTable
+  json={currentBlock}
+/> */
+}
+
+{
+  /* {currentInfo !=null? ( 
+<Table
+animate
+headers={["timestamp", "producer", "confirmed", "previous"]}
+dataset={[[currentInfo.timestamp, currentInfo.producer, currentInfo.confirmed, currentInfo.previous]]}
+/>):("")} */
+}
+{
+  /* 
+timestamp	2020-10-20T02:25:29.500
+producer	eoshuobipool
+confirmed	0
+previous	08d2c3dc37b9a8d605d4bfa7bdb9c1e3bbf8b48743077d5a73978ddf573d87be
+transaction_mroot	d897772a4e795e0fa04ae25529032d58b9f5726ee3d68c21d12afe7ce0ed1f30
+action_mroot	fca0518b7cbf9e2dd8464bc7ececf0442924b9cf786839579cd9cea001aa4ffb
+schedule_version	1778
+new_producers	
+producer_signature	SIG_K1_KBAqfEy7aZTtNuzmRXzgHG3gtNy5fUBkbpjBCLkm4yFPtRfYFrqZU9JkYZh8cM9BVEtsvAqrZbpW1qcVMvNcwUyAfTmjrs
+transactions
+id	08d2c40ad58a10a08e924ec256cca06cb4bedd3cd1f87814d2c6cfa0cdbbfefa
+block_num	148030474
+ref_block_prefix
+
+ */
+}
+
+/*
+  
+// const { time, start, pause, reset, isRunning } = useTimer({
+  //   initialTime: 50,
+  //   timerType: "DECREMENTAL",
+  //   onTimeUpdate: (time) => {
+  //     // console.log("Time is updated", time);
+  //     reqTimer = time;
+  //   },
+  //   interval: 1,
+  // });
+
 */

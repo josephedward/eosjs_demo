@@ -14,6 +14,7 @@ try{
   return (
     <ErrorBoundary>
       <Frame
+      class="EosBlock"
         style={{ ...blockStyle }}
         show={true}
         animate={true}
@@ -23,7 +24,9 @@ try{
       >
         <Content animate layer="success" style={{ margin: "5%" }}>
           <h2>BLOCK ID: </h2>
-          <h3>{props.currentBlock.id}</h3>
+          <h3
+          layer="success"
+          >{props.currentBlock.id}</h3>
           <div style={{ ...rowStyle }}>
             <h5>timestamp : </h5>
             <h5> {props.currentBlock.timestamp}</h5>

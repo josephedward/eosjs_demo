@@ -13,12 +13,15 @@ import {
   Button,
 } from "arwes";
 import Content from "arwes/lib/Content";
-import ErrorBoundary from "./ErrorBoundary";
-import Block from "./Block";
+import ErrorBoundary from "../components/ErrorBoundary";
+import Block from "../components/Block";
 import { useTimer } from "use-timer";
 import { Menu, Grid, Image, Popup } from "semantic-ui-react";
 import { opacify } from "polished";
 import { JsonToTable } from "react-json-to-table";
+import Header from "../components/Header.js";
+import BlockFeed from "../components/BlockFeed.js";
+import GrabTen from "../components/GrabTen";
 
 const chalk = require("chalk");
 const { Api, JsonRpc, RpcError } = require("eosjs");
@@ -76,87 +79,22 @@ function BlockList() {
   return (
     <ErrorBoundary>
       <Arwes background="/images/blocks.gif">
-        <Frame>
-          <Menu
-            style={{
-              backgroundColor: "black",
-              color: "aqua",
-              "-webkit-text-stroke": "1px white",
-            }}
-            stackable
-          >
-            <Menu.Item>
-              <h1>EOS CHAIN NAVIGATOR</h1>
-            </Menu.Item>
-            <Menu.Item style={{ ...centerStyle, width: "45%" }}>
-              <Popup
-                position="left"
-                style={{
-                  backgroundColor: "darkblue",
-                  border: "3px solid aqua",
-                }}
-                trigger={
-                  <h4
-                    style={{
-                      color: "aqua",
-                      "-webkit-text-stroke": "none",
-                    }}
-                  >
-                    RPC-API-URL endpoint : {endPointUrl}
-                  </h4>
-                }
-              >
-                <Popup.Content>
-                  <Frame style={{ backgroundColor: "lightgrey" }}>
-                    <JsonToTable json={currentInfo} />
-                  </Frame>
-                </Popup.Content>
-              </Popup>
-            </Menu.Item>
-            <Menu.Item position="right">
-              <Frame>
-                <Heading>Chain Height : {currentBlock.block_num}</Heading>
-              </Frame>
-            </Menu.Item>
-          </Menu>
-        </Frame>
-
+        <Header
+          endPointUrl={endPointUrl}
+          currentInfo={currentInfo}
+          currentBlock={currentBlock}
+        />
         <Grid style={{ ...menuStyle }}>
           <Grid.Column
             width={12}
             position="left"
             style={{ left: 0, height: "100%", width: "100%" }}
           >
-            <Button
-              style={{ ...centerStyle, margin: "2.5vh" }}
-              onClick={() => {
-                grabTen(currentBlock.block_num);
-              }}
-            >
-              Get Latest Ten Blocks
-            </Button>
-
-            {tenLatestBlocks.length > 0 ? (
-              <Frame
-                style={{
-                  width: "100%",
-                  height: "100vh",
-                  overflowY: "scroll",
-                  right: 0,
-                }}
-              >
-                <div style={{ ...listStyle }}>
-                  {tenLatestBlocks
-                    .slice(0)
-                    .reverse()
-                    .map((book) => (
-                      <Block animate currentBlock={book} />
-                    ))}
-                </div>
-              </Frame>
-            ) : (
-              ""
-            )}
+          <GrabTen
+            grabTen={()=>{grabTen(currentBlock.block_num)}}
+            currentBlock={currentBlock}
+            tenLatestBlocks={tenLatestBlocks}
+          />
           </Grid.Column>
 
           <Grid.Column
@@ -167,23 +105,7 @@ function BlockList() {
               paddingRight: 0,
             }}
           >
-            <div
-              style={{
-                width: "100%",
-                height: "100vh",
-                overflowY: "scroll",
-                right: 0,
-              }}
-            >
-              <div style={{ ...listStyle }}>
-                {recentBlocks
-                  .slice(0)
-                  .reverse()
-                  .map((book) => (
-                    <Block class="intervalBlock" currentBlock={book} />
-                  ))}
-              </div>
-            </div>
+            <BlockFeed recentBlocks={recentBlocks} />
           </Grid.Column>
         </Grid>
       </Arwes>

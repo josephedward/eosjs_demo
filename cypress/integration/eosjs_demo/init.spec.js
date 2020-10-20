@@ -61,16 +61,16 @@ describe("Basic L1 Initialization Test", () => {
     cy.contains("Get Latest Ten Blocks").should("exist");
     cy.wait(500);
     cy.contains("Get Latest Ten Blocks").click();
-      
+          
 
 });
 
 
 
   it("checks the currentInfo hover event", () => {
-    cy.contains("EOS CHAIN NAVIGATOR").should('exist');
+    cy.contains("RPC-API-URL endpoint").should('exist');
     cy.wait(500);  
-    cy.contains("EOS CHAIN NAVIGATOR").trigger("mouseover");
+    cy.contains("RPC-API-URL endpoint").trigger("mouseover");
     cy.get('table').contains('server_version').should('exist')
 });
 

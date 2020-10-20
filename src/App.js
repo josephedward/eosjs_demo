@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import BlockList from "./components/BlockList"
+import BlockList from "./pages/BlockList"
 // import logo from './logo.svg';
 import './App.css';
 import { ThemeProvider, createTheme, Arwes, Project, Heading,

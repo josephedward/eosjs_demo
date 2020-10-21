@@ -12,9 +12,9 @@ export default function Block(props) {
   
 try{
   return (
-    // <ErrorBoundary>
+    <ErrorBoundary>
       <Frame
-     
+      class="EosBlock"
         style={{ ...blockStyle }}
         show={true}
         animate={true}
@@ -98,7 +98,7 @@ try{
           </div>
         </Content>
       </Frame>
-    // </ErrorBoundary>
+    </ErrorBoundary>
   );}
   catch(err){
     console.log(err)

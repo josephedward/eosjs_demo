@@ -30,25 +30,46 @@ export default function Header(props) {
           backgroundColor: "black",
           color: "aqua",
           "-webkit-text-stroke": "1px white",
-          width:"100%"
+          // width:"100%",
+          
         }}
         stackable
       >
         <Menu.Item
         position="left"
         >
-          <h1>EOS CHAIN NAVIGATOR</h1>
+          <h4
+            style={{
+              color: "aqua",
+              "-webkit-text-stroke": "none",
+              paddingRight:"1%"
+            }}
+          >
+            RPC-API-URL endpoint : {props.endPointUrl}
+          </h4>
         </Menu.Item>
 
         <Menu.Item
-          style={{
-            justifyContent: "center",
-            textAlign: "center",
-            // width: "100%",
-          }}
-          align="center"
-          position="center"
+          // style={{
+          //   // justifyContent: "center",
+          //   // textAlign: "center",
+          //   // width: "100%",
+          //   marginLeft:"1%",
+          // marginRight: "1%"
+          // }}
+          // align="center"
+          // position="center"
+
         >
+         <h1
+         style={{
+          // paddingLeft:".5%",
+          // paddingRight: ".5%"
+          // margin:"1%"
+         }}
+         >EOS CHAIN NAVIGATOR</h1>
+</Menu.Item>
+<Menu.Item>
           <Button
             style={{
               ...centerStyle,
@@ -59,6 +80,8 @@ export default function Header(props) {
           >
             Get Latest Ten Blocks
           </Button>
+
+
         </Menu.Item>
 
         <Menu.Item
@@ -67,14 +90,16 @@ export default function Header(props) {
         }}  
         position="right"
         >
-          <h4
-            style={{
-              color: "aqua",
-              "-webkit-text-stroke": "none",
-            }}
-          >
-            RPC-API-URL endpoint : {props.endPointUrl}
-          </h4>
+   <Frame
+        style={{ ...blockStyle }}
+        show={true}
+        animate={true}
+        level={3}
+        corners={4}
+        layer="primary"
+                >
+            <Heading>Chain Height :{props.currentBlock.block_num} </Heading>
+          </Frame>
         </Menu.Item>
       </Menu>
     </Frame>
@@ -82,10 +107,14 @@ export default function Header(props) {
 }
 
 const centerStyle = {
-  width: "100%",
-  // height:"100%",
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "center",
-  textAlign: "center",
+  // display: "flex",
+  // flexDirection: "row",
+
+};
+
+const blockStyle = {
+  // margin: "5%",
+  // height: "100%",
+  wordBreak: "break-all",
+
 };

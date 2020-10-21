@@ -35,18 +35,7 @@ export default function BlockFeed(props){
           right: 0,
         }}
       >
-                <Frame
-        style={{ ...blockStyle }}
-        show={true}
-        animate={true}
-        level={3}
-        corners={4}
-        layer="primary"
-                >
-            <Heading>Chain Height : </Heading>
-           {props.currentBlock.block_num}
-          </Frame>
-
+             
 
 
         <div style={{ ...listStyle }}>

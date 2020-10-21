@@ -145,7 +145,7 @@ let ChainInfoObj = [];
 function ChainInfo(props) {
   ChainInfoObj = [];
   for (let x in Object(props.currentInfo)) {
-    console.log(x, " : ", props.currentInfo[x]);
+    // console.log(x, " : ", props.currentInfo[x]);
     ChainInfoObj.push(
       <Table animate headers={[x]} dataset={[[props.currentInfo[x]]]} />
     );

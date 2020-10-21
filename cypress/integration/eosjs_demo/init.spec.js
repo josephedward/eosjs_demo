@@ -1,5 +1,10 @@
 import React from "react";
 import { mount } from "cypress-react-unit-test";
+import ReactTestUtils from "react-dom/test-utils"; // ES6
+import {GrabTen} from "../../../src/components/GrabTen"
+
+// import '@testing-library/cypress/add-commands'
+
 // import {Button} from 'arwes'
 // import { ErrorBoundary } from '../../../src/components/ErrorBoundary'
 // Cypress.on('uncaught:exception', (err, runnable) => {
@@ -44,6 +49,12 @@ import { mount } from "cypress-react-unit-test";
 // })
 
 describe("Basic L1 Initialization Test", () => {
+//   it("finds the root node", () => {
+     
+//     let test=cy.root().should("match", "html").children();
+//     cy.log(test)
+// });
+
   it("visits the heroku url", () => {
     cy.visit("https://eosjs-chain-nav.herokuapp.com/");
   });
@@ -55,27 +66,19 @@ describe("Basic L1 Initialization Test", () => {
   // , 500)
   // })
 
-
-
   it("checks the getTenLatestBlocks button", () => {
     cy.contains("Get Latest Ten Blocks").should("exist");
     cy.wait(500);
     cy.contains("Get Latest Ten Blocks").click();
-          
-
+    mount(<GrabTen/>)
 });
 
 
 
   it("checks the currentInfo hover event", () => {
-    cy.contains("RPC-API-URL endpoint").should('exist');
-    cy.wait(500);  
+    cy.contains("RPC-API-URL endpoint").should("exist");
+    cy.wait(500);
     cy.contains("RPC-API-URL endpoint").trigger("mouseover");
-    cy.get('table').contains('server_version').should('exist')
-});
-
-
-
-
-
+    cy.get("table").contains("server_version").should("exist");
+  });
 });

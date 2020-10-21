@@ -34,35 +34,39 @@ export default function Header(props) {
         <Menu.Item>
           <h1>EOS CHAIN NAVIGATOR</h1>
         </Menu.Item>
-        <Menu.Item style={{ ...centerStyle, width: "45%" }}>
-          <Popup
-            position="left"
-            style={{
-              backgroundColor: "darkblue",
-              border: "3px solid aqua",
-            }}
-            trigger={
-              <h4
-                style={{
-                  color: "aqua",
-                  "-webkit-text-stroke": "none",
-                }}
-              >
-                RPC-API-URL endpoint : {props.endPointUrl}
-              </h4>
-            }
-          >
-            <Popup.Content>
-              <Frame style={{ backgroundColor: "lightgrey" }}>
-                <JsonToTable json={props.currentInfo} />
-              </Frame>
-            </Popup.Content>
-          </Popup>
+
+        <Menu.Item
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            textAlign:'center'
+          }}
+          align="center"
+          position="center"
+        >
+          <Button
+        style={{ ...centerStyle,
+        //  margin: "2.5vh" 
+         }}
+        onClick={() => {
+          props.grabTen(props.currentBlock.block_num);
+        }}
+      >
+        Get Latest Ten Blocks
+      </Button>
+
         </Menu.Item>
+
         <Menu.Item position="right">
-          <Frame>
-            <Heading>Chain Height : {props.currentBlock.block_num}</Heading>
-          </Frame>
+        <h4
+            style={{
+              color: "aqua",
+              "-webkit-text-stroke": "none",
+            }}
+          >
+            RPC-API-URL endpoint : {props.endPointUrl}
+          </h4>
         </Menu.Item>
       </Menu>
     </Frame>

@@ -11,6 +11,7 @@ import {
   // SoundsProvider,
   // createSounds,
   Button,
+  Blockquote
 } from "arwes";
 import Content from "arwes/lib/Content";
 import ErrorBoundary from "../components/ErrorBoundary";
@@ -29,16 +30,31 @@ export default function BlockFeed(props){
         <div
         style={{
           width: "100%",
-          height: "100vh",
+          height: "100%",
           overflowY: "scroll",
           right: 0,
         }}
       >
+                <Frame
+        style={{ ...blockStyle }}
+        show={true}
+        animate={true}
+        level={3}
+        corners={4}
+        layer="primary"
+                >
+            <Heading>Chain Height : </Heading>
+           {props.currentBlock.block_num}
+          </Frame>
+
+
+
         <div style={{ ...listStyle }}>
           {props.recentBlocks
             .slice(0)
             .reverse()
             .map((book) => (
+
               <Block class="intervalBlock" currentBlock={book} />
             ))}
         </div>
@@ -50,3 +66,11 @@ export default function BlockFeed(props){
 const listStyle = {
     marginTop: "10%",
   };
+
+  const blockStyle = {
+    margin: "5%",
+    // height: "100%",
+    wordBreak: "break-all",
+  
+  };
+  

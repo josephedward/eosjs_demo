@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@arwes/sounds": "^1.0.0-alpha.14",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -10,6 +11,7 @@
     "chalk": "^4.1.0",
     "eos-rc-parser": "^1.0.4",
     "eosjs": "^21.0.3",
+    "json-to-table": "^4.2.0",
     "node-fetch": "^2.6.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

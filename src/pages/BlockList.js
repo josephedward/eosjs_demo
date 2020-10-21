@@ -66,7 +66,7 @@ function BlockList() {
       // console.log(currentInfo);
       currentBlock = await rpc.get_block(currentInfo.head_block_num);
       recentBlocks.push(currentBlock);
-      if (recentBlocks.length >= 11) {
+      if (recentBlocks.length >= 6) {
         recentBlocks.shift();
       }
     } catch (error) {
@@ -77,40 +77,72 @@ function BlockList() {
   }, 500);
 
   return (
-    <ErrorBoundary>
-      <Arwes background="/images/blocks.gif">
-        <Header
-          endPointUrl={endPointUrl}
-          currentInfo={currentInfo}
-          currentBlock={currentBlock}
-        />
-        <Grid style={{ ...menuStyle }}>
-          <Grid.Column
-            width={12}
-            position="left"
-            style={{ left: 0, height: "100%", width: "100%" }}
+    // <ErrorBoundary>
+    <Arwes background="/images/blocks.gif">
+      <Header
+        endPointUrl={endPointUrl}
+        currentInfo={currentInfo}
+        currentBlock={currentBlock}
+        grabTen={() => {
+          grabTen(currentBlock.block_num);
+        }}
+      />
+      <Grid style={{ ...menuStyle }}>
+        <Grid.Column
+          width={4}
+          position="left"
+        >
+          <Frame
+            style={{
+              margin: "5%",
+              left: 0,
+              paddingLeft: 0,
+              objectFit: "contain",
+              width: "100%",
+            }}
           >
+            <ChainInfo currentInfo={currentInfo} />
+          </Frame>
+        </Grid.Column>
+        <Grid.Column width={8} position="center" style={{ width: "100%" }}>
           <GrabTen
-            grabTen={()=>{grabTen(currentBlock.block_num)}}
+            style={{ width: "100%", objectFit: "contain" }}
+            grabTen={() => {
+              grabTen(currentBlock.block_num);
+            }}
             currentBlock={currentBlock}
             tenLatestBlocks={tenLatestBlocks}
           />
-          </Grid.Column>
+        </Grid.Column>
 
-          <Grid.Column
-            width={4}
-            position="right"
-            style={{
-              right: 0,
-              paddingRight: 0,
-            }}
-          >
-            <BlockFeed recentBlocks={recentBlocks} />
-          </Grid.Column>
-        </Grid>
-      </Arwes>
-    </ErrorBoundary>
+        <Grid.Column
+          width={4}
+          position="right"
+          style={{
+            right: 0,
+            paddingRight: 0,
+          }}
+        >
+          {/* <ErrorBoundary> */}
+          <BlockFeed currentBlock={currentBlock} recentBlocks={recentBlocks} />
+          {/* </ErrorBoundary> */}
+        </Grid.Column>
+      </Grid>
+    </Arwes>
   );
+}
+
+let ChainInfoObj = [];
+function ChainInfo(props) {
+  ChainInfoObj = [];
+  for (let x in Object(props.currentInfo)) {
+    console.log(x, " : ", props.currentInfo[x]);
+    ChainInfoObj.push(
+      <Table animate headers={[x]} dataset={[[props.currentInfo[x]]]} />
+    );
+  }
+
+  return <div style={{ width: "100%" }}>{ChainInfoObj}</div>;
 }
 
 function useInterval(callback, delay) {

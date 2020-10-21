@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@arwes/sounds@^1.0.0-alpha.14":
+  version "1.0.0-alpha.14"
+  resolved "https://registry.yarnpkg.com/@arwes/sounds/-/sounds-1.0.0-alpha.14.tgz#4f8c5590d3e4dbd08112b82996c98a73d4b14bd7"
+  integrity sha512-1UXtLpfha7zvXLsOA4fLUyKZeB0lWQRYlA3g9ztzqbBeTJIrrNxUe0+waE93MKxS+NkMHTSlwFdkB3j7wWtyLQ==
+  dependencies:
+    "@babel/runtime" "^7.7.6"
+
 "@babel/code-frame@7.8.3", "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.8.3":
   version "7.8.3"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.8.3.tgz#33e25903d7481181534e12ec0a25f16b6fcf419e"
@@ -1632,6 +1639,13 @@
   version "7.11.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.11.2.tgz#f549c13c754cc40b87644b9fa9f09a6a95fe0736"
   integrity sha512-TeWkU52so0mPtDcaCTxNBI/IHiz0pZgr8VEFqXFtZWpYD08ZB6FaSwVAS8MKRQAP3bYKiVjwysOJgMFY28o6Tw==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
+"@babel/runtime@^7.7.6":
+  version "7.12.1"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.12.1.tgz#b4116a6b6711d010b2dad3b7b6e43bf1b9954740"
+  integrity sha512-J5AIf3vPj3UwXaAzb5j1xM4WAQDX3EMgemF8rjCP3SoW09LfRKAXQKt6CoVYl230P6iWdRcBbnLDDdnqWxZSCA==
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -8484,6 +8498,14 @@ json-stringify-safe@~5.0.1:
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
   integrity sha1-Epai1Y/UXxmg9s4B1lcB4sc1tus=
 
+json-to-table@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/json-to-table/-/json-to-table-4.2.0.tgz#b87f86577254d69faf9d38d67bed93c242a15971"
+  integrity sha512-8L0RNeu6PmjC76yOHLgW4eBvvi2awjZIHHruxQRMUhkvRP3BtYvwZT0XsJ4eRL1XLFJAr8BYcWyEVOTZEosJug==
+  dependencies:
+    lodash "~4.16.0"
+    traverse "~0.6.6"
+
 json3@^3.3.2:
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/json3/-/json3-3.3.3.tgz#7fc10e375fc5ae42c4705a5cc0aa6f62be305b81"
@@ -8963,6 +8985,11 @@ lodash@^4.17.19, lodash@^4.17.20:
   version "4.17.20"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
   integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
+
+lodash@~4.16.0:
+  version "4.16.6"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.16.6.tgz#d22c9ac660288f3843e16ba7d2b5d06cca27d777"
+  integrity sha1-0iyaxmAojzhD4Wun0rXQbMon13c=
 
 log-symbols@^1.0.2:
   version "1.0.2"
@@ -11418,11 +11445,6 @@ react-json-pretty@^2.2.0:
   dependencies:
     prop-types "^15.6.2"
 
-react-json-table@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/react-json-table/-/react-json-table-0.1.1.tgz#712beb9a729167c2d6651987f42c73143217a1d6"
-  integrity sha1-cSvrmnKRZ8LWZRmH9CxzFDIXodY=
-
 react-json-to-table@^0.1.7:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/react-json-to-table/-/react-json-to-table-0.1.7.tgz#dc2a9e424678dc32afd22ce5846c12e62ea3b199"
@@ -13312,6 +13334,11 @@ tr46@^1.0.1:
   integrity sha1-qLE/1r/SSJUZZ0zN5VujaTtwbQk=
   dependencies:
     punycode "^2.1.0"
+
+traverse@~0.6.6:
+  version "0.6.6"
+  resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.6.6.tgz#cbdf560fd7b9af632502fed40f918c157ea97137"
+  integrity sha1-y99WD9e5r2MlAv7UD5GMFX6pcTc=
 
 ts-pnp@1.1.6, ts-pnp@^1.1.6:
   version "1.1.6"

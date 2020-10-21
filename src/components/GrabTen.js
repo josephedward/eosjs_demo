@@ -8,8 +8,8 @@ import {
   Heading,
   Words,
   Table,
-  // SoundsProvider,
-  // createSounds,
+  SoundsProvider,
+  createSounds,
   Button,
 } from "arwes";
 import Content from "arwes/lib/Content";
@@ -25,30 +25,26 @@ import BlockFeed from "../components/BlockFeed.js";
 
 export default function GrabTen(props){
     return(
+      // <ErrorBoundary>
         <div>
-        <Button
-        style={{ ...centerStyle, margin: "2.5vh" }}
-        onClick={() => {
-          props.grabTen(props.currentBlock.block_num);
-        }}
-      >
-        Get Latest Ten Blocks
-      </Button>
+
 
       {props.tenLatestBlocks.length > 0 ? (
         <Frame
           style={{
             width: "100%",
-            height: "100vh",
+            height: "100%",
             overflowY: "scroll",
             right: 0,
           }}
         >
+
           <div style={{ ...listStyle }}>
             {props.tenLatestBlocks
               .slice(0)
               .reverse()
               .map((book) => (
+                
                 <Block animate currentBlock={book} />
               ))}
           </div>
@@ -57,6 +53,7 @@ export default function GrabTen(props){
         ""
       )}
       </div>
+      // </ErrorBoundary>
     )
 }
 

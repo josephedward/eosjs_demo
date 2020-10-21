@@ -25,41 +25,49 @@ export default function Header(props) {
     <Frame>
       <Menu
         style={{
+          display: "flex",
+          flexDirection: "row",
           backgroundColor: "black",
           color: "aqua",
           "-webkit-text-stroke": "1px white",
+          width:"100%"
         }}
         stackable
       >
-        <Menu.Item>
+        <Menu.Item
+        position="left"
+        >
           <h1>EOS CHAIN NAVIGATOR</h1>
         </Menu.Item>
 
         <Menu.Item
           style={{
-            display: "flex",
-            flexDirection: "row",
             justifyContent: "center",
-            textAlign:'center'
+            textAlign: "center",
+            // width: "100%",
           }}
           align="center"
           position="center"
         >
           <Button
-        style={{ ...centerStyle,
-        //  margin: "2.5vh" 
-         }}
-        onClick={() => {
-          props.grabTen(props.currentBlock.block_num);
-        }}
-      >
-        Get Latest Ten Blocks
-      </Button>
-
+            style={{
+              ...centerStyle,
+            }}
+            onClick={() => {
+              props.grabTen(props.currentBlock.block_num);
+            }}
+          >
+            Get Latest Ten Blocks
+          </Button>
         </Menu.Item>
 
-        <Menu.Item position="right">
-        <h4
+        <Menu.Item
+        style={{
+          justifyContent:"right"
+        }}  
+        position="right"
+        >
+          <h4
             style={{
               color: "aqua",
               "-webkit-text-stroke": "none",

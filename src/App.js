@@ -21,7 +21,9 @@ function App(){
 <Switch>
 <ThemeProvider theme={createTheme()}>
 <Arwes   background="/images/background.jpg" >
-<Route exact path="/" component={BlockList} />
+<Route 
+
+exact path="/" component={BlockList} />
 {/* <Route exact path="/test" component={AbiDisplay} /> */}
 </Arwes>
 </ThemeProvider>

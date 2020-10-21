@@ -32,6 +32,7 @@ export default function GrabTen(props){
       {props.tenLatestBlocks.length > 0 ? (
         <Frame
           style={{
+            margin: "2.5%",
             width: "100%",
             height: "100%",
             overflowY: "scroll",
@@ -67,6 +68,6 @@ const centerStyle = {
   };
 
   const listStyle = {
-    marginTop: "10%",
+    marginTop: "2.5%",
   };
   

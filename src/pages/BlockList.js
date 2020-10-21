@@ -77,58 +77,64 @@ function BlockList() {
   }, 500);
 
   return (
-    // <ErrorBoundary>
-    <Arwes background="/images/blocks.gif">
-      <Header
-        endPointUrl={endPointUrl}
-        currentInfo={currentInfo}
-        currentBlock={currentBlock}
-        grabTen={() => {
-          grabTen(currentBlock.block_num);
-        }}
-      />
-      <Grid style={{ ...menuStyle }}>
-        <Grid.Column
-          width={4}
-          position="left"
-        >
-          <Frame
-            style={{
-              margin: "5%",
-              left: 0,
-              paddingLeft: 0,
-              objectFit: "contain",
-              width: "100%",
-            }}
-          >
-            <ChainInfo currentInfo={currentInfo} />
-          </Frame>
-        </Grid.Column>
-        <Grid.Column width={8} position="center" style={{ width: "100%" }}>
-          <GrabTen
-            style={{ width: "100%", objectFit: "contain" }}
+    <div style={{ height: "100vh", overflowY: "hide" }}>
+      <ErrorBoundary>
+        <Arwes background="/images/blocks.gif">
+          <Header
+          style={{overflowY:"scroll"}}
+            endPointUrl={endPointUrl}
+            currentInfo={currentInfo}
+            currentBlock={currentBlock}
             grabTen={() => {
               grabTen(currentBlock.block_num);
             }}
-            currentBlock={currentBlock}
-            tenLatestBlocks={tenLatestBlocks}
           />
-        </Grid.Column>
+          <Grid style={{ ...menuStyle }}>
+            <Grid.Column width={4} position="left">
+              <Frame
+                style={{
+                  margin: "5%",
+                  left: 0,
+                  paddingLeft: 0,
+                  objectFit: "contain",
+                  width: "100%",
+                }}
+              >
+                <ChainInfo
+                          style={{overflowY:"scroll"}}
+                 currentInfo={currentInfo} />
+              </Frame>
+            </Grid.Column>
+            <Grid.Column width={8} position="center" style={{ width: "100%" }}>
+              <GrabTen
+                style={{ width: "100%",overflowY:"scroll", objectFit: "contain" }}
+                grabTen={() => {
+                  grabTen(currentBlock.block_num);
+                }}
+                currentBlock={currentBlock}
+                tenLatestBlocks={tenLatestBlocks}
+              />
+            </Grid.Column>
 
-        <Grid.Column
-          width={4}
-          position="right"
-          style={{
-            right: 0,
-            paddingRight: 0,
-          }}
-        >
-          {/* <ErrorBoundary> */}
-          <BlockFeed currentBlock={currentBlock} recentBlocks={recentBlocks} />
-          {/* </ErrorBoundary> */}
-        </Grid.Column>
-      </Grid>
-    </Arwes>
+            <Grid.Column
+              width={4}
+              position="right"
+              style={{
+                right: 0,
+                paddingRight: 0,
+              }}
+            >
+              {/* <ErrorBoundary> */}
+              <BlockFeed
+                currentBlock={currentBlock}
+                recentBlocks={recentBlocks}
+              />
+              {/* </ErrorBoundary> */}
+            </Grid.Column>
+          </Grid>
+        </Arwes>
+      </ErrorBoundary>
+    </div>
   );
 }
 

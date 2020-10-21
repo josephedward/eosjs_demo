@@ -90,7 +90,9 @@ function BlockList() {
             }}
           />
           <Grid style={{ ...menuStyle }}>
-            <Grid.Column width={4} position="left">
+            <Grid.Column 
+            style={{ ...menuStyle }}
+            width={4} position="left">
               <Frame
                 style={{
                   margin: "5%",
@@ -105,7 +107,7 @@ function BlockList() {
                  currentInfo={currentInfo} />
               </Frame>
             </Grid.Column>
-            <Grid.Column width={8} position="center" style={{ width: "100%" }}>
+            <Grid.Column width={8} position="center" style={{ width: "100%", ...menuStyle }}>
               <GrabTen
                 style={{ width: "100%",overflowY:"scroll", objectFit: "contain" }}
                 grabTen={() => {
@@ -122,6 +124,7 @@ function BlockList() {
               style={{
                 right: 0,
                 paddingRight: 0,
+                ...menuStyle
               }}
             >
               {/* <ErrorBoundary> */}
@@ -173,7 +176,8 @@ export default BlockList;
 
 const menuStyle = {
   width: "100%",
-  height: "100%",
+  height: "100vh",
+  overflowY:"scroll"
 };
 
 const listStyle = {

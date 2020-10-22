@@ -22,6 +22,7 @@ import { JsonToTable } from "react-json-to-table";
 import Header from "../components/Header.js";
 import BlockFeed from "../components/BlockFeed.js";
 import GrabTen from "../components/GrabTen";
+import ChainInfo from "../components/ChainInfo"
 
 const chalk = require("chalk");
 const { Api, JsonRpc, RpcError } = require("eosjs");
@@ -53,7 +54,7 @@ async function grabTen(latestBlockNum) {
     }
   } catch (err) {
     console.log(err);
-    window.location.reload();
+    // window.location.reload();
   }
 }
 
@@ -71,7 +72,7 @@ function BlockList() {
       }
     } catch (error) {
       console.log("ERROR FETCHING CHAIN : " + error);
-      window.location.reload();
+      // window.location.reload();
     }
     setCount(count + 1);
   }, 500);
@@ -89,13 +90,14 @@ function BlockList() {
               grabTen(currentBlock.block_num);
             }}
           />
-          <Grid style={{ ...menuStyle }}>
+          <Grid style={{ ...gridStyle }}>
             <Grid.Column 
             style={{ ...menuStyle }}
             width={4} position="left">
               <Frame
                 style={{
                   margin: "5%",
+                  marginRight:"10%",
                   left: 0,
                   paddingLeft: 0,
                   objectFit: "contain",
@@ -103,7 +105,10 @@ function BlockList() {
                 }}
               >
                 <ChainInfo
-                          style={{overflowY:"scroll"}}
+                          style={{
+                            // overflowY:"scroll",
+                          // marginRight:"50%"
+                          }}
                  currentInfo={currentInfo} />
               </Frame>
             </Grid.Column>
@@ -141,18 +146,18 @@ function BlockList() {
   );
 }
 
-let ChainInfoObj = [];
-function ChainInfo(props) {
-  ChainInfoObj = [];
-  for (let x in Object(props.currentInfo)) {
-    // console.log(x, " : ", props.currentInfo[x]);
-    ChainInfoObj.push(
-      <Table animate headers={[x]} dataset={[[props.currentInfo[x]]]} />
-    );
-  }
+// let ChainInfoObj = [];
+// function ChainInfo(props) {
+//   ChainInfoObj = [];
+//   for (let x in Object(props.currentInfo)) {
+//     // console.log(x, " : ", props.currentInfo[x]);
+//     ChainInfoObj.push(
+//       <Table animate headers={[x]} dataset={[[props.currentInfo[x]]]} />
+//     );
+//   }
 
-  return <div style={{ width: "100%" }}>{ChainInfoObj}</div>;
-}
+//   return <div style={{ width: "100%" }}>{ChainInfoObj}</div>;
+// }
 
 function useInterval(callback, delay) {
   const savedCallback = useRef();
@@ -173,6 +178,15 @@ function useInterval(callback, delay) {
   }, [delay]);
 }
 export default BlockList;
+
+
+const gridStyle={
+  width: "100%",
+  height: "100vh",
+  // overflowY:"scroll"
+  margin:"0"
+
+}
 
 const menuStyle = {
   width: "100%",

@@ -16,13 +16,13 @@ import Content from "arwes/lib/Content";
 import ErrorBoundary from "../components/ErrorBoundary";
 import Block from "../components/Block";
 import { useTimer } from "use-timer";
-import { Menu, Grid, Image, Popup } from "semantic-ui-react";
+import { Menu, Grid, Image, Popup, Dropdown } from "semantic-ui-react";
 import { opacify } from "polished";
 import { JsonToTable } from "react-json-to-table";
 import Header from "../components/Header.js";
 import BlockFeed from "../components/BlockFeed.js";
 import GrabTen from "../components/GrabTen";
-import ChainInfo from "../components/ChainInfo"
+import ChainInfo from "../components/ChainInfo";
 
 const chalk = require("chalk");
 const { Api, JsonRpc, RpcError } = require("eosjs");
@@ -42,6 +42,9 @@ let currentBlock = {};
 let tenMostRecentBlocks = [];
 let reqTimer;
 
+
+
+
 let tenLatestBlocks = [];
 async function grabTen(latestBlockNum) {
   tenLatestBlocks = [];
@@ -54,7 +57,6 @@ async function grabTen(latestBlockNum) {
     }
   } catch (err) {
     console.log(err);
-    // window.location.reload();
   }
 }
 
@@ -64,7 +66,6 @@ function BlockList() {
   useInterval(async () => {
     try {
       currentInfo = await rpc.get_info();
-      // console.log(currentInfo);
       currentBlock = await rpc.get_block(currentInfo.head_block_num);
       recentBlocks.push(currentBlock);
       if (recentBlocks.length >= 6) {
@@ -72,7 +73,6 @@ function BlockList() {
       }
     } catch (error) {
       console.log("ERROR FETCHING CHAIN : " + error);
-      // window.location.reload();
     }
     setCount(count + 1);
   }, 500);
@@ -82,8 +82,9 @@ function BlockList() {
       <ErrorBoundary>
         <Arwes background="/images/blocks.gif">
           <Header
-          style={{overflowY:"scroll"}}
+            style={{ overflowY: "scroll" }}
             endPointUrl={endPointUrl}
+            // endPoint={EndPoint}
             currentInfo={currentInfo}
             currentBlock={currentBlock}
             grabTen={() => {
@@ -91,30 +92,32 @@ function BlockList() {
             }}
           />
           <Grid style={{ ...gridStyle }}>
-            <Grid.Column 
-            style={{ ...menuStyle }}
-            width={4} position="left">
+            <Grid.Column style={{ ...menuStyle }} width={4} position="left">
               <Frame
                 style={{
                   margin: "5%",
-                  marginRight:"10%",
-                  left: 0,
                   paddingLeft: 0,
-                  objectFit: "contain",
-                  width: "100%",
                 }}
               >
                 <ChainInfo
-                          style={{
-                            // overflowY:"scroll",
-                          // marginRight:"50%"
-                          }}
-                 currentInfo={currentInfo} />
+                  style={{
+                    marginRight: "50%",
+                  }}
+                  currentInfo={currentInfo}
+                />
               </Frame>
             </Grid.Column>
-            <Grid.Column width={8} position="center" style={{ width: "100%", ...menuStyle }}>
+            <Grid.Column
+              width={8}
+              position="center"
+              style={{ width: "100%", ...menuStyle }}
+            >
               <GrabTen
-                style={{ width: "100%",overflowY:"scroll", objectFit: "contain" }}
+                style={{
+                  width: "100%",
+                  overflowY: "scroll",
+                  objectFit: "contain",
+                }}
                 grabTen={() => {
                   grabTen(currentBlock.block_num);
                 }}
@@ -129,7 +132,7 @@ function BlockList() {
               style={{
                 right: 0,
                 paddingRight: 0,
-                ...menuStyle
+                ...menuStyle,
               }}
             >
               {/* <ErrorBoundary> */}
@@ -179,19 +182,17 @@ function useInterval(callback, delay) {
 }
 export default BlockList;
 
-
-const gridStyle={
+const gridStyle = {
   width: "100%",
   height: "100vh",
   // overflowY:"scroll"
-  margin:"0"
-
-}
+  margin: "0",
+};
 
 const menuStyle = {
   width: "100%",
   height: "100vh",
-  overflowY:"scroll"
+  overflowY: "scroll",
 };
 
 const listStyle = {

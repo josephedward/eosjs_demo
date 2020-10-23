@@ -30,17 +30,29 @@ export default function ChainInfo(props) {
   for (let x in Object(props.currentInfo)) {
     // console.log(x, " : ", props.currentInfo[x]);
     ChainInfoObj.push(
+        <Frame>
       <Table 
       style={{...chainTableStyle}}
       animate headers={[x]} dataset={[[props.currentInfo[x]]]} />
+      </Frame>
     );
   }
 
-  return <div style={{ width: "100%", marginRight:"45%" }}>{ChainInfoObj}</div>;
+  return <div
+    style={{
+        width: "100%",
+        height: "100%",
+        // overflowY: "scroll",
+        // marginRight:"40%",
+        left: 0,
+        }}
+        >
+        {ChainInfoObj}</div>;
 }
 
 
 const chainTableStyle={
-    height:"5%",
+    // height:"5%",
+    // marginRight:"15%"
     // border:"5px solid red"
 }

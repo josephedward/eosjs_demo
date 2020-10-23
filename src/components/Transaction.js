@@ -50,75 +50,75 @@ function TListObj(props) {
       <Frame style={{ ...rowStyle }}>
         <Header style={{ marginTop: "1%", marginBottom: "1%" }}>
           <strong>Transaction ID : </strong>
-          {props.transactionList[x].trx.id}
+          {props.transactionList[x]?.trx?.id}
         </Header>
 
         <p style={{ ...itemStyle }}>
-          {props.transactionList[x].trx.signatures ? (
+          {props.transactionList[x]?.trx?.signatures ? (
             <div>
               <strong>signatures: </strong>
               <SignatureObj
-                signatures={props.transactionList[x].trx.signatures}
+                signatures={props.transactionList[x]?.trx?.signatures}
               />
             </div>
           ) : (
             ""
           )}
 
-          {props.transactionList[x].cpu_usage_us ? (
+          {props.transactionList[x]?.cpu_usage_us ? (
             <div>
               <strong>cpu_usage_us: </strong>
-              {props.transactionList[x].cpu_usage_us}
+              {props.transactionList[x]?.cpu_usage_us}
             </div>
           ) : (
             ""
           )}
 
-          {props.transactionList[x].net_usage_words ? (
+          {props.transactionList[x]?.net_usage_words ? (
             <div>
               <strong>net_usage_words: </strong>
-              {props.transactionList[x].net_usage_words}
+              {props.transactionList[x]?.net_usage_words}
             </div>
           ) : (
             ""
           )}
 
-          {props.transactionList[x].status ? (
+          {props.transactionList[x]?.status ? (
             <div>
-              <strong>status: </strong> {props.transactionList[x].status}
+              <strong>status: </strong> {props.transactionList[x]?.status}
             </div>
           ) : (
             ""
           )}
 
-          {props.transactionList[x].trx.compression ? (
+          {props.transactionList[x]?.trx?.compression ? (
             <div>
               <strong>compression: </strong>
-              {props.transactionList[x].trx.compression}
+              {props.transactionList[x]?.trx?.compression}
             </div>
           ) : (
             ""
           )}
 
-          {props.transactionList[x].context_free_data ? (
+          {props.transactionList[x]?.context_free_data ? (
             <div>
               <strong>context_free_data: </strong>
-              {props.transactionList[x].context_free_data}
+              {props.transactionList[x]?.context_free_data}
             </div>
           ) : (
             ""
           )}
 
-          {props.transactionList[x].trx.packed_context_free_data ? (
+          {props.transactionList[x]?.trx?.packed_context_free_data ? (
             <div>
               <strong>packed_context_free_data: </strong>{" "}
-              {props.transactionList[x].trx.packed_context_free_data}
+              {props.transactionList[x]?.trx?.packed_context_free_data}
             </div>
           ) : (
             ""
           )}
 
-          {props.transactionList[x].trx.packed_trx ? (
+          {props.transactionList[x]?.trx?.packed_trx ? (
             <div>
               <strong>packed_trx: </strong>
               <div
@@ -128,7 +128,7 @@ function TListObj(props) {
                   textOverflow: "ellipsis",
                 }}
               >
-                {props.transactionList[x].trx.packed_trx}
+                {props.transactionList[x]?.trx?.packed_trx}
               </div>
             </div>
           ) : (
@@ -136,66 +136,66 @@ function TListObj(props) {
           )}
 
             
-          {props.transactionList[x].trx?.transaction?.expiration ? (
+          {props.transactionList[x]?.trx?.transaction?.expiration ? (
             <div>
               <strong>expiration: </strong>
-              {props.transactionList[x].trx?.transaction?.expiration}
+              {props.transactionList[x]?.trx?.transaction?.expiration}
             </div>
           ) : (
             ""
           )}
 
-          {props.transactionList[x].trx?.transaction?.delay_sec ? (
+          {props.transactionList[x]?.trx?.transaction?.delay_sec ? (
             <div>
               <strong>delay_sec: </strong>
-              {props.transactionList[x].trx?.transaction?.delay_sec}
+              {props.transactionList[x]?.trx?.transaction?.delay_sec}
             </div>
           ) : (
             ""
           )}
 
-          {props.transactionList[x].trx?.transaction?.ref_block_num ? (
+          {props.transactionList[x]?.trx?.transaction?.ref_block_num ? (
             <div>
               <strong>ref_block_num: </strong>
-              {props.transactionList[x].trx?.transaction?.ref_block_num}
+              {props.transactionList[x]?.trx?.transaction?.ref_block_num}
             </div>
           ) : (
             ""
           )}
 
-          {props.transactionList[x].trx?.transaction?.ref_block_prefix ? (
+          {props.transactionList[x]?.trx?.transaction?.ref_block_prefix ? (
             <div>
               <strong>ref_block_prefix: </strong>
-              {props.transactionList[x].trx?.transaction?.ref_block_prefix}
+              {props.transactionList[x]?.trx?.transaction?.ref_block_prefix}
             </div>
           ) : (
             ""
           )}
 
-          {props.transactionList[x].trx?.transaction?.max_cpu_usage_ms ? (
+          {props.transactionList[x]?.trx?.transaction?.max_cpu_usage_ms ? (
             <div>
               <strong>max_cpu_usage_ms: </strong>
-              {props.transactionList[x].trx?.transaction?.max_cpu_usage_ms}
+              {props.transactionList[x]?.trx?.transaction?.max_cpu_usage_ms}
             </div>
           ) : (
             ""
           )}
-          {props.transactionList[x].trx?.transaction?.max_net_usage_words ? (
+          {props.transactionList[x]?.trx?.transaction?.max_net_usage_words ? (
             <div>
               <strong>max_net_usage_words: </strong>
-              {props.transactionList[x].trx?.transaction?.max_net_usage_words}
+              {props.transactionList[x]?.trx?.transaction?.max_net_usage_words}
             </div>
           ) : (
             ""
           )}
-          {props.transactionList[x].trx?.transaction?.actions ? (
+          {props.transactionList[x]?.trx?.transaction?.actions ? (
             <div>
               <strong>
                 actions[
-                {props.transactionList[x].trx?.transaction?.actions.length}]:{" "}
+                {props.transactionList[x]?.trx?.transaction?.actions?.length}]:{" "}
               </strong>
               <ActionObj
-                actions={props.transactionList[x].trx?.transaction?.actions}
+                actions={props.transactionList[x]?.trx?.transaction?.actions}
               />
             </div>
           ) : (

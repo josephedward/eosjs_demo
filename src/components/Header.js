@@ -16,9 +16,11 @@ import Content from "arwes/lib/Content";
 import ErrorBoundary from "../components/ErrorBoundary";
 import Block from "../components/Block";
 import { useTimer } from "use-timer";
-import { Menu, Grid, Image, Popup } from "semantic-ui-react";
+import { Menu, Grid, Image, Popup, Dropdown } from "semantic-ui-react";
 import { opacify } from "polished";
 import { JsonToTable } from "react-json-to-table";
+
+let endpointURL = "";
 
 export default function Header(props) {
   return (
@@ -30,46 +32,28 @@ export default function Header(props) {
           backgroundColor: "black",
           color: "aqua",
           "-webkit-text-stroke": "1px white",
-          // width:"100%",
-          
+        
         }}
         stackable
       >
-        <Menu.Item
-        position="left"
-        >
+        <Menu.Item position="left">
           <h4
             style={{
               color: "aqua",
               "-webkit-text-stroke": "none",
-              paddingRight:"1%"
+              paddingRight: "1%",
             }}
           >
-            RPC-API-URL endpoint : {props.endPointUrl}
+            RPC-API-URL endpoint:
+            <br />
+            {props.endPointUrl}
           </h4>
         </Menu.Item>
 
-        <Menu.Item
-          // style={{
-          //   // justifyContent: "center",
-          //   // textAlign: "center",
-          //   // width: "100%",
-          //   marginLeft:"1%",
-          // marginRight: "1%"
-          // }}
-          // align="center"
-          // position="center"
-
-        >
-         <h1
-         style={{
-          // paddingLeft:".5%",
-          // paddingRight: ".5%"
-          // margin:"1%"
-         }}
-         >EOS CHAIN NAVIGATOR</h1>
-</Menu.Item>
-<Menu.Item>
+        <Menu.Item>
+          <h1>EOS CHAIN NAVIGATOR</h1>
+        </Menu.Item>
+        <Menu.Item>
           <Button
             style={{
               ...centerStyle,
@@ -80,24 +64,22 @@ export default function Header(props) {
           >
             Get Latest Ten Blocks
           </Button>
-
-
         </Menu.Item>
 
         <Menu.Item
-        style={{
-          justifyContent:"right"
-        }}  
-        position="right"
+          style={{
+            justifyContent: "right",
+          }}
+          position="right"
         >
-   <Frame
-        style={{ ...blockStyle }}
-        show={true}
-        animate={true}
-        level={3}
-        corners={4}
-        layer="primary"
-                >
+          <Frame
+            style={{ ...blockStyle }}
+            show={true}
+            animate={true}
+            level={3}
+            corners={4}
+            layer="primary"
+          >
             <Heading>Chain Height :{props.currentBlock.block_num} </Heading>
           </Frame>
         </Menu.Item>
@@ -109,12 +91,10 @@ export default function Header(props) {
 const centerStyle = {
   // display: "flex",
   // flexDirection: "row",
-
 };
 
 const blockStyle = {
   // margin: "5%",
   // height: "100%",
   wordBreak: "break-all",
-
 };

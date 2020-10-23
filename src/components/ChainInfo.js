@@ -42,8 +42,6 @@ export default function ChainInfo(props) {
     style={{
         width: "100%",
         height: "100%",
-        // overflowY: "scroll",
-        // marginRight:"40%",
         left: 0,
         }}
         >

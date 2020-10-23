@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Accordion, Icon } from "semantic-ui-react";
+import React, { Component, useEffect, useState } from "react";
+import { Accordion, Icon, Dimmer, Loader } from "semantic-ui-react";
 import { Frame, Project, Table, Header } from "arwes";
 import { Label, Menu } from "semantic-ui-react";
 import { ThemeProvider, createTheme, Row, Col, Arwes, Blockquote } from "arwes";
@@ -9,8 +9,27 @@ import { Redirect } from "react-router";
 import ToObject from "es-abstract/5/ToObject";
 import ErrorBoundary from "./ErrorBoundary";
 import AbiDisplay from "./ABI";
+import JSONTree from "react-json-tree";
+
+// var myVar = setInterval(myTimer, 1000);
+
+// function myTimer() {
+//   var d = new Date();
+//   var t = d.toLocaleTimeString();
+//   document.getElementById("demo").innerHTML = t;
+// }
+
+// function myStopFunction() {
+//   clearInterval(myVar);
+// }
 
 export default function TransactionList(props) {
+  // const [loading, setLoading] = useState(true)
+
+  // useEffect(() => {
+  //   setTimeout(() => setLoading(false), 10000)
+  // }, [])
+
   return (
     <ErrorBoundary>
       <Modal
@@ -31,10 +50,30 @@ export default function TransactionList(props) {
         }
       >
         <Modal.Content>
-          <TListObj
-            blockId={props.blockId}
-            transactionList={props.transactionList}
-          />
+          <Arwes>
+            <Frame
+              style={{
+                overflowY: "scroll",
+                // height: "100%",
+                padding: "10%",
+                objectFit:"contain"
+              }}
+            >
+            <Header>
+            <h2>Block ID: </h2>
+            {props.blockId}
+            </Header>
+              <JSONTree
+                style={{
+                  overflow: "hidden",
+                  objectFit:"contain"
+                }}
+                data={props.transactionList}
+                theme={theme}
+                invertTheme={false}
+              />
+            </Frame>
+          </Arwes>
         </Modal.Content>
       </Modal>
     </ErrorBoundary>
@@ -43,166 +82,170 @@ export default function TransactionList(props) {
 
 function TListObj(props) {
   console.log(props);
+
   let tList = [];
   for (let x = 0; x < props.transactionList.length; x++) {
     tList.push(
       <ErrorBoundary>
-      <Frame style={{ ...rowStyle }}>
-        <Header style={{ marginTop: "1%", marginBottom: "1%" }}>
-          <strong>Transaction ID : </strong>
-          {props.transactionList[x]?.trx?.id}
-        </Header>
+        <Frame style={{ ...rowStyle }}>
+          <Header style={{ marginTop: "1%", marginBottom: "1%" }}>
+            <strong>Transaction ID : </strong>
+            {props.transactionList[x]?.trx?.id}
+          </Header>
 
-        <p style={{ ...itemStyle }}>
-          {props.transactionList[x]?.trx?.signatures ? (
-            <div>
-              <strong>signatures: </strong>
-              <SignatureObj
-                signatures={props.transactionList[x]?.trx?.signatures}
-              />
-            </div>
-          ) : (
-            ""
-          )}
-
-          {props.transactionList[x]?.cpu_usage_us ? (
-            <div>
-              <strong>cpu_usage_us: </strong>
-              {props.transactionList[x]?.cpu_usage_us}
-            </div>
-          ) : (
-            ""
-          )}
-
-          {props.transactionList[x]?.net_usage_words ? (
-            <div>
-              <strong>net_usage_words: </strong>
-              {props.transactionList[x]?.net_usage_words}
-            </div>
-          ) : (
-            ""
-          )}
-
-          {props.transactionList[x]?.status ? (
-            <div>
-              <strong>status: </strong> {props.transactionList[x]?.status}
-            </div>
-          ) : (
-            ""
-          )}
-
-          {props.transactionList[x]?.trx?.compression ? (
-            <div>
-              <strong>compression: </strong>
-              {props.transactionList[x]?.trx?.compression}
-            </div>
-          ) : (
-            ""
-          )}
-
-          {props.transactionList[x]?.context_free_data ? (
-            <div>
-              <strong>context_free_data: </strong>
-              {props.transactionList[x]?.context_free_data}
-            </div>
-          ) : (
-            ""
-          )}
-
-          {props.transactionList[x]?.trx?.packed_context_free_data ? (
-            <div>
-              <strong>packed_context_free_data: </strong>{" "}
-              {props.transactionList[x]?.trx?.packed_context_free_data}
-            </div>
-          ) : (
-            ""
-          )}
-
-          {props.transactionList[x]?.trx?.packed_trx ? (
-            <div>
-              <strong>packed_trx: </strong>
-              <div
-                style={{
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                }}
-              >
-                {props.transactionList[x]?.trx?.packed_trx}
+          <p style={{ ...itemStyle }}>
+            {props.transactionList[x]?.trx?.signatures ? (
+              <div>
+                <strong>signatures: </strong>
+                <SignatureObj
+                  signatures={props.transactionList[x]?.trx?.signatures}
+                />
               </div>
-            </div>
-          ) : (
-            ""
-          )}
+            ) : (
+              ""
+            )}
 
-            
-          {props.transactionList[x]?.trx?.transaction?.expiration ? (
-            <div>
-              <strong>expiration: </strong>
-              {props.transactionList[x]?.trx?.transaction?.expiration}
-            </div>
-          ) : (
-            ""
-          )}
+            {props.transactionList[x]?.cpu_usage_us ? (
+              <div>
+                <strong>cpu_usage_us: </strong>
+                {props.transactionList[x]?.cpu_usage_us}
+              </div>
+            ) : (
+              ""
+            )}
 
-          {props.transactionList[x]?.trx?.transaction?.delay_sec ? (
-            <div>
-              <strong>delay_sec: </strong>
-              {props.transactionList[x]?.trx?.transaction?.delay_sec}
-            </div>
-          ) : (
-            ""
-          )}
+            {props.transactionList[x]?.net_usage_words ? (
+              <div>
+                <strong>net_usage_words: </strong>
+                {props.transactionList[x]?.net_usage_words}
+              </div>
+            ) : (
+              ""
+            )}
 
-          {props.transactionList[x]?.trx?.transaction?.ref_block_num ? (
-            <div>
-              <strong>ref_block_num: </strong>
-              {props.transactionList[x]?.trx?.transaction?.ref_block_num}
-            </div>
-          ) : (
-            ""
-          )}
+            {props.transactionList[x]?.status ? (
+              <div>
+                <strong>status: </strong> {props.transactionList[x]?.status}
+              </div>
+            ) : (
+              ""
+            )}
 
-          {props.transactionList[x]?.trx?.transaction?.ref_block_prefix ? (
-            <div>
-              <strong>ref_block_prefix: </strong>
-              {props.transactionList[x]?.trx?.transaction?.ref_block_prefix}
-            </div>
-          ) : (
-            ""
-          )}
+            {props.transactionList[x]?.trx?.compression ? (
+              <div>
+                <strong>compression: </strong>
+                {props.transactionList[x]?.trx?.compression}
+              </div>
+            ) : (
+              ""
+            )}
 
-          {props.transactionList[x]?.trx?.transaction?.max_cpu_usage_ms ? (
-            <div>
-              <strong>max_cpu_usage_ms: </strong>
-              {props.transactionList[x]?.trx?.transaction?.max_cpu_usage_ms}
-            </div>
-          ) : (
-            ""
-          )}
-          {props.transactionList[x]?.trx?.transaction?.max_net_usage_words ? (
-            <div>
-              <strong>max_net_usage_words: </strong>
-              {props.transactionList[x]?.trx?.transaction?.max_net_usage_words}
-            </div>
-          ) : (
-            ""
-          )}
-          {props.transactionList[x]?.trx?.transaction?.actions ? (
-            <div>
-              <strong>
-                actions[
-                {props.transactionList[x]?.trx?.transaction?.actions?.length}]:{" "}
-              </strong>
-              <ActionObj
-                actions={props.transactionList[x]?.trx?.transaction?.actions}
-              />
-            </div>
-          ) : (
-            ""
-          )}
-        </p>
-      </Frame>
+            {props.transactionList[x]?.context_free_data ? (
+              <div>
+                <strong>context_free_data: </strong>
+                {props.transactionList[x]?.context_free_data}
+              </div>
+            ) : (
+              ""
+            )}
+
+            {props.transactionList[x]?.trx?.packed_context_free_data ? (
+              <div>
+                <strong>packed_context_free_data: </strong>{" "}
+                {props.transactionList[x]?.trx?.packed_context_free_data}
+              </div>
+            ) : (
+              ""
+            )}
+
+            {props.transactionList[x]?.trx?.packed_trx ? (
+              <div>
+                <strong>packed_trx: </strong>
+                <div
+                  style={{
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                >
+                  {props.transactionList[x]?.trx?.packed_trx}
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+
+            {props.transactionList[x]?.trx?.transaction?.expiration ? (
+              <div>
+                <strong>expiration: </strong>
+                {props.transactionList[x]?.trx?.transaction?.expiration}
+              </div>
+            ) : (
+              ""
+            )}
+
+            {props.transactionList[x]?.trx?.transaction?.delay_sec ? (
+              <div>
+                <strong>delay_sec: </strong>
+                {props.transactionList[x]?.trx?.transaction?.delay_sec}
+              </div>
+            ) : (
+              ""
+            )}
+
+            {props.transactionList[x]?.trx?.transaction?.ref_block_num ? (
+              <div>
+                <strong>ref_block_num: </strong>
+                {props.transactionList[x]?.trx?.transaction?.ref_block_num}
+              </div>
+            ) : (
+              ""
+            )}
+
+            {props.transactionList[x]?.trx?.transaction?.ref_block_prefix ? (
+              <div>
+                <strong>ref_block_prefix: </strong>
+                {props.transactionList[x]?.trx?.transaction?.ref_block_prefix}
+              </div>
+            ) : (
+              ""
+            )}
+
+            {props.transactionList[x]?.trx?.transaction?.max_cpu_usage_ms ? (
+              <div>
+                <strong>max_cpu_usage_ms: </strong>
+                {props.transactionList[x]?.trx?.transaction?.max_cpu_usage_ms}
+              </div>
+            ) : (
+              ""
+            )}
+            {props.transactionList[x]?.trx?.transaction?.max_net_usage_words ? (
+              <div>
+                <strong>max_net_usage_words: </strong>
+                {
+                  props.transactionList[x]?.trx?.transaction
+                    ?.max_net_usage_words
+                }
+              </div>
+            ) : (
+              ""
+            )}
+            {props.transactionList[x]?.trx?.transaction?.actions ? (
+              <div>
+                <strong>
+                  actions[
+                  {props.transactionList[x]?.trx?.transaction?.actions?.length}
+                  ]:{" "}
+                </strong>
+                <ActionObj
+                  actions={props.transactionList[x]?.trx?.transaction?.actions}
+                />
+              </div>
+            ) : (
+              ""
+            )}
+          </p>
+        </Frame>
       </ErrorBoundary>
     );
   }
@@ -227,34 +270,32 @@ function ActionObj(props) {
   for (let x = 0; x < props.actions.length; x++) {
     actList.push(
       <ErrorBoundary>
-      <div style={{ ...actionStyle }}>
-            <AbiDisplay 
-            accountName={props.actions[x].account} />
-        <div>
-          <strong>account : </strong>            
-            {props.actions[x].account}
-
+        <div style={{ ...actionStyle }}>
+          <AbiDisplay accountName={props.actions[x]?.account} />
+          <div>
+            <strong>account : </strong>
+            {props.actions[x]?.account}
+          </div>
+          <div>
+            <strong>name : </strong>
+            {props.actions[x]?.name}
+          </div>
+          <div>
+            <strong>hex_data : </strong>
+            {props.actions[x]?.hex_data}
+          </div>
+          <div>
+            <strong>authorization: </strong>
+            <AuthorizationObj authorization={props.actions[x]?.authorization} />
+          </div>
+          <div>
+            <strong>data: </strong>
+            <Blockquote layer="success">
+              <DataObj data={props.actions[x]?.data} />
+              {/* {props.actions[x]?.data} */}
+            </Blockquote>
+          </div>
         </div>
-        <div>
-          <strong>name : </strong>
-          {props.actions[x].name}
-        </div>
-        <div>
-          <strong>hex_data : </strong>
-          {props.actions[x].hex_data}
-        </div>
-        <div>
-          <strong>authorization: </strong>
-          <AuthorizationObj authorization={props.actions[x].authorization} />
-        </div>
-        <div>
-          <strong>data: </strong>
-          <Blockquote layer="success">
-            <DataObj data={props.actions[x].data} />
-            {/* {props.actions[x].data} */}
-          </Blockquote>
-        </div>
-      </div>
       </ErrorBoundary>
     );
   }
@@ -329,6 +370,7 @@ const transactionStyle = {
   wordBreak: "break-all",
   textOverflow: "ellipsis",
   whiteSpace: "wrap",
+  objectFit:"contain"
 };
 
 const buttonStyle = {
@@ -355,6 +397,27 @@ const projectStyle = {
 
 const accordionStyle = {
   color: "white",
+};
+
+const theme = {
+  scheme: "monokai",
+  author: "wimer hazenberg (http://www.monokai.nl)",
+  base00: "#272822",
+  base01: "#383830",
+  base02: "#49483e",
+  base03: "#75715e",
+  base04: "#a59f85",
+  base05: "#f8f8f2",
+  base06: "#f5f4f1",
+  base07: "#f9f8f5",
+  base08: "#f92672",
+  base09: "#fd971f",
+  base0A: "#f4bf75",
+  base0B: "#a6e22e",
+  base0C: "#a1efe4",
+  base0D: "#66d9ef",
+  base0E: "#ae81ff",
+  base0F: "#cc6633",
 };
 
 // const fakeTransaction = {

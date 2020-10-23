@@ -84,7 +84,6 @@ function BlockList() {
           <Header
             style={{ overflowY: "scroll" }}
             endPointUrl={endPointUrl}
-            // endPoint={EndPoint}
             currentInfo={currentInfo}
             currentBlock={currentBlock}
             grabTen={() => {

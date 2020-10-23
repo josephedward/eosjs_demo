@@ -8,8 +8,6 @@ import {
   Heading,
   Words,
   Table,
-  // SoundsProvider,
-  // createSounds,
   Button,
   Blockquote
 } from "arwes";
@@ -21,7 +19,6 @@ import { Menu, Grid, Image, Popup } from "semantic-ui-react";
 import { opacify } from "polished";
 import { JsonToTable } from "react-json-to-table";
 import Header from "../components/Header.js"
-
 
 
 export default function BlockFeed(props){
@@ -43,7 +40,6 @@ export default function BlockFeed(props){
             .slice(0)
             .reverse()
             .map((book) => (
-
               <Block class="intervalBlock" currentBlock={book} />
             ))}
         </div>

@@ -24,7 +24,30 @@ let endpointURL = "";
 
 export default function Header(props) {
   return (
-    <Frame>
+    <Frame show={true} animate={true} level={3} 
+    // corners={4}
+     layer="primary">
+      <Menu
+        style={{
+          height: "20px",
+
+          backgroundColor: "black",
+          justifyContent: "center",
+          margin: "0 auto",
+          bottom: 0,
+          marginBottom: 0,
+        }}
+        celled
+        stackable
+      >
+        <Menu.Item position="right" style={{ color: "aqua" }}>
+          {" "}
+          <a animate href="/">
+            Dashboard{" "}
+          </a>
+        </Menu.Item>
+        <Menu.Item style={{ color: "aqua" }}> Search </Menu.Item>
+      </Menu>
       <Menu
         style={{
           display: "flex",
@@ -32,7 +55,8 @@ export default function Header(props) {
           backgroundColor: "black",
           color: "aqua",
           "-webkit-text-stroke": "1px white",
-        
+          top: "0",
+          marginTop: "0",
         }}
         stackable
       >
@@ -55,9 +79,6 @@ export default function Header(props) {
         </Menu.Item>
         <Menu.Item>
           <Button
-            style={{
-              ...centerStyle,
-            }}
             onClick={() => {
               props.grabTen(props.currentBlock.block_num);
             }}
@@ -88,13 +109,6 @@ export default function Header(props) {
   );
 }
 
-const centerStyle = {
-  // display: "flex",
-  // flexDirection: "row",
-};
-
 const blockStyle = {
-  // margin: "5%",
-  // height: "100%",
   wordBreak: "break-all",
 };

@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef, Fragment, Redirect } from "react";
+import React, 
+{ useState, useEffect, useRef, Fragment, Redirect } 
+from "react";
 import ReactDOM from "react-dom";
 import {
   ThemeProvider,
@@ -49,7 +51,7 @@ export default function BlockFeed(props){
 
 
 const listStyle = {
-    marginTop: "10%",
+    // marginTop: "10%",
   };
 
   const blockStyle = {

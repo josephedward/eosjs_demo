@@ -22,62 +22,54 @@ import { JsonToTable } from "react-json-to-table";
 import Header from "../components/Header.js";
 import BlockFeed from "../components/BlockFeed.js";
 
-
-export default function GrabTen(props){
-    return(
-      // <ErrorBoundary>
-        <div>
-
-
-        <Frame
-        style={{margin: "2.5%"}}
+export default function GrabTen(props) {
+  return (
+    // <ErrorBoundary>
+    <div>
+      <Frame
+        style={{ margin: "2.5%" }}
         show={true}
         animate={true}
         level={3}
         // corners={4}
         layer="primary"
+      >
+        <Button
+          style={{ ...centerStyle }}
+          onClick={() => {
+            props.grabTen(props.currentBlock.block_num);
+          }}
         >
-                  <Button
-                  style={{...centerStyle}}
-            onClick={() => {
-              props.grabTen(props.currentBlock.block_num);
-            }}
-          >
-            Get Latest Ten Blocks
-          </Button>
-
-          {props.tenLatestBlocks.length > 0 ? (
-
+          Get Latest Ten Blocks
+        </Button>
+        {props.tenLatestBlocks.length > 0 ? (
           <div style={{ ...listStyle }}>
             {props.tenLatestBlocks
               .slice(0)
               .reverse()
               .map((book) => (
-                
                 <Block animate currentBlock={book} />
               ))}
           </div>
-          ) : (
-        ""
-      )}
-        </Frame>
-   
-      </div>
-      // </ErrorBoundary>
-    )
+        ) : (
+          ""
+        )}
+      </Frame>
+    </div>
+    // </ErrorBoundary>
+  );
 }
 
 const centerStyle = {
-    width: "100%",
-    margin:"5%",
-    // height:"100%",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    textAlign: "center",
-  };
+  width: "100%",
+  margin: "5%",
+  // height:"100%",
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "center",
+  textAlign: "center",
+};
 
-  const listStyle = {
-    marginTop: "2.5%",
-  };
-  
+const listStyle = {
+  marginTop: "2.5%",
+};

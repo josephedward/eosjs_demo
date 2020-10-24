@@ -14,7 +14,7 @@ try{
   return (
     <ErrorBoundary>
       <Frame
-      class="EosBlock"
+    
         style={{ ...blockStyle }}
         show={true}
         animate={true}
@@ -22,7 +22,8 @@ try{
         corners={4}
         layer="primary"
       >
-        <Content animate layer="success" style={{ margin: "5%" }}>
+        <Content animate layer="success"
+         style={{ margin: "5%" }}>
           <h2>BLOCK ID: </h2>
           <h3
           layer="success"

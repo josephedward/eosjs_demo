@@ -23,6 +23,7 @@ import Header from "../components/Header.js";
 import BlockFeed from "../components/BlockFeed.js";
 import GrabTen from "../components/GrabTen";
 import ChainInfo from "../components/ChainInfo";
+import SearchABI from "../components/SearchABI";
 
 const chalk = require("chalk");
 const { Api, JsonRpc, RpcError } = require("eosjs");
@@ -36,11 +37,9 @@ let endPointUrl = "https://api.eosdetroit.io:443";
 // "https://api.testnet.eos.io";
 // https://api.eosnewyork.io/v1/chain/get_info
 
-
 const rpc = new JsonRpc(endPointUrl, { fetch });
 let currentInfo = {};
 let currentBlock = {};
-// let mainColFlag=""
 let tenLatestBlocks = [];
 async function grabTen(latestBlockNum) {
   tenLatestBlocks = [];
@@ -74,18 +73,15 @@ function BlockList() {
   }, 500);
 
   return (
-    <div style={{ height: "100vh"
-    , overflowY: "hide" 
-    }}>
+    <div style={{ height: "100vh", overflowY: "hide" }}>
       <ErrorBoundary>
         <Arwes background="/images/blocks.gif">
           <Header
+            getComponent={getComponent}
             endPointUrl={endPointUrl}
             currentInfo={currentInfo}
             currentBlock={currentBlock}
-            grabTen={() => {
-              grabTen(currentBlock.block_num);
-            }}
+            setMainFlag={setMainFlag}
           />
           <Grid style={{ ...gridStyle }}>
             <Grid.Column style={{ ...menuStyle }} width={4} position="left">
@@ -95,13 +91,13 @@ function BlockList() {
                   paddingLeft: 0,
                 }}
               >
-              <ErrorBoundary>
-                <ChainInfo
-                  style={{
-                    marginRight: "50%",
-                  }}
-                  currentInfo={currentInfo}
-                />
+                <ErrorBoundary>
+                  <ChainInfo
+                    style={{
+                      marginRight: "50%",
+                    }}
+                    currentInfo={currentInfo}
+                  />
                 </ErrorBoundary>
               </Frame>
             </Grid.Column>
@@ -110,23 +106,8 @@ function BlockList() {
               position="center"
               style={{ width: "100%", ...menuStyle }}
             >
-            <ErrorBoundary>
-              <GrabTen
-                style={{
-                  height:"100%",
-                  width: "100%",
-                  overflowY: "scroll",
-                  objectFit: "contain",
-                }}
-                grabTen={() => {
-                  grabTen(currentBlock.block_num);
-                }}
-                currentBlock={currentBlock}
-                tenLatestBlocks={tenLatestBlocks}
-              />
-              </ErrorBoundary>
+              <ErrorBoundary>{getComponent(mainColFlag)}</ErrorBoundary>
             </Grid.Column>
-
             <Grid.Column
               width={4}
               position="right"
@@ -137,10 +118,10 @@ function BlockList() {
               }}
             >
               <ErrorBoundary>
-              <BlockFeed
-                currentBlock={currentBlock}
-                recentBlocks={recentBlocks}
-              />
+                <BlockFeed
+                  currentBlock={currentBlock}
+                  recentBlocks={recentBlocks}
+                />
               </ErrorBoundary>
             </Grid.Column>
           </Grid>
@@ -148,6 +129,65 @@ function BlockList() {
       </ErrorBoundary>
     </div>
   );
+}
+
+function setMainFlag(flag) {
+  mainColFlag = flag;
+  return mainColFlag;
+}
+let mainColFlag;
+
+function getComponent() {
+  let component;
+  switch (mainColFlag) {
+    case "getTenBlocks":
+      component = (
+        <GrabTen
+          style={{
+            height: "100%",
+            width: "100%",
+            overflowY: "scroll",
+            objectFit: "contain",
+          }}
+          grabTen={() => {
+            grabTen(currentBlock.block_num);
+          }}
+          currentBlock={currentBlock}
+          tenLatestBlocks={tenLatestBlocks}
+        />
+      );
+      break;
+    case "searchAbi":
+      component = (
+        <SearchABI
+          style={{
+            height: "100%",
+            width: "100%",
+            overflowY: "scroll",
+            objectFit: "contain",
+          }}
+        />
+      );
+      break;
+    default:
+      component = (
+        <GrabTen
+          style={{
+            height: "100%",
+            width: "100%",
+            overflowY: "scroll",
+            objectFit: "contain",
+          }}
+          grabTen={() => {
+            grabTen(currentBlock.block_num);
+          }}
+          currentBlock={currentBlock}
+          tenLatestBlocks={tenLatestBlocks}
+        />
+      );
+      break;
+  }
+  return component;
 }
 
 // let ChainInfoObj = [];
@@ -159,7 +199,6 @@ function BlockList() {
 //       <Table animate headers={[x]} dataset={[[props.currentInfo[x]]]} />
 //     );
 //   }
-
 //   return <div style={{ width: "100%" }}>{ChainInfoObj}</div>;
 // }
 

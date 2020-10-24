@@ -1,17 +1,13 @@
-import React, {useState} from 'react';
+import React, {
+} from 'react';
 import BlockList from "./pages/BlockList"
-// import logo from './logo.svg';
 import './App.css';
-import { ThemeProvider, createTheme, Arwes, Project, Heading,
-    // SoundsProvider,
-    // createSounds,
+import { ThemeProvider, createTheme, Arwes, 
 } from 'arwes';
-import Content from 'arwes/lib/Content';
 import ErrorBoundary from './components/ErrorBoundary';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Transaction from './components/Transaction'
 import 'semantic-ui-css/semantic.min.css'
-import AbiDisplay from "./components/ABI"
+
 
 function App(){
     return(
@@ -22,7 +18,6 @@ function App(){
 <ThemeProvider theme={createTheme()}>
 <Arwes   background="/images/background.jpg" >
 <Route exact path="/" component={BlockList} />
-{/* <Route exact path="/test" component={AbiDisplay} /> */}
 </Arwes>
 </ThemeProvider>
 </Switch>

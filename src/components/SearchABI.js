@@ -15,11 +15,21 @@ import Content from "arwes/lib/Content";
 import ErrorBoundary from "./ErrorBoundary";
 import Block from "./Block";
 import { useTimer } from "use-timer";
-import { Menu, Grid, Image, Modal, Container } from "semantic-ui-react";
+import {
+  Menu,
+  Grid,
+  Image,
+  Modal,
+  Container,
+  Input,
+  Header,
+} from "semantic-ui-react";
 import { opacify } from "polished";
 import JSONPretty from "react-json-pretty";
 import { JsonToTable } from "react-json-to-table";
 import JSONTree from "react-json-tree";
+
+import { useForm } from "react-hook-form";
 
 const chalk = require("chalk");
 const { Api, JsonRpc, RpcError } = require("eosjs");
@@ -40,13 +50,192 @@ let AbiObj;
 let AbiObjString;
 
 export default function AbiDisplay(props) {
-  
-let accountName= props.accountName
+  // let accountName = props.accountName;
+  // const { register, handleSubmit } = useForm();
+  const [accountName, setAccountName] = useState("");
+  // const onSubmit = data => console.log(data);
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    // alert(`Submitting Name ${name}`)
+  };
 
   return (
     <ErrorBoundary>
-      <Modal
-        trigger={
+      {/* <Arwes> */}
+      <Frame
+        style={{
+          objectFit: "contain",
+          // margin: "2.5%",
+          backgroundColor: "black",
+        }}
+        show={true}
+        animate={true}
+        level={3}
+        corners={4}
+        layer="primary"
+      >
+        <form onSubmit={handleSubmit}>
+          <Container
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              margin: "5%",
+              padding: "5%",
+              objectFit: "contain",
+            }}
+          >
+            <Input
+              inverted
+              style={{
+                height: "40px",
+                backgroundColor: "black",
+              }}
+              // fluid
+              name="search"
+              placeholder="Search ABI"
+              onChange={(e) => setAccountName(e.target.value)}
+              // ref={register}
+            />
+            <Modal
+              style={{
+                // overflowY: "scroll",
+                // height: "100%",
+                // padding: "5%",
+                // objectFit: "contain",
+                ...transactionStyle,
+              }}
+              trigger={
+                <Button
+                  type="submit"
+                  layer="success"
+                  // onMouseOver={changeBackground}
+                  onClick={(props) => {
+                    // console.log(props)
+                    (async (props) => {
+                      console.log(accountName);
+                      let AbiResponse = await rpc.get_abi(accountName);
+                      // let AbiResponse = await rpc.get_abi("whaleextrust");
+                      // console.log(AbiResponse);
+                      AbiObj = AbiResponse.abi;
+                      // console.log("AbiObj : ", AbiObj);
+                      // AbiObjString = JSON.stringify(AbiObj);
+                      // console.log(AbiObjString);
+                    })();
+                  }}
+                >
+                  Search Account
+                </Button>
+              }
+            >
+              {/* <Frame style={{}}> */}
+              <Modal.Content
+              // style={{
+              //   // height: "100%",
+
+              //   // height: "400%",
+              // //  overflowY: "scroll",
+              //   // height: "100%",
+              //   // padding: "5%",
+              //   objectFit: "contain",
+              //   height:"80vh"
+              // }}
+              >
+                <Arwes
+                // style={{
+                //   height: "100%",
+                //   objectFit:"fill",
+                // }}
+                >
+                  <Frame
+                    style={{
+                      overflowY: "scroll",
+                      // height: "100%",
+                      padding: "5%",
+                      objectFit: "contain",
+                    }}
+                    // style={{
+                    //   height: "100%",
+                    //   objectFit:"fill",
+                    //   // width: "80%",
+                    //   wordBreak: "break-all",
+                    //   textOverflow: "ellipsis",
+                    //   whiteSpace: "wrap",
+
+                    // }}
+                  >
+                    <Heading>
+                      <h2>Account Name: </h2>
+                      {accountName}
+                    </Heading>
+
+                    <JSONTree
+                      style={{
+                        overflow: "hidden",
+                        objectFit: "contain",
+                      }}
+                      data={AbiObj}
+                      theme={theme}
+                      invertTheme={false}
+                    />
+                  </Frame>
+                </Arwes>
+              </Modal.Content>
+            </Modal>
+          </Container>
+        </form>
+      </Frame>
+      {/* </Arwes> */}
+    </ErrorBoundary>
+  );
+}
+
+const transactionStyle = {
+  height: "80%",
+  width: "80%",
+  wordBreak: "break-all",
+  textOverflow: "ellipsis",
+  whiteSpace: "wrap",
+};
+
+// function changeBackground(e) {
+//   e.target.style.backgroundColor = "red !important";
+// }
+
+const theme = {
+  scheme: "monokai",
+  author: "wimer hazenberg (http://www.monokai.nl)",
+  base00: "#272822",
+  base01: "#383830",
+  base02: "#49483e",
+  base03: "#75715e",
+  base04: "#a59f85",
+  base05: "#f8f8f2",
+  base06: "#f5f4f1",
+  base07: "#f9f8f5",
+  base08: "#f92672",
+  base09: "#fd971f",
+  base0A: "#f4bf75",
+  base0B: "#a6e22e",
+  base0C: "#a1efe4",
+  base0D: "#66d9ef",
+  base0E: "#ae81ff",
+  base0F: "#cc6633",
+};
+
+// <div>
+//   <JSONTree data={data} theme={theme} invertTheme={false} />
+// </div>
+
+const jsonStyle = {
+  lineHeight: "20px",
+  height: "20px",
+  fontSize: "20px",
+};
+
+/*
+
           <Button
           layer='success'
             onClick={
@@ -68,51 +257,8 @@ let accountName= props.accountName
           >
             ABI Details - {accountName}
           </Button>
-        }
-      >
-        <Frame>
-          <Modal.Content>
-            <JSONTree data={AbiObj} 
-              theme={theme}
-              invertTheme={false}
-            />
-          </Modal.Content>
-        </Frame>
-      </Modal>
-    </ErrorBoundary>
-  );
-}
 
-const theme = {
-  scheme: 'monokai',
-  author: 'wimer hazenberg (http://www.monokai.nl)',
-  base00: '#272822',
-  base01: '#383830',
-  base02: '#49483e',
-  base03: '#75715e',
-  base04: '#a59f85',
-  base05: '#f8f8f2',
-  base06: '#f5f4f1',
-  base07: '#f9f8f5',
-  base08: '#f92672',
-  base09: '#fd971f',
-  base0A: '#f4bf75',
-  base0B: '#a6e22e',
-  base0C: '#a1efe4',
-  base0D: '#66d9ef',
-  base0E: '#ae81ff',
-  base0F: '#cc6633'
-};
-
-// <div>
-//   <JSONTree data={data} theme={theme} invertTheme={false} />
-// </div>
-
-const jsonStyle = {
-  lineHeight: "20px",
-  height: "20px",
-  fontSize: "20px",
-};
+*/
 
 // propVals[x] = [];
 // if (ABI[x].length > 0) {

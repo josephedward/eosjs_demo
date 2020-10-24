@@ -34,17 +34,13 @@ const signatureProvider = new JsSignatureProvider([defaultPrivateKey]);
 let endPointUrl = "https://api.eosdetroit.io:443";
 // "https://api.eosio.cr:80"
 // "https://api.testnet.eos.io";
-const rpc = new JsonRpc(endPointUrl, { fetch });
 // https://api.eosnewyork.io/v1/chain/get_info
+
+
+const rpc = new JsonRpc(endPointUrl, { fetch });
 let currentInfo = {};
 let currentBlock = {};
-
-let tenMostRecentBlocks = [];
-let reqTimer;
-
-
-
-
+// let mainColFlag=""
 let tenLatestBlocks = [];
 async function grabTen(latestBlockNum) {
   tenLatestBlocks = [];
@@ -78,11 +74,12 @@ function BlockList() {
   }, 500);
 
   return (
-    <div style={{ height: "100vh", overflowY: "hide" }}>
+    <div style={{ height: "100vh"
+    , overflowY: "hide" 
+    }}>
       <ErrorBoundary>
         <Arwes background="/images/blocks.gif">
           <Header
-            style={{ overflowY: "scroll" }}
             endPointUrl={endPointUrl}
             currentInfo={currentInfo}
             currentBlock={currentBlock}
@@ -98,12 +95,14 @@ function BlockList() {
                   paddingLeft: 0,
                 }}
               >
+              <ErrorBoundary>
                 <ChainInfo
                   style={{
                     marginRight: "50%",
                   }}
                   currentInfo={currentInfo}
                 />
+                </ErrorBoundary>
               </Frame>
             </Grid.Column>
             <Grid.Column
@@ -111,8 +110,10 @@ function BlockList() {
               position="center"
               style={{ width: "100%", ...menuStyle }}
             >
+            <ErrorBoundary>
               <GrabTen
                 style={{
+                  height:"100%",
                   width: "100%",
                   overflowY: "scroll",
                   objectFit: "contain",
@@ -123,6 +124,7 @@ function BlockList() {
                 currentBlock={currentBlock}
                 tenLatestBlocks={tenLatestBlocks}
               />
+              </ErrorBoundary>
             </Grid.Column>
 
             <Grid.Column
@@ -134,12 +136,12 @@ function BlockList() {
                 ...menuStyle,
               }}
             >
-              {/* <ErrorBoundary> */}
+              <ErrorBoundary>
               <BlockFeed
                 currentBlock={currentBlock}
                 recentBlocks={recentBlocks}
               />
-              {/* </ErrorBoundary> */}
+              </ErrorBoundary>
             </Grid.Column>
           </Grid>
         </Arwes>
@@ -184,7 +186,6 @@ export default BlockList;
 const gridStyle = {
   width: "100%",
   height: "100vh",
-  // overflowY:"scroll"
   margin: "0",
 };
 
@@ -201,18 +202,14 @@ const listStyle = {
 const headerStyle = {
   position: "fixed",
   justifyContent: "center",
-  // background: "darkblue",
   textAlign: "center",
   top: "0",
-  // width: "100%",
   zIndex: "10",
   margin: "0 auto",
-  // border: "3px solid aqua",
 };
 
 const centerStyle = {
   width: "100%",
-  // height:"100%",
   display: "flex",
   flexDirection: "row",
   justifyContent: "center",

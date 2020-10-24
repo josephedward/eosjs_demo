@@ -23,34 +23,43 @@ import Header from "../components/Header.js";
 import BlockFeed from "../components/BlockFeed.js";
 import GrabTen from "../components/GrabTen";
 
-
 let ChainInfoObj = [];
 export default function ChainInfo(props) {
   ChainInfoObj = [];
   for (let x in Object(props.currentInfo)) {
     // console.log(x, " : ", props.currentInfo[x]);
     ChainInfoObj.push(
-        <Frame>
-      <Table 
-      style={{...chainTableStyle}}
-      animate headers={[x]} dataset={[[props.currentInfo[x]]]} />
+      <Frame>
+        <Table
+          style={{ ...chainTableStyle }}
+          animate
+          headers={[x]}
+          dataset={[[props.currentInfo[x]]]}
+        />
       </Frame>
     );
   }
 
-  return <div
-    style={{
-        width: "100%",
-        height: "100%",
-        left: 0,
-        }}
-        >
-        {ChainInfoObj}</div>;
+  return (
+    <Frame
+      show={true}
+      animate={true}
+      level={3}
+      corners={4}
+      layer="primary"
+      style={{
+        // width: "100%",
+        // height: "100%",
+        // left: 0,
+      }}
+    >
+      {ChainInfoObj}
+    </Frame>
+  );
 }
 
-
-const chainTableStyle={
-    // height:"5%",
-    // marginRight:"15%"
-    // border:"5px solid red"
-}
+const chainTableStyle = {
+  // height:"5%",
+  // marginRight:"15%"
+  // border:"5px solid red"
+};

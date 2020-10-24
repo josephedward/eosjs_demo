@@ -29,16 +29,24 @@ export default function GrabTen(props){
         <div>
 
 
-      {props.tenLatestBlocks.length > 0 ? (
         <Frame
-          style={{
-            margin: "2.5%",
-            width: "100%",
-            height: "100%",
-            overflowY: "scroll",
-            right: 0,
-          }}
+        style={{margin: "2.5%"}}
+        show={true}
+        animate={true}
+        level={3}
+        // corners={4}
+        layer="primary"
         >
+                  <Button
+                  style={{...centerStyle}}
+            onClick={() => {
+              props.grabTen(props.currentBlock.block_num);
+            }}
+          >
+            Get Latest Ten Blocks
+          </Button>
+
+          {props.tenLatestBlocks.length > 0 ? (
 
           <div style={{ ...listStyle }}>
             {props.tenLatestBlocks
@@ -49,10 +57,11 @@ export default function GrabTen(props){
                 <Block animate currentBlock={book} />
               ))}
           </div>
-        </Frame>
-      ) : (
+          ) : (
         ""
       )}
+        </Frame>
+   
       </div>
       // </ErrorBoundary>
     )
@@ -60,6 +69,7 @@ export default function GrabTen(props){
 
 const centerStyle = {
     width: "100%",
+    margin:"5%",
     // height:"100%",
     display: "flex",
     flexDirection: "row",

@@ -161,8 +161,8 @@ function getComponent() {
       component = (
         <SearchABI
           style={{
-            height: "100%",
-            width: "100%",
+            height: "50px",
+            width: "50px",
             overflowY: "scroll",
             objectFit: "contain",
           }}

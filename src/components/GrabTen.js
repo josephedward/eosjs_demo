@@ -63,6 +63,7 @@ export default function GrabTen(props) {
 const centerStyle = {
   width: "100%",
   margin: "5%",
+  padding:"0px",
   // height:"100%",
   display: "flex",
   flexDirection: "row",

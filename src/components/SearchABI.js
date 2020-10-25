@@ -50,23 +50,17 @@ let AbiObj;
 let AbiObjString;
 
 export default function AbiDisplay(props) {
-  // let accountName = props.accountName;
-  // const { register, handleSubmit } = useForm();
   const [accountName, setAccountName] = useState("");
-  // const onSubmit = data => console.log(data);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    // alert(`Submitting Name ${name}`)
   };
 
   return (
     <ErrorBoundary>
-      {/* <Arwes> */}
       <Frame
         style={{
           objectFit: "contain",
-          // margin: "2.5%",
           backgroundColor: "black",
         }}
         show={true}
@@ -81,8 +75,10 @@ export default function AbiDisplay(props) {
               display: "flex",
               flexDirection: "row",
               justifyContent: "space-between",
-              margin: "5%",
-              padding: "5%",
+              margin: "1%",
+              padding: "1%",
+              paddingLeft: "5%",
+              paddingRight: "5%",
               objectFit: "contain",
             }}
           >
@@ -92,36 +88,24 @@ export default function AbiDisplay(props) {
                 height: "40px",
                 backgroundColor: "black",
               }}
-              // fluid
+              icon='search'
               name="search"
               placeholder="Search ABI"
               onChange={(e) => setAccountName(e.target.value)}
-              // ref={register}
             />
             <Modal
               style={{
-                // overflowY: "scroll",
-                // height: "100%",
-                // padding: "5%",
-                // objectFit: "contain",
                 ...transactionStyle,
               }}
               trigger={
                 <Button
                   type="submit"
                   layer="success"
-                  // onMouseOver={changeBackground}
                   onClick={(props) => {
-                    // console.log(props)
                     (async (props) => {
                       console.log(accountName);
                       let AbiResponse = await rpc.get_abi(accountName);
-                      // let AbiResponse = await rpc.get_abi("whaleextrust");
-                      // console.log(AbiResponse);
                       AbiObj = AbiResponse.abi;
-                      // console.log("AbiObj : ", AbiObj);
-                      // AbiObjString = JSON.stringify(AbiObj);
-                      // console.log(AbiObjString);
                     })();
                   }}
                 >
@@ -129,41 +113,15 @@ export default function AbiDisplay(props) {
                 </Button>
               }
             >
-              {/* <Frame style={{}}> */}
-              <Modal.Content
-              // style={{
-              //   // height: "100%",
-
-              //   // height: "400%",
-              // //  overflowY: "scroll",
-              //   // height: "100%",
-              //   // padding: "5%",
-              //   objectFit: "contain",
-              //   height:"80vh"
-              // }}
-              >
-                <Arwes
-                // style={{
-                //   height: "100%",
-                //   objectFit:"fill",
-                // }}
-                >
+              <Modal.Content>
+                <Arwes>
                   <Frame
                     style={{
+
                       overflowY: "scroll",
-                      // height: "100%",
-                      padding: "5%",
+                      padding: "1%",
                       objectFit: "contain",
                     }}
-                    // style={{
-                    //   height: "100%",
-                    //   objectFit:"fill",
-                    //   // width: "80%",
-                    //   wordBreak: "break-all",
-                    //   textOverflow: "ellipsis",
-                    //   whiteSpace: "wrap",
-
-                    // }}
                   >
                     <Heading>
                       <h2>Account Name: </h2>
@@ -199,9 +157,7 @@ const transactionStyle = {
   whiteSpace: "wrap",
 };
 
-// function changeBackground(e) {
-//   e.target.style.backgroundColor = "red !important";
-// }
+
 
 const theme = {
   scheme: "monokai",
@@ -224,7 +180,7 @@ const theme = {
   base0F: "#cc6633",
 };
 
-// <div>
+ // <div>
 //   <JSONTree data={data} theme={theme} invertTheme={false} />
 // </div>
 

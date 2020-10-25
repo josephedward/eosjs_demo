@@ -10,7 +10,7 @@ import {
   // Table,
   // SoundsProvider,
   // createSounds,
-  //Button,
+  Button,
 } from "arwes";
 // import Content from "arwes/lib/Content";
 // import ErrorBoundary from "../components/ErrorBoundary";
@@ -18,6 +18,7 @@ import {
 // import { useTimer } from "use-timer";
 import {
   Menu,
+  //  Button
   // Grid, Image, Popup, Dropdown
 } from "semantic-ui-react";
 // import { opacify } from "polished";
@@ -29,39 +30,27 @@ export default function Header(props) {
     <Frame show={true} animate={true} level={3} layer="primary">
       <Menu
         style={{
-          height: "20px",
-          backgroundColor: "black",
+          height: "25px",
           justifyContent: "center",
           margin: "0 auto",
           bottom: 0,
           marginBottom: 0,
+          backgroundColor: "black",
+          color: "aqua",
+          "-webkit-text-stroke": "1px white",
         }}
         celled
         stackable
       >
         <Menu.Item
-          style={{
-            color: "aqua",
-            border: "3px solid aqua",
-          }}
-          onClick={() => {
-            props.setMainFlag("getTenBlocks");
-          }}
+        // style={{ fontSize:"30px" }}
         >
-          Block Explorer
-        </Menu.Item>
-        <Menu.Item
-          style={{ color: "aqua", border: "3px solid aqua" }}
-          onClick={() => {
-            props.setMainFlag("searchAbi");
-          }}
-        >
-          {" "}
-          Search ABI{" "}
+          <h1>EOS CHAIN NAVIGATOR</h1>
         </Menu.Item>
       </Menu>
       <Menu
         style={{
+          height: "10%",
           display: "flex",
           flexDirection: "row",
           backgroundColor: "black",
@@ -89,8 +78,38 @@ export default function Header(props) {
         </Menu.Item>
 
         <Menu.Item style={{ marginLeft: "10%" }}>
-          <h1>EOS CHAIN NAVIGATOR</h1>
+          <Button
+            style={{
+              color: "aqua",
+              // backgroundColor:"blue",
+              border: "3px solid black",
+              outline: "3px solid aqua",
+              webkitTextStroke: "1px blue",
+            }}
+            onClick={() => {
+              props.setMainFlag("getTenBlocks");
+            }}
+          >
+            Block Explorer
+          </Button>
         </Menu.Item>
+        <Menu.Item>
+          <Button
+            style={{
+              color: "aqua",
+              // backgroundColor:"blue",
+              border: "3px solid black",
+              outline: "3px solid aqua",
+              webkitTextStroke: "1px blue",
+            }}
+            onClick={() => {
+              props.setMainFlag("searchAbi");
+            }}
+          >
+            Search ABI
+          </Button>
+        </Menu.Item>
+
         <Menu.Item
           style={{
             justifyContent: "right",

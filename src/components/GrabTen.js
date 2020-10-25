@@ -22,7 +22,9 @@ import { JsonToTable } from "react-json-to-table";
 import Header from "../components/Header.js";
 import BlockFeed from "../components/BlockFeed.js";
 
+
 export default function GrabTen(props) {
+  
   return (
     // <ErrorBoundary>
     <div>
@@ -48,7 +50,8 @@ export default function GrabTen(props) {
               .slice(0)
               .reverse()
               .map((book) => (
-                <Block animate currentBlock={book} />
+                <Block
+                 animate currentBlock={book} />
               ))}
           </div>
         ) : (

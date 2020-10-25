@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from "react";
 import { mount } from "cypress-react-unit-test";
 import ReactTestUtils from "react-dom/test-utils"; // ES6
@@ -49,29 +50,12 @@ import {GrabTen} from "../../../src/components/GrabTen"
 // })
 
 describe("Basic L1 Initialization Test", () => {
-//   it("finds the root node", () => {
-     
-//     let test=cy.root().should("match", "html").children();
-//     cy.log(test)
-// });
+
 
   it("visits the heroku url", () => {
     cy.visit("https://eosjs-chain-nav.herokuapp.com/");
   });
 
-  // it('tests the timed get_info call to the RPC', () =>{
-  //     let lastBlock={}
-  // setInterval(() => {
-  // }
-  // , 500)
-  // })
-
-  it("checks the getTenLatestBlocks button", () => {
-    cy.contains("Get Latest Ten Blocks").should("exist");
-    cy.wait(500);
-    cy.contains("Get Latest Ten Blocks").click();
-    mount(<GrabTen/>)
-});
 
 
 

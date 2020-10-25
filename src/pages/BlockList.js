@@ -1,37 +1,47 @@
-import React, { useState, useEffect, useRef, Fragment, Redirect } from "react";
-import ReactDOM from "react-dom";
+import React, { useState, useEffect, useRef, 
+  // Fragment, Redirect 
+} from "react";
+// import ReactDOM from "react-dom";
 import {
-  ThemeProvider,
-  createTheme,
+  // ThemeProvider,
+  // createTheme,
   Arwes,
   Frame,
-  Heading,
-  Words,
-  Table,
+  // Heading,
+  // Words,
+  // Table,
   // SoundsProvider,
   // createSounds,
-  Button,
+  // Button,
 } from "arwes";
-import Content from "arwes/lib/Content";
+// import Content from "arwes/lib/Content";
 import ErrorBoundary from "../components/ErrorBoundary";
-import Block from "../components/Block";
-import { useTimer } from "use-timer";
-import { Menu, Grid, Image, Popup, Dropdown } from "semantic-ui-react";
-import { opacify } from "polished";
-import { JsonToTable } from "react-json-to-table";
+// import Block from "../components/Block";
+// import { useTimer } from "use-timer";
+import {
+  // Menu,
+  Grid,
+  //  Image, Popup, Dropdown
+} from "semantic-ui-react";
+// import { opacify } from "polished";
+// import { JsonToTable } from "react-json-to-table";
 import Header from "../components/Header.js";
 import BlockFeed from "../components/BlockFeed.js";
 import GrabTen from "../components/GrabTen";
 import ChainInfo from "../components/ChainInfo";
 import SearchABI from "../components/SearchABI";
 
-const chalk = require("chalk");
-const { Api, JsonRpc, RpcError } = require("eosjs");
-const { JsSignatureProvider } = require("eosjs/dist/eosjs-jssig"); // development only
+// const chalk = require("chalk");
+const { 
+  // Api,
+   JsonRpc,
+    // RpcError
+   } = require("eosjs");
+// const { JsSignatureProvider } = require("eosjs/dist/eosjs-jssig"); // development only
 const fetch = require("node-fetch"); // node only; not needed in browsers
-const { TextEncoder, TextDecoder } = require("util"); // node only; native TextEncoder/Decoder
-const defaultPrivateKey = "5JtUScZK2XEp3g9gh7F8bwtPTRAkASmNrrftmx4AxDKD5K4zDnr"; // bob
-const signatureProvider = new JsSignatureProvider([defaultPrivateKey]);
+// const { TextEncoder, TextDecoder } = require("util"); // node only; native TextEncoder/Decoder
+// const defaultPrivateKey = "5JtUScZK2XEp3g9gh7F8bwtPTRAkASmNrrftmx4AxDKD5K4zDnr"; // bob
+// const signatureProvider = new JsSignatureProvider([defaultPrivateKey]);
 let endPointUrl = "https://api.eosdetroit.io:443";
 // "https://api.eosio.cr:80"
 // "https://api.testnet.eos.io";

@@ -89,6 +89,7 @@ export default function Header(props) {
             onClick={() => {
               props.setMainFlag("getTenBlocks");
             }}
+            href="/"
           >
             Block Explorer
           </Button>
@@ -105,6 +106,7 @@ export default function Header(props) {
             onClick={() => {
               props.setMainFlag("searchAbi");
             }}
+            href="/"
           >
             Search ABI
           </Button>

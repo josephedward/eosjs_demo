@@ -244,26 +244,7 @@ const menuStyle = {
   overflowY: "scroll",
 };
 
-const listStyle = {
-  marginTop: "10%",
-};
 
-const headerStyle = {
-  position: "fixed",
-  justifyContent: "center",
-  textAlign: "center",
-  top: "0",
-  zIndex: "10",
-  margin: "0 auto",
-};
-
-const centerStyle = {
-  width: "100%",
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "center",
-  textAlign: "center",
-};
 
 /*
 timestamp 
@@ -313,49 +294,44 @@ https://eu1.eosdac.io:443
 https://api.main.alohaeos.com:443
 https://rpc.eosys.io
 */
-{
-  /* <JsonToTable
-  json={currentBlock}
-/> */
-}
 
-{
-  /* {currentInfo !=null? ( 
-<Table
-animate
-headers={["timestamp", "producer", "confirmed", "previous"]}
-dataset={[[currentInfo.timestamp, currentInfo.producer, currentInfo.confirmed, currentInfo.previous]]}
-/>):("")} */
-}
-{
-  /* 
-timestamp	2020-10-20T02:25:29.500
-producer	eoshuobipool
-confirmed	0
-previous	08d2c3dc37b9a8d605d4bfa7bdb9c1e3bbf8b48743077d5a73978ddf573d87be
-transaction_mroot	d897772a4e795e0fa04ae25529032d58b9f5726ee3d68c21d12afe7ce0ed1f30
-action_mroot	fca0518b7cbf9e2dd8464bc7ececf0442924b9cf786839579cd9cea001aa4ffb
-schedule_version	1778
-new_producers	
-producer_signature	SIG_K1_KBAqfEy7aZTtNuzmRXzgHG3gtNy5fUBkbpjBCLkm4yFPtRfYFrqZU9JkYZh8cM9BVEtsvAqrZbpW1qcVMvNcwUyAfTmjrs
-transactions
-id	08d2c40ad58a10a08e924ec256cca06cb4bedd3cd1f87814d2c6cfa0cdbbfefa
-block_num	148030474
-ref_block_prefix
 
+/**
+ * block_cpu_limit: 200000
+block_net_limit: 1048576
+chain_id: "aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906"
+fork_db_head_block_id: "08e279257c018d4b08fa3fc0d8b5e68c6fd9b86830062805130a04e7f8b84a68"
+fork_db_head_block_num: 149059877
+head_block_id: "08e279257c018d4b08fa3fc0d8b5e68c6fd9b86830062805130a04e7f8b84a68"
+head_block_num: 149059877
+head_block_producer: "blockpooleos"
+head_block_time: "2020-10-26T01:29:45.000"
+last_irreversible_block_id: "08e277da437b57ec4334289c7689ca9a65193e6a66750a1076f306ae378feb04"
+last_irreversible_block_num: 149059546
+server_full_version_string: "v2.0.6-2281ba064ffa5de0efbe492a2fbf8e4249eda508-dirty"
+server_version: "c173d52d"
+server_version_string: "v2.0.6"
+virtual_block_cpu_limit: 200000
+virtual_block_net_limit: 1048576000
  */
-}
 
-/*
-  
-// const { time, start, pause, reset, isRunning } = useTimer({
-  //   initialTime: 50,
-  //   timerType: "DECREMENTAL",
-  //   onTimeUpdate: (time) => {
-  //     // console.log("Time is updated", time);
-  //     reqTimer = time;
-  //   },
-  //   interval: 1,
-  // });
 
-*/
+
+
+
+
+/**
+action_mroot: "ca7425909b4e64fb77d73d5885582664de19505f70e91d007bb11f62eb114e71"
+block_num: 149059877
+confirmed: 0
+id: "08e279257c018d4b08fa3fc0d8b5e68c6fd9b86830062805130a04e7f8b84a68"
+new_producers: null
+previous: "08e27924882cf6601aa119b47a68614f4864d3a7e9e97e90d7b0efd92ae76347"
+producer: "blockpooleos"
+producer_signature: "SIG_K1_K96MvqGwR2DPYAcGFQGEUrv9jVoUVmBbHsFpzKw68zWuXNQad2BbQRMf9dNGf6LQpqcKNeQh2TkFR4hEjBDXDTfAWTF5qx"
+ref_block_prefix: 3225418248
+schedule_version: 1782
+timestamp: "2020-10-26T01:29:45.000"
+transaction_mroot: "4177b8971d93dc55c557eac144cf2ff8901211a1612ebb950141d5380433698c"
+transactions:
+ */

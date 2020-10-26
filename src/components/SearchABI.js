@@ -1,57 +1,60 @@
-import React, { useState, useEffect, useRef, Fragment, Redirect } from "react";
-import ReactDOM from "react-dom";
+import React, { useState, 
+  // useEffect, useRef, Fragment, Redirect 
+} from "react";
+// import ReactDOM from "react-dom";
 import {
-  ThemeProvider,
-  createTheme,
+  // ThemeProvider,
+  // createTheme,
   Arwes,
   Frame,
   Heading,
-  Words,
-  SoundsProvider,
-  createSounds,
+  // Words,
+  // SoundsProvider,
+  // createSounds,
   Button,
 } from "arwes";
-import Content from "arwes/lib/Content";
+// import Content from "arwes/lib/Content";
 import ErrorBoundary from "./ErrorBoundary";
-import Block from "./Block";
-import { useTimer } from "use-timer";
+// import Block from "./Block";
+// import { useTimer } from "use-timer";
 import {
-  Menu,
-  Grid,
-  Image,
+  // Menu,
+  // Grid,
+  // Image,
   Modal,
   Container,
   Input,
-  Header,
+  // Header,
 } from "semantic-ui-react";
-import { opacify } from "polished";
-import JSONPretty from "react-json-pretty";
-import { JsonToTable } from "react-json-to-table";
+// import { opacify } from "polished";
+// import JSONPretty from "react-json-pretty";
+// import { JsonToTable } from "react-json-to-table";
 import JSONTree from "react-json-tree";
 
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 
-const chalk = require("chalk");
-const { Api, JsonRpc, RpcError } = require("eosjs");
-const { JsSignatureProvider } = require("eosjs/dist/eosjs-jssig"); // development only
+// const chalk = require("chalk");
+const { 
+  // Api, 
+  JsonRpc, 
+  // RpcError
+ } = require("eosjs");
+// const { JsSignatureProvider } = require("eosjs/dist/eosjs-jssig"); // development only
 const fetch = require("node-fetch"); // node only; not needed in browsers
-const { TextEncoder, TextDecoder } = require("util"); // node only; native TextEncoder/Decoder
-const defaultPrivateKey = "5JtUScZK2XEp3g9gh7F8bwtPTRAkASmNrrftmx4AxDKD5K4zDnr"; // bob
-const signatureProvider = new JsSignatureProvider([defaultPrivateKey]);
+// const { TextEncoder, TextDecoder } = require("util"); // node only; native TextEncoder/Decoder
+// const defaultPrivateKey = "5JtUScZK2XEp3g9gh7F8bwtPTRAkASmNrrftmx4AxDKD5K4zDnr"; // bob
+// const signatureProvider = new JsSignatureProvider([defaultPrivateKey]);
 let endPointUrl = "https://api.eosdetroit.io:443";
 // "https://api.eosio.cr:80"
 // "https://api.testnet.eos.io";
 const rpc = new JsonRpc(endPointUrl, { fetch });
-const parser = require("eos-rc-parser");
-var Inspector = require("react-json-inspector");
-
-// let AbiResponse;
+// const parser = require("eos-rc-parser");
+// var Inspector = require("react-json-inspector");
 let AbiObj;
-let AbiObjString;
+
 
 export default function AbiDisplay(props) {
   const [accountName, setAccountName] = useState("");
-
   const handleSubmit = (evt) => {
     evt.preventDefault();
   };
@@ -88,7 +91,7 @@ export default function AbiDisplay(props) {
                 height: "40px",
                 backgroundColor: "black",
               }}
-              icon='search'
+              icon="search"
               name="search"
               placeholder="Search ABI"
               onChange={(e) => setAccountName(e.target.value)}
@@ -117,9 +120,8 @@ export default function AbiDisplay(props) {
                 <Arwes>
                   <Frame
                     style={{
-
                       overflowY: "scroll",
-                      padding: "1%",
+                      // padding: "1%",
                       objectFit: "contain",
                     }}
                   >
@@ -150,14 +152,14 @@ export default function AbiDisplay(props) {
 }
 
 const transactionStyle = {
-  height: "80%",
-  width: "80%",
+  height: "50%",
+  width: "50%",
+  objectFit:"cover",
   wordBreak: "break-all",
   textOverflow: "ellipsis",
   whiteSpace: "wrap",
+  border:"1px solid aqua"
 };
-
-
 
 const theme = {
   scheme: "monokai",
@@ -180,7 +182,7 @@ const theme = {
   base0F: "#cc6633",
 };
 
- // <div>
+// <div>
 //   <JSONTree data={data} theme={theme} invertTheme={false} />
 // </div>
 

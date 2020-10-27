@@ -49,6 +49,14 @@ it('Uses the account value from the previous test as parameter in the get_abi ca
   cy.wait(500)
   cy.get('input').type(accountNameVal.replace(/['"]+/g, ''))
   cy.get('.container > .c0141 > .c0115 > .c0116 > .c0117 > .c0152 > .c0154 > .c0142').click()
+  if(cy.get(':nth-child(3) > [style="display: inline-block; padding-right: 0.5em; padding-left: 0px; cursor: pointer;"] > div').should('exist'))
+  {
+    cy.get(':nth-child(3) > [style="display: inline-block; padding-right: 0.5em; padding-left: 0px; cursor: pointer;"] > div').click()
+  }
+  if(cy.get('[style="position: relative; padding-top: 0.25em; margin-left: 0.875em; padding-left: 0px;"] > [style="display: inline-block; padding-right: 0.5em; padding-left: 0px; cursor: pointer;"] > div').should('exist'))
+  {
+    cy.get('[style="position: relative; padding-top: 0.25em; margin-left: 0.875em; padding-left: 0px;"] > [style="display: inline-block; padding-right: 0.5em; padding-left: 0px; cursor: pointer;"] > div').click()
+  }
 
 })
 

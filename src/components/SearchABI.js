@@ -120,7 +120,7 @@ export default function AbiDisplay(props) {
                 <Arwes>
                   <Frame
                     style={{
-                      overflowY: "scroll",
+                      // overflowY: "scroll",
                       // padding: "1%",
                       objectFit: "contain",
                     }}
@@ -132,7 +132,7 @@ export default function AbiDisplay(props) {
 
                     <JSONTree
                       style={{
-                        overflow: "hidden",
+                        // overflow: "hidden",
                         objectFit: "contain",
                       }}
                       data={AbiObj}
@@ -152,8 +152,8 @@ export default function AbiDisplay(props) {
 }
 
 const transactionStyle = {
-  height: "50%",
-  width: "50%",
+  height: "60%",
+  width: "80%",
   objectFit:"cover",
   wordBreak: "break-all",
   textOverflow: "ellipsis",

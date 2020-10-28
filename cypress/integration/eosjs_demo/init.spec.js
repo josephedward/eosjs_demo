@@ -17,6 +17,7 @@ it('Makes sure all the core DOM elements are present', ()=>{
     cy.get('.right').contains('Chain Height ').should('exist')
     cy.wait(500)
     cy.get('.c01109 > .c0116 > .c0117 > .c01117 > div > table > tbody > tr > td').should('exist')
+    cy.get('.c0116.c0184>.c0117').children().should('have.length', 16)
     cy.wait(500)
     cy.get(':nth-child(1) > .c0141 > .c0115 > .c0116 > .c0117 > .c0152 > .c0154 > .c0142').contains('Get Latest Ten Blocks').should('exist')
     cy.wait(500)

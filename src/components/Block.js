@@ -1,12 +1,20 @@
-import React, { useState, useEffect, useRef, Fragment } from "react";
-import ReactDOM from "react-dom";
-import { ThemeProvider, createTheme, Arwes, Frame, Heading } from "arwes";
+import React, 
+{
+  //  useState, useEffect, useRef, Fragment
+   } 
+from "react";
+// import ReactDOM from "react-dom";
+import { 
+  // ThemeProvider, createTheme, Arwes, 
+  Frame, 
+  // Heading
+ } from "arwes";
 import Content from "arwes/lib/Content";
 import ErrorBoundary from "./ErrorBoundary";
 // import Transaction from "../../misc/Transaction";
 import TransactionList from "./Transaction";
-import { Button } from "semantic-ui-react";
-import { Redirect } from "react-router";
+// import { Button } from "semantic-ui-react";
+// import { Redirect } from "react-router";
 
 export default function Block(props) {
   
@@ -81,7 +89,7 @@ try{
             <h5> {props.currentBlock.ref_block_prefix}</h5>
           </div>
           <div style={{ ...rowStyle }}>
-            {props.currentBlock.staticFlag == true ? (
+            {props.currentBlock.staticFlag === true ? (
               props.currentBlock.transactions.length > 0 ? (
                 <div style={{ ...rowStyle }}>
                   <TransactionList

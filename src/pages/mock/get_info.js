@@ -1,4 +1,4 @@
-{
+let currentInfo={
     "server_version": "c173d52d",
     "chain_id": "aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906",
     "head_block_num": 149062540,
@@ -16,3 +16,5 @@
     "fork_db_head_block_id": "08e2838c5158ec539e2bf75b14c8df622779759939d10c671e15b10a4b0314eb",
     "server_full_version_string": "v2.0.6-2281ba064ffa5de0efbe492a2fbf8e4249eda508-dirty"
 }
+
+export default currentInfo

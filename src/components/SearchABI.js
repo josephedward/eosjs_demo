@@ -186,11 +186,11 @@ const theme = {
 //   <JSONTree data={data} theme={theme} invertTheme={false} />
 // </div>
 
-const jsonStyle = {
-  lineHeight: "20px",
-  height: "20px",
-  fontSize: "20px",
-};
+// const jsonStyle = {
+//   lineHeight: "20px",
+//   height: "20px",
+//   fontSize: "20px",
+// };
 
 /*
 

@@ -1,16 +1,26 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { 
+  // Component, useEffect, useState 
+} from "react";
 // import { Accordion, Icon, Dimmer, Loader } from "semantic-ui-react";
-import { Frame, Project, Table, Header } from "arwes";
+import { Frame, 
+  // Project, Table,
+   Header } from "arwes";
 // import { Label, Menu } from "semantic-ui-react";
-import { ThemeProvider, createTheme, Row, Col, Arwes, Blockquote } from "arwes";
-import { Container, Modal } from "semantic-ui-react";
+import {
+  //  ThemeProvider, createTheme, Row, Col, 
+   Arwes, 
+  //  Blockquote 
+  } from "arwes";
+import {
+  //  Container,
+    Modal } from "semantic-ui-react";
 import { Button, 
   // Segment, TransitionablePortal
  } from "semantic-ui-react";
 // import { Redirect } from "react-router";
 // import ToObject from "es-abstract/5/ToObject";
 import ErrorBoundary from "./ErrorBoundary";
-import AbiDisplay from "./SearchABI";
+// import AbiDisplay from "./SearchABI";
 import JSONTree from "react-json-tree";
 
 
@@ -330,31 +340,31 @@ export default function TransactionList(props) {
 //   return <div>{dataList}</div>;
 // }
 
-const leftStyle = {
-  marginLeft: "2.5%",
-};
+// const leftStyle = {
+//   marginLeft: "2.5%",
+// };
 
-const actionStyle = {
-  marginLeft: "2.5%",
-  textOverflow: "wrap",
-  whiteSpace: "wrap",
-  marginTop: "1%",
-  marginBottom: "1%",
-  border: "1px solid #26dafd",
-};
+// const actionStyle = {
+//   marginLeft: "2.5%",
+//   textOverflow: "wrap",
+//   whiteSpace: "wrap",
+//   marginTop: "1%",
+//   marginBottom: "1%",
+//   border: "1px solid #26dafd",
+// };
 
-const dataStyle = {
-  display: "flex",
-  flexDirection: "row",
-  overflow: "hidden",
-};
+// const dataStyle = {
+//   display: "flex",
+//   flexDirection: "row",
+//   overflow: "hidden",
+// };
 
-const itemStyle = {
-  // overflowX: "scroll",
-  wordBreak: "break-all",
-  textOverflow: "ellipsis",
-  whiteSpace: "wrap",
-};
+// const itemStyle = {
+//   // overflowX: "scroll",
+//   wordBreak: "break-all",
+//   textOverflow: "ellipsis",
+//   whiteSpace: "wrap",
+// };
 
 const transactionStyle = {
   height: "80%",
@@ -370,26 +380,26 @@ const buttonStyle = {
   zIndex: 50,
 };
 
-const rowStyle = {
-  marginTop: "5%",
-  marginBottom: "5%",
-  wordBreak: "break-all",
-  textOverflow: "ellipsis",
-  whiteSpace: "wrap",
-};
+// const rowStyle = {
+//   marginTop: "5%",
+//   marginBottom: "5%",
+//   wordBreak: "break-all",
+//   textOverflow: "ellipsis",
+//   whiteSpace: "wrap",
+// };
 
-const frameStyle = {
-  height: "100%",
-  width: "100%",
-};
+// const frameStyle = {
+//   height: "100%",
+//   width: "100%",
+// };
 
-const projectStyle = {
-  height: "100%",
-};
+// const projectStyle = {
+//   height: "100%",
+// };
 
-const accordionStyle = {
-  color: "white",
-};
+// const accordionStyle = {
+//   color: "white",
+// };
 
 
 const theme = {

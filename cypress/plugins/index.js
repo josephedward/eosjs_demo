@@ -17,9 +17,9 @@
  */
 module.exports = (on, config) => {
 
-  require('cypress-react-unit-test/plugins/react-scripts')(on, config)
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
-  return config
+  // require('cypress-react-unit-test/plugins/react-scripts')(on, config)
+  // // `on` is used to hook into various events Cypress emits
+  // // `config` is the resolved Cypress config
+  // return config
 
 }

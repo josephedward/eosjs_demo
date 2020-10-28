@@ -1,6 +1,7 @@
 import React, {
 } from 'react';
 import BlockList from "./pages/BlockList"
+import BlockListTest from "./pages/BlockList.spec"
 import './App.css';
 import { ThemeProvider, createTheme, Arwes, 
 } from 'arwes';
@@ -18,6 +19,8 @@ function App(){
 <ThemeProvider theme={createTheme()}>
 <Arwes   background="/images/background.jpg" >
 <Route exact path="/" component={BlockList} />
+<Route exact path="/test" component={BlockListTest} />
+
 </Arwes>
 </ThemeProvider>
 </Switch>

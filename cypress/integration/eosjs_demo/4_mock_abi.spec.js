@@ -2,7 +2,7 @@
 
 describe("passes mock data as get_abi call for single account name", () => {
   it("Visits the heroku url", () => {
-    cy.visit("localhost:3000/test");
+    cy.visit("https://eosjs-chain-nav.herokuapp.com/test");
     cy.wait(500);
   });
 

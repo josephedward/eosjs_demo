@@ -2,10 +2,10 @@
 
 describe("tests block properties and verifies signatures on transactions", () => {
     it("Visits the heroku url", () => {
-        cy.visit("localhost:3000/test");
+        cy.visit("https://eosjs-chain-nav.herokuapp.com/test");
         cy.wait(500);
       });
-      
+
     it("mocks most recent block information",  () => {
         cy.fixture("get_block").then((blockInfo) => {
         console.log("blockInfo : ", blockInfo);

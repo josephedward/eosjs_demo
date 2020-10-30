@@ -27,7 +27,13 @@ import {
 
 export default function Header(props) {
   return (
-    <Frame show={true} animate={true} level={3} layer="primary">
+    <Frame
+      show={true}
+      animate={true}
+      level={3}
+      layer="primary"
+      
+    >
       <Menu
         style={{
           height: "25px",
@@ -61,7 +67,14 @@ export default function Header(props) {
         }}
         stackable
       >
-        <Menu.Item position="left">
+        <Menu.Item position="left"
+      //   onMouseEnter={() => {
+      //   document.documentElement.classList.toggle("dark-mode");
+      // }}
+      // onMouseOut={() => {
+      //   document.documentElement.classList.toggle("dark-mode");
+      // }}
+        >
           <h4
             style={{
               color: "aqua",
@@ -93,7 +106,7 @@ export default function Header(props) {
           >
             Block Explorer
           </Button>
-        </Menu.Item>
+          </Menu.Item>
         <Menu.Item>
           <Button
             style={{

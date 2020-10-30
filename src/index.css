@@ -12,3 +12,6 @@ code {
     monospace;
 }
 
+.dark-mode {
+  filter: invert(100%)
+}

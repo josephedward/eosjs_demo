@@ -199,6 +199,9 @@ function getComponent() {
   return component;
 }
 
+
+
+
 // let ChainInfoObj = [];
 // function ChainInfo(props) {
 //   ChainInfoObj = [];

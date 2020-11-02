@@ -1,7 +1,5 @@
 /* eslint-disable no-undef */
 
-/* eslint-disable no-undef */
-
 describe("Basic Initialization Test", () => {
   it("Visits the heroku url", () => {
     cy.visit("https://eosjs-chain-nav.herokuapp.com/");
@@ -50,7 +48,6 @@ describe("Basic Initialization Test", () => {
 let accountNameVal;
 
 describe("Tests Core Functionality, Getting Ten Most Recent Blocks, Searching Account for ABI Information", () => {
-  
 
   it("Grabs First Account Name from First Action of First Transaction of FirstBlock", () => {
     Cypress.currentTest.retries(2);

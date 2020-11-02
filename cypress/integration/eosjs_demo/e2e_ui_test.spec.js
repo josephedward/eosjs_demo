@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 
-describe("passes mock data about current blockchain state, get_info call", () => {
+describe("passes mock data about current blockchain state via get_info call", () => {
   it("Visits the heroku url", () => {
     cy.visit("https://eosjs-chain-nav.herokuapp.com/test");
     cy.wait(500);
@@ -52,7 +52,7 @@ describe("passes mock data about current blockchain state, get_info call", () =>
   });
 });
 
-describe("passes mock data as get_abi call for single account name", () => {
+describe("Passes mock data as get_abi call for single account name", () => {
   it("Gets ABI fixture information", () => {
     cy.fixture("get_abi").then((abiInfo) => {
       try {
@@ -86,9 +86,11 @@ describe("passes mock data as get_abi call for single account name", () => {
 });
 
 let transactionList;
-describe("tests block properties and verifies signatures on transactions", () => {
+describe("Tests block properties are present", () => {
   it("Get block example fixture information", () => {
     // it("Visits the heroku url", () => {
+    // Cypress.currentTest.retries(2);
+
     cy.visit("https://eosjs-chain-nav.herokuapp.com/test");
     cy.wait(500);
     // });
@@ -112,33 +114,42 @@ describe("tests block properties and verifies signatures on transactions", () =>
   });
 });
 
-describe("It navigates through called UI elements", () => {
-  it("Opens a modal with JSON tree displayed", async () => {
+describe("Tests JSON transaction tree UI against mock fixture", () => {
+  it("Opens leaves of JSON tree", async () => {
     cy.contains("Get Latest Ten Blocks").click();
     cy.wait(500);
     cy.contains("Show Transactions").click();
     cy.wait(500);
-
-
     for (let i = 1; i <= transactionList.length; i++) {
-
-    try{
-      cy.get(`[style="position: relative; padding-top: 0.25em; margin-left: 0px; padding-left: 0px;"] > :nth-child(4) > :nth-child(${i}) > :nth-child(1) > div`).click()
-      // cy.get(':nth-child(4) > :nth-child(1) > :nth-child(4) > [style="position: relative; padding-top: 0.25em; margin-left: 0.875em; padding-left: 0px;"] > [style="display: inline-block; padding-right: 0.5em; padding-left: 0px; cursor: pointer;"] > div').click()
-      // cy.get(':nth-child(4) > :nth-child(4) > :nth-child(2) > [style="display: inline-block; padding-right: 0.5em; padding-left: 0px; cursor: pointer;"] > div').click()
-      // cy.get(':nth-child(4) > :nth-child(4) > :nth-child(7) > [style="display: inline-block; padding-right: 0.5em; padding-left: 0px; cursor: pointer;"] > div').click()
-      // cy.get(':nth-child(7) > :nth-child(4) > [style="position: relative; padding-top: 0.25em; margin-left: 0.875em; padding-left: 0px;"] > [style="display: inline-block; padding-right: 0.5em; padding-left: 0px; cursor: pointer;"] > div').click()
-      // cy.get(':nth-child(8) > :nth-child(4) > li > [style="display: inline-block; padding-right: 0.5em; padding-left: 0px; cursor: pointer;"] > div').click()
-  }
-    catch(err){
-      console.log("testing error : ", err);
+      try {
+        cy.get(
+          `[style="position: relative; padding-top: 0.25em; margin-left: 0px; padding-left: 0px;"] > :nth-child(4) > :nth-child(${i}) > :nth-child(1) > div`
+        ).click();
+        cy.get(
+          `[style="position: relative; padding-top: 0.25em; margin-left: 0px; padding-left: 0px;"] > :nth-child(4) > :nth-child(${i}) > :nth-child(4) > [style="position: relative; padding-top: 0.25em; margin-left: 0.875em; padding-left: 0px;"] > [style="display: inline-block; padding-right: 0.5em; padding-left: 0px; cursor: pointer;"]`
+        ).click();
+        cy.get(`:nth-child(${i}) > :nth-child(4) > :nth-child(4) > :nth-child(4) > :nth-child(2) > [style="display: inline-block; padding-right: 0.5em; padding-left: 0px; cursor: pointer;"]`).click()
+        cy.get(`:nth-child(${i}) > :nth-child(4) > :nth-child(4) > :nth-child(4) > :nth-child(7) > [style="display: inline-block; padding-right: 0.5em; padding-left: 0px; cursor: pointer;"] > div`).click()
+        checkTransactionDom(transactionList[i-1]);
+        cy.get(
+          `[style="position: relative; padding-top: 0.25em; margin-left: 0px; padding-left: 0px;"] > :nth-child(4) > :nth-child(${i}) > :nth-child(1) > div`
+        ).click();
+      } catch (err) {
+        console.log("testing error : ", err);
+      }
     }
-    }
 
-
-
-    checkTransactionDom(transactionList)
-
+    // for (let i = 1; i <= transactionList.length; i++) {
+    //   try {
+    //   } catch (err) {
+    //     console.log("testing error : ", err);
+    //   }
+    // }
+    // try {
+    //   checkTransactionDom(transactionList);
+    // } catch (err) {
+    //   console.log("testing error : ", err);
+    // }
   });
 });
 
@@ -152,14 +163,41 @@ function checkBlockInfoDom(blockInfo) {
   }
 }
 
-function checkTransactionDom(transactionList){
-  console.log(transactionList)
-  for (let x of transactionList) {
+function checkTransactionDom(
+  x
+  // transactionList
+  ) {
+  // console.log(transactionList);
+  // for (let x of transactionList) {
     try {
-      cy.contains(x.cpu_usage_us).invoke('text').should('exist')
-      cy.contains(x.net_usage_words).invoke('text').should('exist')
-      cy.contains(x.status).invoke('text').should('exist')
-      
+      cy.contains(x.cpu_usage_us).invoke("text").should("exist");
+      cy.contains(x.net_usage_words).invoke("text").should("exist");
+      cy.contains(x.status).invoke("text").should("exist");
+      if (x.trx) {
+        cy.contains(x.trx.compression).invoke("text").should("exist");
+        cy.contains(x.trx.id).invoke("text").should("exist");
+        cy.contains(x.trx.packed_trx).invoke("text").should("exist");
+        if (x.trx.signatures) {
+          for (let y of x.trx.signatures) {
+            cy.contains(y).invoke("text").should("exist");
+          }
+        }
+
+        cy.contains(x.trx.transaction.expiration).invoke("text").should("exist");
+        cy.contains(x.trx.transaction.ref_block_num).invoke("text").should("exist");
+        cy.contains(x.trx.transaction.ref_block_prefix).invoke("text").should("exist");
+       
+        //   cy.contains(x.trx.transaction.delay_sec).invoke("text").should("exist");
+        // cy.contains(x.trx.transaction.max_cpu_usage_ms).invoke("text").should("exist");
+        // cy.contains(x.trx.transaction.max_net_usage_words).invoke("text").should("exist");
+        
+       
+      }
+      // if(x.trx.transaction)
+      // {
+
+      // }
+
       // cy.contains(transaction.net_usage_words).should('exist')
       // cy.contains(transaction.status).should('exist')
       // expect(x).to.have.property("trx");
@@ -185,5 +223,5 @@ function checkTransactionDom(transactionList){
     } catch (err) {
       console.log("testing error : ", err);
     }
-  }
+  // }
 }

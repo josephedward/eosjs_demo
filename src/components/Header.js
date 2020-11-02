@@ -18,6 +18,7 @@ import {
 // import { useTimer } from "use-timer";
 import {
   Menu,
+  // MenuItem,
   //  Button
   // Grid, Image, Popup, Dropdown
 } from "semantic-ui-react";
@@ -27,13 +28,7 @@ import {
 
 export default function Header(props) {
   return (
-    <Frame
-      show={true}
-      animate={true}
-      level={3}
-      layer="primary"
-      
-    >
+    <Frame show={true} animate={true} level={3} layer="primary">
       <Menu
         style={{
           height: "25px",
@@ -48,9 +43,8 @@ export default function Header(props) {
         celled
         stackable
       >
-        <Menu.Item
-        // style={{ fontSize:"30px" }}
-        >
+
+        <Menu.Item>
           <h1>EOS CHAIN NAVIGATOR</h1>
         </Menu.Item>
       </Menu>
@@ -67,13 +61,14 @@ export default function Header(props) {
         }}
         stackable
       >
-        <Menu.Item position="left"
-      //   onMouseEnter={() => {
-      //   document.documentElement.classList.toggle("dark-mode");
-      // }}
-      // onMouseOut={() => {
-      //   document.documentElement.classList.toggle("dark-mode");
-      // }}
+        <Menu.Item
+          position="left"
+          //   onMouseEnter={() => {
+          //   document.documentElement.classList.toggle("dark-mode");
+          // }}
+          // onMouseOut={() => {
+          //   document.documentElement.classList.toggle("dark-mode");
+          // }}
         >
           <h4
             style={{
@@ -106,7 +101,7 @@ export default function Header(props) {
           >
             Block Explorer
           </Button>
-          </Menu.Item>
+        </Menu.Item>
         <Menu.Item>
           <Button
             style={{

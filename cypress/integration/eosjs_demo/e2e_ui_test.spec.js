@@ -89,7 +89,7 @@ let transactionList;
 describe("Tests block properties are present", () => {
   it("Get block example fixture information", () => {
     // it("Visits the heroku url", () => {
-    // Cypress.currentTest.retries(2);
+    
 
     cy.visit("https://eosjs-chain-nav.herokuapp.com/test");
     cy.wait(500);

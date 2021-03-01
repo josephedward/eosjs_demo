@@ -42,10 +42,11 @@ const fetch = require("node-fetch"); // node only; not needed in browsers
 // const { TextEncoder, TextDecoder } = require("util"); // node only; native TextEncoder/Decoder
 // const defaultPrivateKey = "5JtUScZK2XEp3g9gh7F8bwtPTRAkASmNrrftmx4AxDKD5K4zDnr"; // bob
 // const signatureProvider = new JsSignatureProvider([defaultPrivateKey]);
-let endPointUrl = "https://api.eosdetroit.io:443";
+let endPointUrl = 
+// "https://api.eosdetroit.io:443";
 // "https://api.eosio.cr:80"
-// "https://api.testnet.eos.io";
-// https://api.eosnewyork.io/v1/chain/get_info
+"https://api.testnet.eos.io";
+// "https://api.eosnewyork.io/v1/chain/get_info"
 
 const rpc = new JsonRpc(endPointUrl, { fetch });
 let currentInfo = {};

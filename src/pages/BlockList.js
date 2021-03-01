@@ -45,7 +45,8 @@ const fetch = require("node-fetch"); // node only; not needed in browsers
 let endPointUrl = 
 // "https://api.eosdetroit.io:443";
 // "https://api.eosio.cr:80"
-"https://api.testnet.eos.io";
+// "https://api.testnet.eos.io";
+"https://eos.dfuse.eosnation.io/"
 // "https://api.eosnewyork.io/v1/chain/get_info"
 
 const rpc = new JsonRpc(endPointUrl, { fetch });

@@ -1,57 +1,14 @@
-import React, { useState, 
-  // useEffect, useRef, Fragment, Redirect 
-} from "react";
-// import ReactDOM from "react-dom";
-import {
-  // ThemeProvider,
-  // createTheme,
-  Arwes,
-  Frame,
-  Heading,
-  // Words,
-  // SoundsProvider,
-  // createSounds,
-  Button,
-} from "arwes";
-// import Content from "arwes/lib/Content";
+import React, { useState } from "react";
+import { Arwes, Frame, Heading, Button } from "arwes";
 import ErrorBoundary from "./ErrorBoundary";
-// import Block from "./Block";
-// import { useTimer } from "use-timer";
-import {
-  // Menu,
-  // Grid,
-  // Image,
-  Modal,
-  Container,
-  Input,
-  // Header,
-} from "semantic-ui-react";
-// import { opacify } from "polished";
-// import JSONPretty from "react-json-pretty";
-// import { JsonToTable } from "react-json-to-table";
+import { Modal, Container, Input } from "semantic-ui-react";
 import JSONTree from "react-json-tree";
 
-// import { useForm } from "react-hook-form";
-
-// const chalk = require("chalk");
-const { 
-  // Api, 
-  JsonRpc, 
-  // RpcError
- } = require("eosjs");
-// const { JsSignatureProvider } = require("eosjs/dist/eosjs-jssig"); // development only
-const fetch = require("node-fetch"); // node only; not needed in browsers
-// const { TextEncoder, TextDecoder } = require("util"); // node only; native TextEncoder/Decoder
-// const defaultPrivateKey = "5JtUScZK2XEp3g9gh7F8bwtPTRAkASmNrrftmx4AxDKD5K4zDnr"; // bob
-// const signatureProvider = new JsSignatureProvider([defaultPrivateKey]);
+const { JsonRpc } = require("eosjs");
+const fetch = require("node-fetch"); 
 let endPointUrl = "https://api.eosdetroit.io:443";
-// "https://api.eosio.cr:80"
-// "https://api.testnet.eos.io";
 const rpc = new JsonRpc(endPointUrl, { fetch });
-// const parser = require("eos-rc-parser");
-// var Inspector = require("react-json-inspector");
 let AbiObj;
-
 
 export default function AbiDisplay(props) {
   const [accountName, setAccountName] = useState("");
@@ -120,8 +77,6 @@ export default function AbiDisplay(props) {
                 <Arwes>
                   <Frame
                     style={{
-                      // overflowY: "scroll",
-                      // padding: "1%",
                       objectFit: "contain",
                     }}
                   >
@@ -132,7 +87,6 @@ export default function AbiDisplay(props) {
 
                     <JSONTree
                       style={{
-                        // overflow: "hidden",
                         objectFit: "contain",
                       }}
                       data={AbiObj}
@@ -154,11 +108,11 @@ export default function AbiDisplay(props) {
 const transactionStyle = {
   height: "60%",
   width: "80%",
-  objectFit:"cover",
+  objectFit: "cover",
   wordBreak: "break-all",
   textOverflow: "ellipsis",
   whiteSpace: "wrap",
-  border:"1px solid aqua"
+  border: "1px solid aqua",
 };
 
 const theme = {
@@ -182,200 +136,3 @@ const theme = {
   base0F: "#cc6633",
 };
 
-// <div>
-//   <JSONTree data={data} theme={theme} invertTheme={false} />
-// </div>
-
-// const jsonStyle = {
-//   lineHeight: "20px",
-//   height: "20px",
-//   fontSize: "20px",
-// };
-
-/*
-
-          <Button
-          layer='success'
-            onClick={
-              (props) => {
-              // console.log(this.props)
-              (async (props) => {
-                console.log(props)
-               let AbiResponse = await rpc.get_abi(accountName);
-                // let AbiResponse = await rpc.get_abi("whaleextrust");
-                // console.log(AbiResponse);
-                AbiObj = AbiResponse.abi;
-                // console.log("AbiObj : ", AbiObj);
-                AbiObjString = JSON.stringify(AbiObj);
-                // console.log(AbiObjString);
-              }
-              )();
-            }
-            }
-          >
-            ABI Details - {accountName}
-          </Button>
-
-*/
-
-// propVals[x] = [];
-// if (ABI[x].length > 0) {
-//   for (let y in ABI[x]) {
-//     console.log(ABI[x][y]);
-//     propVals[x].push(<p key={hashCode(ABI[x][y])}>{ABI[x][y]}</p>);
-//   }
-// }
-
-// abiRows.push(
-//   <div>
-//     {x}
-//   </div>
-// );
-// export default function ContractInfo(props){
-// }
-
-// let abiRows = [];
-// let propVals = [];
-// let ABI;
-
-// // const [data, setData] = useState({ abiRows: [] });
-
-// // async function BuildAbi(accountName)
-// async function BuildAbi(props)
-// {
-//   try {
-//     let response = await rpc.get_abi(props.accountName);
-//     ABI = response.abi;
-//     console.log(ABI);
-//     // abiRows=[]
-
-//     // console.log("ABI.ricardian_clauses : ", ABI.ricardian_clauses);
-//     // } catch (err) {
-//     //   console.log("error : ", err);
-//     // }
-//   } catch (err) {
-//     console.log(err);
-//     // window.location.reload()
-//   }
-
-// // abiRows = ABI.map((key,val)=>(
-// //   <div>{key}</div>
-// // ))
-
-//   return <div>{abiRows.forEach((aRow)=>
-//   (<p>{aRow}</p>)
-//   )}</div>
-
-// }
-
-// function AbiDisplay(props) {
-//   console.log(props);
-
-//   return (
-//     // "test"
-//     // <p>test</p>
-//     <ErrorBoundary>
-//       <Modal
-//         trigger={
-//           <Button
-//             // onClick={async (props) => {
-//             //   await BuildAbi("whaleextrust");
-//             //   console.log("abiRows.length : ", abiRows.length);
-//             // }}
-//           >
-//             Test
-//           </Button>
-//         }
-//       >
-//         <Frame>
-//           <Modal.Content>
-//             {/* {abiRows.length > 0 ? ( */}
-//               {/* <div> */}
-
-//                 <BuildAbi
-//                 accountName={"whaleextrust"}
-//                  />
-//           </Modal.Content>
-//         </Frame>
-//       </Modal>
-//     </ErrorBoundary>
-//   );
-// }
-
-// //   console.log(ABI);
-// //   // let propKeys=[]
-
-// //   // let propRow=[]
-
-// //   for (let x in ABI) {
-// //     propVals[x] = [];
-// //     if (ABI[x].length > 0) {
-// //       for (let y in ABI[x]) {
-// //         propVals[x].push(<p>{y}</p>);
-// //       }
-// //     }
-
-// //     abiRows.push(
-// //       <p>
-// //         <strong>{x} : </strong>
-// //         {propVals[x]}
-// //       </p>
-// //     );
-// //   }
-
-// //   // console.log(testAbi.abi.ricardian_clauses)
-// // } catch (err) {
-// //   console.log("error : ", err);
-// // }
-
-// // async function getAbi(){
-
-// // }
-
-// // const [data, setData] = useState({ hits: [] });
-
-// //   useEffect(async () => {
-// //     const result = await axios(
-// //       'https://hn.algolia.com/api/v1/search?query=redux',
-// //     );
-
-// //     setData(result.data);
-// //   });
-
-// export default AbiDisplay;
-
-// const rowStyle = {
-//   display: "flex",
-//   flexDirection: "row",
-// };
-
-// //whaleextrust
-// //pptqipaelyog
-// // bluebetbulls
-// //gravydefitkn
-// // rentcpu2oow2
-
-//     // try {
-//     //   // console.log("abiRows : ", abiRows);
-//     //   return await (<div>{abiRows}</div>);
-//     // } catch (err) {
-//     //   console.log(err);
-//     // }
-
-//     // function hashCode(aString) {
-//     //   var hash = 0;
-//     //   if (aString.length == 0) {
-//     //     return hash;
-//     //   }
-//     //   for (var i = 0; i < aString.length; i++) {
-//     //     var char = aString.charCodeAt(i);
-//     //     hash = (hash << 5) - hash + char;
-//     //     hash = hash & hash; // Convert to 32bit integer
-//     //   }
-//     //   return hash;
-//     // }
-
-//                   {/* </div> */}
-//             {/* ) : (
-//               <p>no abi </p>
-//             )} */}

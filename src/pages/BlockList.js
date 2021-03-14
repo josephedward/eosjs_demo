@@ -1,55 +1,33 @@
-import React, { useState, useEffect, useRef, 
-  // Fragment, Redirect 
-} from "react";
-// import ReactDOM from "react-dom";
-import {
-  // ThemeProvider,
-  // createTheme,
-  Arwes,
-  Frame,
-  // Heading,
-  // Words,
-  // Table,
-  // SoundsProvider,
-  // createSounds,
-  // Button,
-} from "arwes";
-// import Content from "arwes/lib/Content";
+import React, { useState, useEffect, useRef } from "react";
+
+import { Arwes, Frame } from "arwes";
+
 import ErrorBoundary from "../components/ErrorBoundary";
-// import Block from "../components/Block";
-// import { useTimer } from "use-timer";
-import {
-  // Menu,
-  Grid,
-  //  Image, Popup, Dropdown
-} from "semantic-ui-react";
-// import { opacify } from "polished";
-// import { JsonToTable } from "react-json-to-table";
+import { Grid } from "semantic-ui-react";
+
 import Header from "../components/Header.js";
 import BlockFeed from "../components/BlockFeed.js";
 import GrabTen from "../components/GrabTen";
 import ChainInfo from "../components/ChainInfo";
 import SearchABI from "../components/SearchABI";
 
-// const chalk = require("chalk");
-const { 
-  // Api,
-   JsonRpc,
-    // RpcError
-   } = require("eosjs");
-// const { JsSignatureProvider } = require("eosjs/dist/eosjs-jssig"); // development only
+const { JsonRpc } = require("eosjs");
+
 const fetch = require("node-fetch"); // node only; not needed in browsers
-// const { TextEncoder, TextDecoder } = require("util"); // node only; native TextEncoder/Decoder
-// const defaultPrivateKey = "5JtUScZK2XEp3g9gh7F8bwtPTRAkASmNrrftmx4AxDKD5K4zDnr"; // bob
-// const signatureProvider = new JsSignatureProvider([defaultPrivateKey]);
-let endPointUrl = 
-// "https://api.eosdetroit.io:443";
-// "https://api.eosio.cr:80"
-// "https://api.testnet.eos.io";
-"https://eos.dfuse.eosnation.io/"
+
+let endPointUrl =
+  // "https://api.eosdetroit.io:443";
+  // "https://api.eosio.cr:80"
+  // "https://api.testnet.eos.io";
+  "https://eos.dfuse.eosnation.io/";
 // "https://api.eosnewyork.io/v1/chain/get_info"
 
-const rpc = new JsonRpc(endPointUrl, { fetch });
+function setEndPointUrl(url) {
+  endPointUrl = url;
+  rpc = new JsonRpc(endPointUrl, { fetch });
+}
+
+let rpc = new JsonRpc(endPointUrl, { fetch });
 let currentInfo = {};
 let currentBlock = {};
 let tenLatestBlocks = [];
@@ -71,6 +49,7 @@ let recentBlocks = [];
 function BlockList() {
   const [count, setCount] = useState(0);
   useInterval(async () => {
+    console.log(endPointUrl);
     try {
       currentInfo = await rpc.get_info();
       currentBlock = await rpc.get_block(currentInfo.head_block_num);
@@ -85,10 +64,13 @@ function BlockList() {
   }, 500);
 
   return (
-    <div style={{ height: "100vh", overflowY: "hide" }}>
+    <div style={{ height: "100vh", overflowY: "visible" }}>
       <ErrorBoundary>
         <Arwes background="/images/blocks.gif">
           <Header
+            style={{
+              overflowY: "visible",
+            }}
             getComponent={getComponent}
             endPointUrl={endPointUrl}
             currentInfo={currentInfo}
@@ -109,6 +91,7 @@ function BlockList() {
                       marginRight: "50%",
                     }}
                     currentInfo={currentInfo}
+                    setEndPointUrl={setEndPointUrl}
                   />
                 </ErrorBoundary>
               </Frame>
@@ -201,9 +184,6 @@ function getComponent() {
   return component;
 }
 
-
-
-
 // let ChainInfoObj = [];
 // function ChainInfo(props) {
 //   ChainInfoObj = [];
@@ -247,8 +227,6 @@ const menuStyle = {
   height: "100vh",
   overflowY: "scroll",
 };
-
-
 
 /*
 timestamp 
@@ -299,7 +277,6 @@ https://api.main.alohaeos.com:443
 https://rpc.eosys.io
 */
 
-
 /**
  * block_cpu_limit: 200000
 block_net_limit: 1048576
@@ -318,11 +295,6 @@ server_version_string: "v2.0.6"
 virtual_block_cpu_limit: 200000
 virtual_block_net_limit: 1048576000
  */
-
-
-
-
-
 
 /**
 action_mroot: "ca7425909b4e64fb77d73d5885582664de19505f70e91d007bb11f62eb114e71"

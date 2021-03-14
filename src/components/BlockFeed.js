@@ -12,7 +12,6 @@ export default function BlockFeed(props) {
             <Block animate={true} class="intervalBlock" currentBlock={book} />
           ))}
       </div>
-    // </div>
   );
 }
 

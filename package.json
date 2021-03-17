@@ -10,10 +10,11 @@
     "@types/jest": "^26.0.15",
     "arwes": "^1.0.0-alpha.5",
     "axios": "^0.21.0",
+    "babel-jest": "^24.9.0",
     "chalk": "^4.1.0",
     "eos-rc-parser": "^1.0.4",
     "eosjs": "^21.0.3",
-    "jest": "^26.6.1",
+    "jest": "^24.9.0",
     "nanoid": "^3.1.15",
     "node-fetch": "^2.6.1",
     "react": "^16.14.0",
@@ -30,7 +31,17 @@
     "semantic-ui-react": "^2.0.0",
     "ts-node": "^9.0.0",
     "use-timer": "^1.4.0",
-    "use-unique-id": "^1.0.1"
+    "use-unique-id": "^1.0.1",
+    "@babel/core": "^7.12.3",
+    "@cypress/fiddle": "^1.18.3",
+    "@testing-library/react-hooks": "^3.4.2",
+    "@tsconfig/recommended": "^1.0.1",
+    "babel-loader": "^8.1.0",
+    "cypress": "^5.4.0",
+    "eslint": "^7.11.0",
+    "eslint-plugin-react": "^7.21.4",
+    "react-is": "^17.0.1",
+    "react-test-renderer": "^16.14.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -38,8 +49,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "heroku-postbuild": "npm run build",
-    "e2e": "cypress open",
-    "schema-test": "json-server db.json --middlewares node_modules/json-server-reset"
+    "e2e": "cypress open"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -55,17 +65,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@babel/core": "^7.12.3",
-    "@cypress/fiddle": "^1.18.3",
-    "@testing-library/react-hooks": "^3.4.2",
-    "@tsconfig/recommended": "^1.0.1",
-    "babel-loader": "^8.1.0",
-    "cypress": "^5.4.0",
-    "eslint": "^7.11.0",
-    "eslint-plugin-react": "^7.21.4",
-    "react-is": "^17.0.1",
-    "react-test-renderer": "^16.14.0"
   }
 }
